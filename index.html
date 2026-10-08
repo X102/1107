@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Đăng Hiển & Bích Ngọc</title>
+<meta name="description" content="Đăng Hiển và Bích Ngọc, bên nhau từ 11.07.2026.">
+<meta name="theme-color" content="#7a5b8c">
+<meta property="og:title" content="Đăng Hiển & Bích Ngọc">
+<meta property="og:description" content="Bên nhau từ 11.07.2026.">
+<meta property="og:image" content="https://x102.github.io/1107/sky.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FF5E62' d='M16 28s-11-6.6-11-15a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 8.4-11 15-11 15z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Coiny&family=Mali:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dusk: #4a3460;        /* tím chiều — chữ chính */
+    --lilac: #9a88b8;       /* tím nhạt của mây trong bóng */
+    --coral: #ff5e62;       /* mây được nắng chiều rọi */
+    --coral-deep: #d93a55;
+    --pink: #ff9aae;
+    --gold: #ffb45a;        /* vệt nắng cuối chân trời */
+    --cream: #fff2ee;       /* bụng mây sáng */
+    --ink: #21182b;         /* hàng cây */
+    --display: "Coiny", "Baloo 2", ui-rounded, system-ui, sans-serif;
+    --body: "Mali", "Nunito", ui-rounded, system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--dusk);
+    background: #6b4e7e;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Bầu trời cố định phía sau toàn trang */
+  .sky {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(62, 44, 92, .5) 0%, rgba(62, 44, 92, 0) 34%, rgba(62, 44, 92, 0) 72%, rgba(33, 24, 43, .3) 100%),
+      url("sky.jpg") 72% 100% / cover no-repeat,
+      linear-gradient(180deg, #7a6a9c 0%, #ff6b6b 58%, #ffa14a 100%);
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ---------- Thanh trên cùng ---------- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: max(18px, env(safe-area-inset-top));
+    color: var(--cream);
+  }
+  .date-mark {
+    font-family: var(--display);
+    font-size: 1.125rem;
+    letter-spacing: .04em;
+    text-shadow: 0 1px 10px rgba(58, 40, 80, .5);
+  }
+  .hien-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px 7px 12px;
+    border-radius: 999px;
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .95rem;
+    background: rgba(255, 242, 238, .16);
+    border: 1px solid rgba(255, 242, 238, .55);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .hien-pill svg { width: 20px; height: 20px; }
+
+  /* ---------- Hero: con số trên bầu trời ---------- */
+  .hero {
+    min-height: 86svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 64px;
+    color: var(--cream);
+  }
+  .names {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 6.2vw, 3rem);
+    line-height: 1.15;
+    text-shadow: 0 2px 0 rgba(74, 52, 96, .35), 0 0 22px rgba(58, 40, 80, .45);
+  }
+  .names .tim-nho {
+    display: inline-block;
+    width: .8em;
+    height: .8em;
+    margin: 0 .12em;
+    vertical-align: -.02em;
+    color: var(--coral);
+    filter: drop-shadow(0 0 8px rgba(255, 220, 220, .8));
+  }
+
+  /* Số ngày: mây phồng, sáng từ bên dưới như trong ảnh */
+  .days {
+    --n: 2;
+    margin: .06em 0 0 -.04em;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: min(16rem, calc((100vw - 40px) / (var(--n) * .74 + .15)));
+    line-height: .9;
+    letter-spacing: -.01em;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(180deg, #fff8f5 0%, #ffe6e8 42%, #ffa3ab 78%, #ff7d6e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 5px 0 rgba(74, 52, 96, .32)) drop-shadow(0 0 30px rgba(255, 94, 98, .55));
+  }
+  .days-label {
+    margin: .1em 0 0;
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    line-height: 1.1;
+    text-shadow: 0 2px 0 rgba(74, 52, 96, .3), 0 0 18px rgba(58, 40, 80, .45);
+  }
+  .since {
+    max-width: 34ch;
+    margin: 14px 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    text-shadow: 0 1px 12px rgba(46, 30, 64, .75);
+  }
+  .since .clock { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+
+  /* ---------- Những đám mây nội dung (mép dưới gợn kiểu mây vú) ---------- */
+  .cloud-wrap {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto 72px;
+    padding: 0 16px;
+    filter: drop-shadow(0 14px 22px rgba(58, 36, 78, .28));
+  }
+  .cloud {
+    position: relative;
+    background: var(--cream);
+    padding: 34px 26px 58px;
+    border-radius: 34px 34px 0 0;
+    -webkit-mask:
+      radial-gradient(18px at 50% 0, #000 98%, transparent) 0 100% / 36px 18px round no-repeat,
+      linear-gradient(#000 0 0) top / 100% calc(100% - 17px) no-repeat;
+    mask:
+      radial-gradient(18px at 50% 0, #000 98%, transparent) 0 100% / 36px 18px round no-repeat,
+      linear-gradient(#000 0 0) top / 100% calc(100% - 17px) no-repeat;
+  }
+  .cloud h2 {
+    margin: 0 0 6px;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 1.875rem;
+    line-height: 1.15;
+    color: var(--coral-deep);
+  }
+  .cloud .lead { margin: 0 0 22px; color: #6d5a84; }
+
+  /* Dòng thời gian các cột mốc */
+  .mocs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .mocs::before {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--coral) 0%, var(--coral) var(--done, 0%), #e6d6e6 var(--done, 0%), #e6d6e6 100%);
+  }
+  .moc {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 2px 14px;
+    align-items: center;
+    padding: 9px 0;
+  }
+  .moc .dot { width: 28px; height: 28px; display: grid; place-items: center; }
+  .moc .dot svg { width: 22px; height: 22px; }
+  .moc-ten { margin: 0; font-weight: 600; line-height: 1.3; }
+  .moc-ngay { margin: 0; font-size: .9rem; color: #7f6c96; font-variant-numeric: tabular-nums; }
+  .moc-tt { margin: 0; font-size: .9rem; text-align: right; white-space: nowrap; color: #7f6c96; }
+
+  .moc.da-qua .dot { color: var(--coral); }
+  .moc.da-qua .moc-ten { color: var(--dusk); }
+  .moc.sap-toi .dot { color: var(--gold); }
+  .moc.sap-toi .dot svg { width: 26px; height: 26px; filter: drop-shadow(0 0 6px rgba(255, 180, 90, .9)); }
+  .moc.sap-toi .moc-ten { color: var(--coral-deep); font-size: 1.125rem; }
+  .moc.sap-toi .moc-tt { color: var(--coral-deep); font-weight: 600; }
+  .moc.tuong-lai { opacity: .62; }
+  .moc.tuong-lai .dot { color: var(--lilac); }
+
+  .bar {
+    grid-column: 2 / 4;
+    height: 8px;
+    margin-top: 8px;
+    border-radius: 99px;
+    background: #f6dfe2;
+    overflow: hidden;
+  }
+  .bar span {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--gold), var(--coral));
+    transition: width 1.2s cubic-bezier(.2, .7, .2, 1);
+  }
+
+  /* Hiên: mái hiên vắt ngang trên đám mây */
+  .eave {
+    display: block;
+    width: calc(100% + 24px);
+    margin: 0 -12px -6px;
+    height: auto;
+    color: var(--dusk);
+    position: relative;
+    z-index: 1;
+  }
+  .hien-cloud { padding-top: 30px; }
+  .hien-cloud p { margin: 0 0 12px; max-width: 46ch; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 22px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 28px 12px;
+    border-radius: 999px;
+    font-family: var(--display);
+    font-size: 1.25rem;
+    line-height: 1.2;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(180deg, #ff7a72, #e8475a);
+    box-shadow: 0 6px 0 #b9324a, 0 14px 24px rgba(232, 71, 90, .35);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn svg { width: 22px; height: 22px; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 7px 0 #b9324a, 0 16px 26px rgba(232, 71, 90, .4); }
+  .btn:active { transform: translateY(5px); box-shadow: 0 1px 0 #b9324a, 0 6px 12px rgba(232, 71, 90, .3); }
+  .url { font-size: .9rem; color: #8a77a0; }
+
+  a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 999px; }
+
+  /* ---------- Chân trang ---------- */
+  footer {
+    padding: 8px 20px max(40px, env(safe-area-inset-bottom));
+    text-align: center;
+    color: var(--cream);
+    text-shadow: 0 1px 10px rgba(33, 24, 43, .8);
+  }
+  footer p { margin: 0 0 4px; }
+  footer .small { font-size: .875rem; opacity: .85; }
+
+  /* Tim bay lên khi chạm vào bầu trời */
+  .tim-bay {
+    position: fixed;
+    z-index: 50;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    animation: bay 1.7s cubic-bezier(.2, .7, .3, 1) forwards;
+  }
+  @keyframes bay {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(.3); }
+    14%  { opacity: 1; transform: translate(-50%, -62%) scale(1.15); }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), -240px) scale(.75) rotate(var(--r)); }
+  }
+
+  @media (min-width: 760px) {
+    .wrap { padding: 0 40px; }
+    .hero { min-height: 92vh; }
+    .days { font-size: min(17rem, calc((100vw - 80px) / (var(--n) * .74 + .15))); }
+    .cloud { padding: 44px 44px 64px; }
+    .since { font-size: 1.1875rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar span { transition: none; }
+    .tim-bay { animation: hien-mo 1.2s ease forwards; }
+    @keyframes hien-mo { 0% { opacity: 0; transform: translate(-50%, -50%); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -50%); } }
+  }
+</style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header class="topbar">
+      <span class="date-mark" aria-label="Ngày 11 tháng 7">11.07</span>
+      <a class="hien-pill" href="https://huongnoi.vercel.app" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10.5c3-.4 5.2-2.2 6.4-4.5h7.2c1.2 2.3 3.4 4.1 6.4 4.5"/><path d="M5 10v9.5M19 10v9.5M3.5 19.5h17"/><path d="M12 10v2.2"/><rect x="10.4" y="12.2" width="3.2" height="3.6" rx="1.4"/></svg>
+        Hiên
+      </a>
+    </header>
+
+    <main class="hero">
+      <h1 class="names">
+        Đăng Hiển<svg class="tim-nho" viewBox="0 0 32 32" aria-label="và" role="img"><path fill="currentColor" d="M16 28s-11-6.6-11-15a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 8.4-11 15-11 15z"/></svg>Bích Ngọc
+      </h1>
+      <p class="days" id="so-ngay" aria-live="off">0</p>
+      <p class="days-label">ngày bên nhau</p>
+      <p class="since">Tính từ 11.07.2026: <span id="chi-tiet">…</span> <span class="clock" id="dong-ho"></span></p>
+    </main>
+  </div>
+
+  <section class="cloud-wrap" aria-labelledby="moc-tieu-de">
+    <div class="cloud">
+      <h2 id="moc-tieu-de">Những cột mốc</h2>
+      <p class="lead" id="moc-dan">Cột mốc tiếp theo đang tới gần.</p>
+      <ol class="mocs" id="mocs"></ol>
+    </div>
+  </section>
+
+  <section class="cloud-wrap" aria-labelledby="hien-tieu-de">
+    <svg class="eave" viewBox="0 0 400 46" aria-hidden="true">
+      <path fill="currentColor" d="M0 34c14 0 24-4 32-16h336c8 12 18 16 32 16v6c-18 1-32-4-40-14H40C32 36 18 41 0 40z"/>
+      <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" d="M60 14h280"/>
+      <g fill="currentColor" opacity=".5"><rect x="70" y="20" width="3" height="5" rx="1.5"/><rect x="110" y="20" width="3" height="5" rx="1.5"/><rect x="150" y="20" width="3" height="5" rx="1.5"/><rect x="247" y="20" width="3" height="5" rx="1.5"/><rect x="287" y="20" width="3" height="5" rx="1.5"/><rect x="327" y="20" width="3" height="5" rx="1.5"/></g>
+      <path stroke="currentColor" stroke-width="1.6" d="M200 26v6"/>
+      <rect x="193" y="31" width="14" height="14" rx="6" fill="#ff7a5c"/>
+      <rect x="196" y="34" width="8" height="8" rx="3.5" fill="#ffd27a"/>
+    </svg>
+    <div class="cloud hien-cloud">
+      <h2 id="hien-tieu-de">Hiên</h2>
+      <p>Hiên là mạng xã hội nhỏ cho những người thích yên tĩnh: viết nhật ký trước, chia sẻ sau, không ai đếm like.</p>
+      <p>Ở đó lúc nào cũng có một chỗ ngồi dành cho hai đứa.</p>
+      <div class="actions">
+        <a class="btn" href="https://huongnoi.vercel.app" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10.5c3-.4 5.2-2.2 6.4-4.5h7.2c1.2 2.3 3.4 4.1 6.4 4.5"/><path d="M5 10v9.5M19 10v9.5M3.5 19.5h17"/></svg>
+          Vào Hiên
+        </a>
+        <span class="url">huongnoi.vercel.app</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Chạm vào bầu trời để thả tim.</p>
+    <p class="small">Hiển &amp; Ngọc, từ 11.07.2026</p>
+  </footer>
+
+<script>
+  /* ===== Cấu hình — sửa ở đây nếu cần ===== */
+  const CAU_HINH = {
+    ngayBatDau: [2026, 7, 11],  // năm, tháng, ngày
+    tinhCaNgayDau: false        // true: coi ngày 11/07 là "ngày thứ 1"
+  };
+
+  const [Y, M, D] = CAU_HINH.ngayBatDau;
+  const BU = CAU_HINH.tinhCaNgayDau ? 1 : 0;
+  const BAT_DAU = new Date(Y, M - 1, D);
+  const giamChuyenDong = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Số thứ tự ngày theo lịch (không lệch vì giờ mùa hè)
+  const soNgayLich = d => Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5);
+  const congNgay = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const congThang = (d, n) => {
+    const x = new Date(d.getFullYear(), d.getMonth() + n, 1);
+    const cuoi = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate();
+    x.setDate(Math.min(d.getDate(), cuoi));
+    return x;
+  };
+  const dinhDang = d => String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear();
+  const soNgayTu = (bay, gio) => soNgayLich(bay) - soNgayLich(gio);
+
+  function tongNgay(now) { return soNgayTu(now, BAT_DAU) + BU; }
+
+  function namThangNgay(now) {
+    let thang = (now.getFullYear() - Y) * 12 + (now.getMonth() - (M - 1));
+    if (now.getDate() < D) thang--;
+    if (thang < 0) return null;
+    const moc = congThang(BAT_DAU, thang);
+    const ngay = soNgayTu(now, moc);
+    const nam = Math.floor(thang / 12);
+    const t = thang % 12;
+    const phan = [];
+    if (nam) phan.push(nam + " năm");
+    if (t) phan.push(t + " tháng");
+    phan.push(ngay + " ngày");
+    return phan.join(" ");
+  }
+
+  /* ----- Con số lớn + đồng hồ ----- */
+  const elSo = document.getElementById("so-ngay");
+  const elChiTiet = document.getElementById("chi-tiet");
+  const elDongHo = document.getElementById("dong-ho");
+
+  function datSo(n) {
+    elSo.textContent = n;
+    elSo.style.setProperty("--n", Math.max(2, String(n).length));
+  }
+
+  function capNhat() {
+    const now = new Date();
+    const ntn = namThangNgay(now);
+    elChiTiet.textContent = ntn ? ntn + "," : "";
+    elDongHo.textContent = now.getHours() + " giờ " + now.getMinutes() + " phút " + now.getSeconds() + " giây.";
+  }
+
+  const N = tongNgay(new Date());
+  elSo.setAttribute("aria-label", N + " ngày");
+  if (giamChuyenDong || N <= 0) {
+    datSo(Math.max(N, 0));
+  } else {
+    elSo.style.setProperty("--n", Math.max(2, String(N).length));
+    const t0 = performance.now(), dai = 1400;
+    (function chay(t) {
+      const p = Math.min(1, (t - t0) / dai);
+      elSo.textContent = Math.round(N * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(chay);
+    })(t0);
+  }
+  capNhat();
+  setInterval(() => {
+    capNhat();
+    const n = tongNgay(new Date());
+    if (n !== N && elSo.textContent != n) datSo(n);  // qua nửa đêm thì tăng số
+  }, 1000);
+
+  /* ----- Cột mốc ----- */
+  const TIM = '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 28s-11-6.6-11-15a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 8.4-11 15-11 15z"/></svg>';
+  const TIM_RONG = '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" d="M16 27s-10-6.2-10-14a5.5 5.5 0 0 1 10-3.1A5.5 5.5 0 0 1 26 13c0 7.8-10 14-10 14z"/></svg>';
+
+  function veMoc() {
+    const homNay = new Date();
+    const ds = [
+      { ten: "Ngày đầu tiên", ngay: BAT_DAU },
+      { ten: "100 ngày", ngay: congNgay(BAT_DAU, 100 - BU) },
+      { ten: "6 tháng", ngay: congThang(BAT_DAU, 6) },
+      { ten: "200 ngày", ngay: congNgay(BAT_DAU, 200 - BU) },
+      { ten: "1 năm", ngay: congThang(BAT_DAU, 12) },
+      { ten: "500 ngày", ngay: congNgay(BAT_DAU, 500 - BU) },
+      { ten: "2 năm", ngay: congThang(BAT_DAU, 24) },
+      { ten: "1000 ngày", ngay: congNgay(BAT_DAU, 1000 - BU) }
+    ].sort((a, b) => a.ngay - b.ngay);
+
+    const iSau = ds.findIndex(m => soNgayTu(m.ngay, homNay) > 0);
+    const ul = document.getElementById("mocs");
+    let html = "";
+    ds.forEach((m, i) => {
+      const con = soNgayTu(m.ngay, homNay);
+      let lop, tt, dot = TIM;
+      if (con === 0) { lop = "sap-toi"; tt = "hôm nay!"; }
+      else if (con < 0) { lop = "da-qua"; tt = "đã qua"; }
+      else if (i === iSau) { lop = "sap-toi"; tt = "còn " + con + " ngày"; }
+      else { lop = "tuong-lai"; tt = ""; dot = TIM_RONG; }
+      html += '<li class="moc ' + lop + '"><span class="dot">' + dot + '</span>' +
+              '<div><p class="moc-ten">' + m.ten + '</p><p class="moc-ngay">' + dinhDang(m.ngay) + '</p></div>' +
+              '<p class="moc-tt">' + tt + '</p>' +
+              (i === iSau && con > 0 ? '<div class="bar" role="progressbar" aria-label="Tiến tới ' + m.ten + '"><span></span></div>' : '') +
+              '</li>';
+    });
+    ul.innerHTML = html;
+
+    const dan = document.getElementById("moc-dan");
+    if (iSau > 0) {
+      const truoc = ds[iSau - 1].ngay, sau = ds[iSau].ngay;
+      const tile = Math.max(0, Math.min(1, soNgayTu(homNay, truoc) / soNgayTu(sau, truoc)));
+      const con = soNgayTu(sau, homNay);
+      dan.textContent = con === 1 ? "Ngày mai là " + ds[iSau].ten + " rồi." : "Còn " + con + " ngày nữa là tới " + ds[iSau].ten + ".";
+      const bar = ul.querySelector(".bar");
+      if (bar) {
+        bar.setAttribute("aria-valuenow", Math.round(tile * 100));
+        bar.setAttribute("aria-valuemin", "0");
+        bar.setAttribute("aria-valuemax", "100");
+        requestAnimationFrame(() => requestAnimationFrame(() => { bar.firstChild.style.width = (tile * 100) + "%"; }));
+      }
+      const vt = (iSau - 1 + tile) / (ds.length - 1);
+      ul.style.setProperty("--done", (vt * 100).toFixed(1) + "%");
+    } else if (iSau === -1) {
+      dan.textContent = "Đã đi qua tất cả các cột mốc ở đây. Thêm cột mốc mới thôi.";
+      ul.style.setProperty("--done", "100%");
+    }
+  }
+  veMoc();
+
+  /* ----- Thả tim khi chạm vào bầu trời ----- */
+  const MAU = ["#ff5e62", "#ff9aae", "#ffb45a", "#ff7a8a", "#fff2ee"];
+  document.addEventListener("pointerdown", e => {
+    if (e.target.closest("a, button")) return;
+    const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("viewBox", "0 0 32 32");
+    s.setAttribute("class", "tim-bay");
+    s.setAttribute("aria-hidden", "true");
+    s.innerHTML = '<path fill="' + MAU[Math.floor(Math.random() * MAU.length)] + '" d="M16 28s-11-6.6-11-15a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 8.4-11 15-11 15z"/>';
+    s.style.left = e.clientX + "px";
+    s.style.top = e.clientY + "px";
+    s.style.setProperty("--dx", (Math.random() * 80 - 40).toFixed(0) + "px");
+    s.style.setProperty("--r", (Math.random() * 40 - 20).toFixed(0) + "deg");
+    const kc = 0.8 + Math.random() * 0.6;
+    s.style.width = s.style.height = (30 * kc).toFixed(0) + "px";
+    document.body.appendChild(s);
+    s.addEventListener("animationend", () => s.remove());
+  });
+</script>
+</body>
+</html>
