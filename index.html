@@ -270,6 +270,66 @@
   }
   .nut-mo:hover { background: #fde6e8; }
   .nut-mo:focus-visible, .mo-khoang:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+
+  /* Ngày cần nhớ */
+  .chu-giai { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: -10px 0 18px; font-size: .85rem; color: #8a77a0; }
+  .chu-giai span { display: inline-flex; align-items: center; gap: 6px; }
+  .chu-giai i { width: 12px; height: 12px; border-radius: 4px; }
+  .nhos { list-style: none; margin: 0 -10px; padding: 0; }
+  .nho {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 14px;
+    align-items: start;
+    padding: 10px;
+    border-radius: 18px;
+  }
+  .nho + .nho { margin-top: 4px; }
+  .nho.gan { background: #ffe6e3; }
+  .nho.hom-nay { background: linear-gradient(90deg, #ffdcd2, #ffe8ee); }
+  .lich {
+    width: 48px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 0 #f0d3d8;
+    text-align: center;
+  }
+  .lich-thang { display: block; padding: 2px 0 1px; font-size: .7rem; font-weight: 600; line-height: 1.5; }
+  .lich-ngay { display: block; padding: 1px 0 3px; font-family: var(--display); font-size: 1.375rem; line-height: 1.2; color: var(--dusk); }
+  .le .lich-thang, .chu-giai .le { background: var(--coral-deep); color: #fff; }
+  .rieng .lich-thang, .chu-giai .rieng { background: var(--gold); color: #5e2a0c; }
+  .am .lich-thang, .chu-giai .am { background: #7d68a3; color: #fff; }
+  .nho-ten { margin: 0; font-weight: 600; line-height: 1.35; }
+  .nho-thu { margin: 1px 0 0; font-size: .85rem; color: #8a77a0; font-variant-numeric: tabular-nums; }
+  .nho-con {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 8px;
+    border-radius: 99px;
+    font-size: .8rem;
+    line-height: 1.6;
+    white-space: nowrap;
+    color: #7f6c96;
+    background: #f3e6ef;
+  }
+  .nho.gan .nho-con, .nho.hom-nay .nho-con { color: #fff; font-weight: 600; background: var(--coral-deep); }
+  .nho-ghi { margin: 3px 0 0; font-size: .925rem; line-height: 1.45; color: #6d5a84; }
+  .nut-lich {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 99px;
+    font: 600 .95rem var(--body);
+    color: #fff;
+    text-decoration: none;
+    background: var(--coral-deep);
+    box-shadow: 0 4px 0 #a92a44;
+  }
+  .nut-lich svg { width: 18px; height: 18px; }
+  .nut-lich:active { transform: translateY(3px); box-shadow: 0 1px 0 #a92a44; }
+  .lich-ghi { flex-basis: 100%; margin: 0; font-size: .85rem; color: #8a77a0; }
   .moc-ngay { margin: 0; font-size: .9rem; color: #7f6c96; font-variant-numeric: tabular-nums; }
   .moc-tt { margin: 0; font-size: .9rem; text-align: right; white-space: nowrap; color: #7f6c96; }
 
@@ -413,6 +473,23 @@
     </div>
   </section>
 
+  <section class="cloud-wrap" aria-labelledby="nho-tieu-de">
+    <div class="cloud">
+      <h2 id="nho-tieu-de">Ngày cần nhớ</h2>
+      <p class="lead" id="nho-dan">Những ngày cần chúc nhau trong năm.</p>
+      <p class="chu-giai"><span><i class="rieng"></i>của hai đứa</span><span><i class="le"></i>ngày lễ</span><span><i class="am"></i>âm lịch</span></p>
+      <ul class="nhos" id="nhos"></ul>
+      <div class="mocs-chan">
+        <a class="nut-lich" href="ngay-can-nho.ics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 13.2v4.6M9.7 15.5h4.6"/></svg>
+          Thêm vào lịch điện thoại
+        </a>
+        <button type="button" class="nut-mo" id="nut-nho" aria-expanded="false" aria-controls="nhos">Xem cả năm</button>
+        <p class="lich-ghi">Lịch sẽ nhắc lúc 9 giờ sáng hôm trước. Những ngày nên có quà được nhắc thêm trước một tuần.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="cloud-wrap" aria-labelledby="hien-tieu-de">
     <svg class="eave" viewBox="0 0 400 46" aria-hidden="true">
       <path fill="currentColor" d="M0 34c14 0 24-4 32-16h336c8 12 18 16 32 16v6c-18 1-32-4-40-14H40C32 36 18 41 0 40z"/>
@@ -525,42 +602,21 @@
 
   const BA_CHAM = '<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><circle cx="16" cy="8" r="2.4"/><circle cx="16" cy="16" r="2.4"/><circle cx="16" cy="24" r="2.4"/></g></svg>';
 
-  // Danh sách cột mốc tới 100 năm — [tên, ngày, nhãn tuỳ chọn]. Thêm/bớt dòng thoải mái, thứ tự tự sắp.
+  // Cột mốc: ngày đầu, 6 tháng, các mốc theo ngày, và TỪNG NĂM từ 1 tới 100
   const sauNgay = n => congNgay(BAT_DAU, n - BU);
   const sauNam = n => congThang(BAT_DAU, n * 12);
+  const MOC_THEO_NGAY = [100, 200, 500, 1000, 2000, 3000, 5000, 10000, 20000, 30000];
+  const NHAN_NAM = { 25: "bạc", 30: "ngọc trai", 40: "hồng ngọc", 50: "vàng", 60: "kim cương", 70: "bạch kim", 100: "trăm năm hạnh phúc" };
   const DS_MOC = [
-    ["Ngày đầu tiên", BAT_DAU],
-    ["100 ngày", sauNgay(100)],
-    ["6 tháng", congThang(BAT_DAU, 6)],
-    ["200 ngày", sauNgay(200)],
-    ["1 năm", sauNam(1)],
-    ["500 ngày", sauNgay(500)],
-    ["2 năm", sauNam(2)],
-    ["1.000 ngày", sauNgay(1000)],
-    ["3 năm", sauNam(3)],
-    ["4 năm", sauNam(4)],
-    ["5 năm", sauNam(5)],
-    ["2.000 ngày", sauNgay(2000)],
-    ["3.000 ngày", sauNgay(3000)],
-    ["10 năm", sauNam(10)],
-    ["5.000 ngày", sauNgay(5000)],
-    ["15 năm", sauNam(15)],
-    ["20 năm", sauNam(20)],
-    ["25 năm", sauNam(25), "bạc"],
-    ["10.000 ngày", sauNgay(10000)],
-    ["30 năm", sauNam(30), "ngọc trai"],
-    ["40 năm", sauNam(40), "hồng ngọc"],
-    ["50 năm", sauNam(50), "vàng"],
-    ["20.000 ngày", sauNgay(20000)],
-    ["60 năm", sauNam(60), "kim cương"],
-    ["70 năm", sauNam(70), "bạch kim"],
-    ["80 năm", sauNam(80)],
-    ["30.000 ngày", sauNgay(30000)],
-    ["90 năm", sauNam(90)],
-    ["100 năm", sauNam(100), "trăm năm hạnh phúc"]
-  ].map(([ten, ngay, nhan]) => ({ ten, ngay, nhan })).sort((a, b) => a.ngay - b.ngay);
+    { ten: "Ngày đầu tiên", ngay: BAT_DAU },
+    { ten: "6 tháng", ngay: congThang(BAT_DAU, 6) },
+    ...MOC_THEO_NGAY.map(n => ({ ten: n.toLocaleString("vi-VN") + " ngày", ngay: sauNgay(n) })),
+    ...Array.from({ length: 100 }, (_, i) => ({ ten: (i + 1) + " năm", ngay: sauNam(i + 1), nhan: NHAN_NAM[i + 1] }))
+  ].sort((a, b) => a.ngay - b.ngay);
 
-  let moRong = false, lanDau = true;
+  // Mức hiển thị: thu gọn → tới 10 năm → tới 30 năm → đủ 100 năm
+  const MUC = [0, 10, 30, 100];
+  let muc = 0, lanDau = true;
   const ul = document.getElementById("mocs");
   const nutMo = document.getElementById("nut-mo");
 
@@ -569,17 +625,12 @@
     const ds = DS_MOC;
     const cuoi = ds.length - 1;
     const iSau = ds.findIndex(m => soNgayTu(m.ngay, homNay) > 0);
+    const tam = iSau === -1 ? cuoi : iSau;
+    const han = muc > 0 ? sauNam(MUC[muc]) : null;
 
-    // Thu gọn: mốc đầu, mốc vừa qua, mốc sắp tới + 3 mốc kế, và mốc 100 năm
-    let hien;
-    if (moRong) {
-      hien = ds.map((_, i) => i);
-    } else {
-      const s = new Set([0, cuoi]);
-      const tam = iSau === -1 ? cuoi : iSau;
-      for (let i = tam - 1; i <= tam + 3; i++) if (i >= 0 && i <= cuoi) s.add(i);
-      hien = [...s].sort((a, b) => a - b);
-    }
+    // Luôn hiện: mốc đầu, mốc vừa qua, mốc sắp tới + 3 mốc kế, và mốc 100 năm
+    const hien = ds.map((_, i) => i).filter(i =>
+      i === 0 || i === cuoi || (i >= tam - 1 && i <= tam + 3) || (han && ds[i].ngay <= han));
 
     let tile = 0;
     if (iSau > 0) {
@@ -633,18 +684,191 @@
       "Hành trình trăm năm: đã đi " + daDi.toLocaleString("vi-VN") + " trên " + tong.toLocaleString("vi-VN") +
       " ngày (" + (daDi / tong * 100).toLocaleString("vi-VN", { maximumFractionDigits: 2 }) + "%).";
 
-    nutMo.textContent = moRong ? "Thu gọn" : "Xem đủ " + ds.length + " cột mốc";
-    nutMo.setAttribute("aria-expanded", String(moRong));
+    nutMo.textContent = muc < MUC.length - 1 ? "Xem tới " + MUC[muc + 1] + " năm" : "Thu gọn";
+    nutMo.setAttribute("aria-expanded", String(muc > 0));
   }
 
-  function doiCheDo() {
-    moRong = !moRong;
+  function moThem() {
+    if (muc < MUC.length - 1) { muc++; veMoc(); return; }
+    muc = 0;
     veMoc();
-    if (!moRong) document.getElementById("moc-tieu-de").scrollIntoView({ block: "start", behavior: giamChuyenDong ? "auto" : "smooth" });
+    document.getElementById("moc-tieu-de").scrollIntoView({ block: "start", behavior: giamChuyenDong ? "auto" : "smooth" });
   }
-  nutMo.addEventListener("click", doiCheDo);
-  ul.addEventListener("click", e => { if (e.target.closest(".mo-khoang")) doiCheDo(); });
+  nutMo.addEventListener("click", moThem);
+  ul.addEventListener("click", e => { if (e.target.closest(".mo-khoang") && muc < MUC.length - 1) { muc++; veMoc(); } });
   veMoc();
+
+  /* AMLICH-START — đổi âm lịch sang dương lịch (thuật toán Hồ Ngọc Đức, múi giờ Việt Nam +7) */
+  const AmLich = (() => {
+    const PI = Math.PI, INT = Math.floor;
+    function jdFromDate(dd, mm, yy) {
+      const a = INT((14 - mm) / 12), y = yy + 4800 - a, m = mm + 12 * a - 3;
+      let jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - INT(y / 100) + INT(y / 400) - 32045;
+      if (jd < 2299161) jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - 32083;
+      return jd;
+    }
+    function jdToDate(jd) {
+      let a, b, c;
+      if (jd > 2299160) { a = jd + 32044; b = INT((4 * a + 3) / 146097); c = a - INT((b * 146097) / 4); }
+      else { b = 0; c = jd + 32082; }
+      const d = INT((4 * c + 3) / 1461), e = c - INT((1461 * d) / 4), m = INT((5 * e + 2) / 153);
+      return [e - INT((153 * m + 2) / 5) + 1, m + 3 - 12 * INT(m / 10), b * 100 + d - 4800 + INT(m / 10)];
+    }
+    function newMoon(k, tz) {
+      const T = k / 1236.85, T2 = T * T, T3 = T2 * T, dr = PI / 180;
+      let Jd1 = 2415020.75933 + 29.53058868 * k + 0.0001178 * T2 - 0.000000155 * T3;
+      Jd1 += 0.00033 * Math.sin((166.56 + 132.87 * T - 0.009173 * T2) * dr);
+      const M = 359.2242 + 29.10535608 * k - 0.0000333 * T2 - 0.00000347 * T3;
+      const Mpr = 306.0253 + 385.81691806 * k + 0.0107306 * T2 + 0.00001236 * T3;
+      const F = 21.2964 + 390.67050646 * k - 0.0016528 * T2 - 0.00000239 * T3;
+      let C1 = (0.1734 - 0.000393 * T) * Math.sin(M * dr) + 0.0021 * Math.sin(2 * dr * M);
+      C1 = C1 - 0.4068 * Math.sin(Mpr * dr) + 0.0161 * Math.sin(dr * 2 * Mpr);
+      C1 = C1 - 0.0004 * Math.sin(dr * 3 * Mpr);
+      C1 = C1 + 0.0104 * Math.sin(dr * 2 * F) - 0.0051 * Math.sin(dr * (M + Mpr));
+      C1 = C1 - 0.0074 * Math.sin(dr * (M - Mpr)) + 0.0004 * Math.sin(dr * (2 * F + M));
+      C1 = C1 - 0.0004 * Math.sin(dr * (2 * F - M)) - 0.0006 * Math.sin(dr * (2 * F + Mpr));
+      C1 = C1 + 0.0010 * Math.sin(dr * (2 * F - Mpr)) + 0.0005 * Math.sin(dr * (2 * Mpr + M));
+      const deltat = T < -11
+        ? 0.001 + 0.000839 * T + 0.0002261 * T2 - 0.00000845 * T3 - 0.000000081 * T * T3
+        : -0.000278 + 0.000265 * T + 0.000262 * T2;
+      return INT(Jd1 + C1 - deltat + 0.5 + tz / 24);
+    }
+    function sunLong(jdn, tz) {
+      const T = (jdn - 2451545.5 - tz / 24) / 36525, T2 = T * T, dr = PI / 180;
+      const M = 357.52910 + 35999.05030 * T - 0.0001559 * T2 - 0.00000048 * T * T2;
+      const L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2;
+      let DL = (1.914600 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M);
+      DL = DL + (0.019993 - 0.000101 * T) * Math.sin(dr * 2 * M) + 0.000290 * Math.sin(dr * 3 * M);
+      let L = (L0 + DL) * dr;
+      L = L - PI * 2 * INT(L / (PI * 2));
+      return INT(L / PI * 6);
+    }
+    function month11(yy, tz) {
+      const off = jdFromDate(31, 12, yy) - 2415021, k = INT(off / 29.530588853);
+      let nm = newMoon(k, tz);
+      if (sunLong(nm, tz) >= 9) nm = newMoon(k - 1, tz);
+      return nm;
+    }
+    function leapOffset(a11, tz) {
+      const k = INT((a11 - 2415021.076998695) / 29.530588853 + 0.5);
+      let last, i = 1, arc = sunLong(newMoon(k + i, tz), tz);
+      do { last = arc; i++; arc = sunLong(newMoon(k + i, tz), tz); } while (arc !== last && i < 14);
+      return i - 1;
+    }
+    // Trả về Date (giờ máy) của ngày âm lịch dd/mm năm âm yy (tháng thường, không nhuận)
+    function sangDuong(dd, mm, yy, tz = 7) {
+      let a11, b11;
+      if (mm < 11) { a11 = month11(yy - 1, tz); b11 = month11(yy, tz); }
+      else { a11 = month11(yy, tz); b11 = month11(yy + 1, tz); }
+      const k = INT(0.5 + (a11 - 2415021.076998695) / 29.530588853);
+      let off = mm - 11;
+      if (off < 0) off += 12;
+      if (b11 - a11 > 365) {
+        const lo = leapOffset(a11, tz);
+        if (off >= lo) off += 1;
+      }
+      const [d, m, y] = jdToDate(newMoon(k + off, tz) + dd - 1);
+      return new Date(y, m - 1, d);
+    }
+    const CAN = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
+    const CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+    const tenNam = y => CAN[(y + 6) % 10] + " " + CHI[(y + 8) % 12];
+    return { sangDuong, tenNam };
+  })();
+  /* AMLICH-END */
+
+  /* ----- Ngày cần nhớ: lặp lại hằng năm -----
+     loai: "rieng" (của hai đứa) | "le" (ngày lễ) | "am" (âm lịch)
+     qua: true = nên chuẩn bị quà (lịch nhắc thêm trước một tuần)
+     Ngày dương: d, m. Ngày âm: am: [ngày, tháng]. Tết: amTet (0 = mùng 1, -1 = giao thừa). */
+  const NGAY_NHO = [
+    { ma: "sn-ngoc", ten: "Sinh nhật Bích Ngọc", d: 14, m: 12, sinh: 2001, loai: "rieng", qua: true,
+      ghi: x => "Ngọc tròn " + x.n + " tuổi. Chuẩn bị quà từ sớm nhé." },
+    { ma: "sn-hien", ten: "Sinh nhật Đăng Hiển", d: 26, m: 12, sinh: 1998, loai: "rieng", qua: true,
+      ghi: x => "Hiển tròn " + x.n + " tuổi. Chuẩn bị quà từ sớm nhé." },
+    { ma: "ki-niem", ten: "Kỉ niệm ngày yêu", d: D, m: M, sinh: Y, loai: "rieng", qua: true,
+      ghi: x => "Tròn " + x.n + " năm bên nhau." },
+    { ma: "tet-duong", ten: "Tết Dương lịch", d: 1, m: 1, loai: "le",
+      ghi: () => "Cùng viết điều ước cho năm mới." },
+    { ma: "valentine", ten: "Lễ Tình nhân", d: 14, m: 2, loai: "le", qua: true,
+      ghi: () => "Hẹn hò, chocolate và hoa." },
+    { ma: "23-2", ten: "Ngày Bảo vệ Tổ quốc (Nga)", d: 23, m: 2, loai: "le",
+      ghi: () => "Ở Nga đây là ngày chúc mừng các chàng trai. Ngọc nhớ chúc Hiển." },
+    { ma: "8-3", ten: "Quốc tế Phụ nữ", d: 8, m: 3, loai: "le", qua: true,
+      ghi: () => "Hiển nhớ chúc Ngọc. Ở Nga hoa ngày này đắt và hết sớm, nên đặt trước." },
+    { ma: "valentine-trang", ten: "Valentine Trắng", d: 14, m: 3, loai: "le",
+      ghi: () => "Ngày đáp lại món quà Valentine." },
+    { ma: "that-tich", ten: "Thất tịch", am: [7, 7], loai: "am",
+      ghi: () => "Mùng 7 tháng 7 âm lịch, ngày Ngưu Lang gặp Chức Nữ." },
+    { ma: "vu-lan", ten: "Lễ Vu Lan", am: [15, 7], loai: "am",
+      ghi: () => "Rằm tháng Bảy âm lịch. Nhớ hỏi thăm bố mẹ hai bên." },
+    { ma: "trung-thu", ten: "Tết Trung thu", am: [15, 8], loai: "am",
+      ghi: () => "Rằm tháng Tám âm lịch. Ngắm trăng, ăn bánh cùng nhau." },
+    { ma: "20-10", ten: "Ngày Phụ nữ Việt Nam", d: 20, m: 10, loai: "le", qua: true,
+      ghi: () => "Hiển nhớ chúc Ngọc, tặng hoa." },
+    { ma: "19-11", ten: "Quốc tế Nam giới", d: 19, m: 11, loai: "le",
+      ghi: () => "Ngọc nhớ chúc Hiển." },
+    { ma: "noel", ten: "Đêm Giáng sinh", d: 24, m: 12, loai: "le", qua: true,
+      ghi: () => "Đi dạo xem đèn, trao quà Noel." },
+    { ma: "giao-thua", ten: "Giao thừa", amTet: -1, loai: "am",
+      ghi: () => "Đêm cuối năm âm lịch. 0 giờ ở Việt Nam là 20 giờ ở Moskva." },
+    { ma: "tet-am", ten: "Tết Nguyên đán", amTet: 0, loai: "am",
+      ghi: x => "Mùng 1 Tết " + AmLich.tenNam(x.namAm) + ". Chúc Tết gia đình hai bên." }
+  ];
+
+  const THU = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+
+  // Ngày của sự kiện e trong năm y (năm âm lịch với ngày âm)
+  function ngayTrongNam(e, y) {
+    let ngay;
+    if (e.am) ngay = AmLich.sangDuong(e.am[0], e.am[1], y);
+    else if (e.amTet !== undefined) ngay = congNgay(AmLich.sangDuong(1, 1, y), e.amTet);
+    else ngay = new Date(y, e.m - 1, e.d);
+    return { e, ngay, namAm: y, n: e.sinh ? ngay.getFullYear() - e.sinh : 0 };
+  }
+  // Lần tới (tính cả hôm nay)
+  function lanToi(e, tu) {
+    const y0 = tu.getFullYear();
+    return [y0 - 1, y0, y0 + 1, y0 + 2].map(y => ngayTrongNam(e, y))
+      .filter(x => soNgayTu(x.ngay, tu) >= 0 && (!e.sinh || x.n > 0))
+      .sort((a, b) => a.ngay - b.ngay)[0];
+  }
+
+  let nhoMo = false;
+  const ulNho = document.getElementById("nhos");
+  const nutNho = document.getElementById("nut-nho");
+
+  function veNho() {
+    const homNay = new Date();
+    const ds = NGAY_NHO.map(e => lanToi(e, homNay)).sort((a, b) => a.ngay - b.ngay);
+    const hien = nhoMo ? ds : ds.slice(0, 5);
+    ulNho.innerHTML = hien.map(x => {
+      const con = soNgayTu(x.ngay, homNay);
+      const lop = con === 0 ? "hom-nay" : con <= 7 ? "gan" : "";
+      const tt = con === 0 ? "hôm nay!" : con === 1 ? "ngày mai" : "còn " + con + " ngày";
+      return '<li class="nho ' + x.e.loai + ' ' + lop + '">' +
+        '<span class="lich" aria-hidden="true"><span class="lich-thang">Th' + (x.ngay.getMonth() + 1) + '</span>' +
+        '<span class="lich-ngay">' + x.ngay.getDate() + '</span></span>' +
+        '<div><p class="nho-ten">' + x.e.ten + '</p>' +
+        '<p class="nho-thu">' + THU[x.ngay.getDay()] + ', ' + dinhDang(x.ngay) + '<span class="nho-con">' + tt + '</span></p>' +
+        '<p class="nho-ghi">' + x.e.ghi(x) + '</p></div></li>';
+    }).join("");
+
+    const g = ds[0], con = soNgayTu(g.ngay, homNay);
+    document.getElementById("nho-dan").textContent =
+      con === 0 ? "Hôm nay là " + g.e.ten + "!" :
+      con === 1 ? "Ngày mai là " + g.e.ten + "." :
+      "Gần nhất: " + g.e.ten + ", còn " + con + " ngày.";
+
+    nutNho.textContent = nhoMo ? "Thu gọn" : "Xem cả năm (" + ds.length + " ngày)";
+    nutNho.setAttribute("aria-expanded", String(nhoMo));
+  }
+  nutNho.addEventListener("click", () => {
+    nhoMo = !nhoMo;
+    veNho();
+    if (!nhoMo) document.getElementById("nho-tieu-de").scrollIntoView({ block: "start", behavior: giamChuyenDong ? "auto" : "smooth" });
+  });
+  veNho();
 
   /* ----- Thả tim khi chạm vào bầu trời ----- */
   const MAU = ["#ff5e62", "#ff9aae", "#ffb45a", "#ff7a8a", "#fff2ee"];
