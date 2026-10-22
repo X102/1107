@@ -162,6 +162,28 @@ body{margin:0}
 .docbtn .s{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
 .docbtn .done{color:var(--ok);font-size:.75rem}
 .docselect{display:none}
+.golinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.golinks .btn{margin-top:0}
+.gsys>*:first-child{margin-top:0}
+.gsys ul,.gsys ol{padding-left:1.2em;margin:.3em 0}
+.gdlist{display:grid;gap:14px;margin-top:12px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px;min-width:0}
+.gcard>*{min-width:0}
+.gcard h3{margin:6px 0 2px;font-family:var(--f-display);font-size:1.12rem;line-height:1.3}
+.gstamp{font-family:var(--f-mono);font-size:.74rem;border:1px solid currentColor;border-radius:4px;padding:1px 6px;margin-left:8px;color:var(--party)}
+.gcard.state .gstamp{color:var(--accent)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 10px;background:var(--bg);border-radius:8px}
+.flow .node{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.82rem;background:var(--surface);overflow-wrap:anywhere}
+.flow .node.cur{border-color:var(--party);color:var(--party);font-weight:600}
+.gcard.state .flow .node.cur{border-color:var(--accent);color:var(--accent)}
+.flow .arr{color:var(--muted)}
+.flow .flab{flex-basis:100%;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.flow .flab:last-child{text-align:right}
+.gcard details{border-top:1px solid var(--line);padding-top:8px}
+.gcard summary{cursor:pointer;font-weight:600}
+.gcard details>div{padding-top:6px}
+.gcard details>div>*:first-child{margin-top:0}
+
 .doc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;display:grid;gap:18px;min-width:0}
 .doc-head{display:grid;gap:8px}
 .doc-head h2{font-size:1.45rem}
@@ -191,6 +213,7 @@ table.nums th{font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;col
 table.nums td.v{font-family:var(--f-display);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
 table.nums td.v span{background:var(--mark);color:var(--mark-ink);padding:0 .3em;border-radius:3px}
 table.nums td.r{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);white-space:nowrap}
+@media (max-width:640px){table.bktable{min-width:0}table.bktable thead{display:none}table.bktable,table.bktable tbody,table.bktable tr,table.bktable td{display:block}table.bktable tr{padding:10px 14px;border-bottom:1px solid var(--line)}table.bktable tr:last-child{border-bottom:0}table.bktable td{padding:1px 0;border:0}table.bktable td:empty{display:none}table.bktable td.bt{font-weight:600;margin-bottom:3px}table.bktable td.ba,table.bktable td.bw{display:inline;font-size:.86rem;color:var(--muted)}table.bktable td.ba:not(:empty)::after{content:" · "}table.bktable td.bn{font-size:.9rem;margin-top:3px}}
 .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 
 /* Confusions */
@@ -278,6 +301,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:.84rem;border-top:1p
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
+const GUIDE={intro:"",system:[],howto:"",chains:[],sources:[]},BOOKS={intro:"",cats:"",years:[],study:[],series:[],sources:[]};
 const DOCS=[],NUMBERS=[],CONFUSE=[],FLASH=[],QUIZ=[],ESSAY=[],WRITTEN=[],INTERVIEW=[],EXAMINFO=[];
 const OVERVIEW={
 sub:"Bộ ôn thi cho vị trí Biên tập viên: pháp luật về viên chức, chủ trương của Đảng, văn kiện Đại hội Đảng (trọng tâm Đại hội XIV), kiến thức chuyên môn xuất bản – biên tập. Có tóm tắt, bản đồ tư duy, bảng con số, điểm dễ nhầm, thẻ ghi nhớ, bộ đề thi thử có tính giờ, đề viết 90 phút có đáp án gợi ý và phần chuẩn bị phỏng vấn.",
@@ -3574,6 +3598,606 @@ OVERVIEW.mustKnow.push(
 "<b>Hội đồng phỏng vấn</b>: 5 hoặc 7 người (NĐ 259); nhiều khả năng do Giám đốc – Tổng Biên tập <b>Vũ Trọng Lâm</b> chủ trì. Đọc trước bài của ông về bồi dưỡng biên tập viên (TC Chính trị và Phát triển 06/2024) và cuốn hỏi – đáp Văn kiện Đại hội XIV (6/2026)."
 );
 
+/* ===== Quy trình xuất bản nội bộ của NXB (bản dự thảo sửa 15/11/2025) – chỉ tóm tắt, không đăng toàn văn ===== */
+DOCS.push({id:"quytrinh",group:"pro",short:"Quy trình xuất bản của NXB (dự thảo 11/2025) – tóm tắt",mmLabel:"Quy trình xuất bản nội bộ (dự thảo 11/2025)",so:"Dự thảo",
+title:"Quy định về Quy trình xuất bản của NXB Chính trị quốc gia Sự thật (bản trình ký, sửa ngày 15/11/2025) – tóm tắt để ôn tập",
+meta:[["Loại văn bản","Quy định nội bộ, ban hành kèm Quyết định của Giám đốc – Tổng Biên tập (bản trình ký, chưa ghi số, ngày)"],["Bố cục","6 chương, 35 điều"],["Phạm vi","Xuất bản, tái bản, in nối bản xuất bản phẩm; thực hiện trên phần mềm quy trình xuất bản điện tử"],["Đầu mối","Vụ Kế hoạch – Tài chính theo dõi, đôn đốc, làm các thủ tục"],["Hiệu lực (dự kiến)","Từ ngày ký; thay các quy định về quy trình xuất bản trước đây"],["Lưu ý","<b>Bản dự thảo, chưa chính thức.</b> Trang này chỉ tóm tắt để ôn, không đăng toàn văn"]],
+tldr:`Dự thảo chia quy trình thành 4 phần: <b>kế hoạch đề tài</b> (lập từ tháng 8, gửi Ban Tuyên giáo và Dân vận Trung ương tháng 10 với sách Trung ương đặt hàng); <b>các công đoạn xuất bản</b> từ đặt in, đăng ký xuất bản, biên tập, duyệt cấp Ban, đọc kiểm tra, duyệt cấp Nhà xuất bản, chuẩn bị in, quyết định xuất bản, in, đọc sách mẫu, nộp lưu chiểu, quyết định phát hành đến thanh quyết toán; <b>quy trình gấp, tái bản, in nối bản</b>; và <b>trách nhiệm của từng đơn vị</b>. Mốc cần nhớ: biên tập viên biên tập bản thảo 200 trang trong tối đa <mark>10 ngày làm việc</mark>; Giám đốc – Tổng Biên tập ký duyệt in trong <mark>2 ngày làm việc</mark>; sách kỷ niệm ra trước ngày lễ ít nhất <mark>15 ngày</mark>; biên tập viên chưa có chứng chỉ hành nghề không được đứng tên biên tập.`,
+sections:[
+{h:"Bố cục 6 chương",html:`<div class="tablewrap"><table class="nums"><thead><tr><th>Chương</th><th>Nội dung</th></tr></thead><tbody>
+<tr><td>I (Điều 1–4)</td><td>Quy định chung: mục đích, phạm vi, nguyên tắc, giải thích từ ngữ</td></tr>
+<tr><td>II (Điều 5–7)</td><td>Công tác kế hoạch đề tài biên tập – xuất bản</td></tr>
+<tr><td>III (Điều 8–18)</td><td>Các công đoạn của quy trình xuất bản</td></tr>
+<tr><td>IV (Điều 19–21)</td><td>Quy trình xuất bản gấp, tái bản, in nối bản</td></tr>
+<tr><td>V (Điều 22–33)</td><td>Quyền hạn, trách nhiệm của Giám đốc, các Phó Giám đốc, Hội đồng Biên tập – Xuất bản, đơn vị biên tập, các đơn vị chức năng, cơ sở in</td></tr>
+<tr><td>VI (Điều 34–35)</td><td>Trách nhiệm thi hành, hiệu lực</td></tr>
+</tbody></table></div>`},
+{h:"Các loại sách theo nguồn kinh phí",items:[
+"<b>Sách Trung ương đặt hàng</b>: cơ quan Trung ương giao chỉ tiêu, ngân sách theo kế hoạch hằng năm, phục vụ nhiệm vụ chính trị, công tác văn hóa – tư tưởng.",
+"<b>Sách trợ giá</b>: Trung ương giao cho các ban Đảng Trung ương về đề tài, kinh phí; Nhà xuất bản phối hợp biên tập, xuất bản.",
+"<b>Sách tự phát hành</b>: Nhà xuất bản khai thác từ cộng tác viên, dùng kinh phí của mình để biên tập, in, phát hành.",
+"<b>Sách liên kết trọn gói</b>: đối tác chịu chi phí biên tập, in, phát hành. <b>Sách quản lý phí</b>: đối tác trả chi phí biên tập, duyệt, chế bản, đọc morát; đối tác tự in và phát hành.",
+"Phân biệt: <b>tái bản</b> là xuất bản lại sách của các năm trước (có hoặc không sửa), hoặc sách trong năm có sửa chữa, bổ sung; <b>in nối bản</b> là in thêm sách xuất bản trong năm, không sửa chữa. <b>Sách mẫu</b> là sách đủ bìa, tay sách, phụ bản nhưng chưa gia công vào bìa."]},
+{h:"Kế hoạch đề tài",items:[
+"5 căn cứ đề xuất đề tài: chức năng, nhiệm vụ của Nhà xuất bản; chỉ đạo của Bộ Chính trị, Ban Bí thư; chương trình xây dựng pháp luật của Quốc hội, chương trình làm việc của Trung ương và Chính phủ; nhu cầu của các cấp, ngành và thị trường; các ngày lễ, kỷ niệm lớn.",
+"<mark>Tháng 8</mark> hằng năm: Vụ Kế hoạch – Tài chính trình thông báo xây dựng kế hoạch đề tài năm sau (cả sách giấy và sách điện tử). Trong <mark>30 ngày</mark>, biên tập viên lập kế hoạch cá nhân, đơn vị tổng hợp; xử lý trùng lặp trong 10 ngày.",
+"Hội đồng Biên tập – Xuất bản cho ý kiến; Giám đốc – Tổng Biên tập phê duyệt; gửi Ban Tuyên giáo và Dân vận Trung ương vào <mark>tháng 10</mark> (sách Trung ương đặt hàng).",
+"Sách kỷ niệm ngày lễ lớn phải lên kế hoạch trước <mark>6 tháng đến 1 năm</mark>."]},
+{h:"Chuỗi công đoạn một cuốn sách",html:`<ol>
+<li><b>Tổng hợp số lượng đặt in</b> (sách tự phát hành: đơn vị phát hành đăng ký trong 2 ngày làm việc).</li>
+<li><b>Đăng ký xuất bản</b>: sau khi có Chủ trương xuất bản; tổng hợp trình duyệt vào <b>thứ Sáu hằng tuần</b>; đợt cuối năm trước <b>15/11</b> (sách Trung ương đặt hàng) và <b>15/12</b> (sách khác).</li>
+<li><b>Biên tập và duyệt cấp Ban</b>: biên tập viên đổ khổ, dàn trang, biên tập, viết Lời Nhà xuất bản, lập Phiếu duyệt bản thảo, viết Lời giới thiệu, dự thảo hợp đồng; lãnh đạo ban đọc duyệt.</li>
+<li><b>Vụ Kế hoạch – Tài chính đọc kiểm tra</b> toàn bộ bản thảo, ghi lưu ý bằng bút chì, không tự sửa; ghi nhận xét vào Phiếu duyệt.</li>
+<li><b>Phó Giám đốc – Phó Tổng Biên tập hoặc Ủy viên Hội đồng Biên tập – Xuất bản</b> phụ trách đơn vị đọc duyệt nội dung chính trị, khoa học.</li>
+<li><b>Giám đốc – Tổng Biên tập ký duyệt in</b> và Chủ trương xuất bản.</li>
+<li><b>Chuẩn bị in</b>: thiết kế, duyệt bìa; chế bản, đọc bông; duyệt giá; hợp đồng xuất bản, hợp đồng in.</li>
+<li><b>Quyết định xuất bản/tái bản</b> (chỉ cấp một lần); tạo mã QR, mã vạch.</li>
+<li><b>In</b>; <b>đọc sách mẫu</b> (đơn vị biên tập đọc nếu Trung tâm Xuất bản điện tử đã đọc bông, và ngược lại).</li>
+<li><b>Nộp lưu chiểu</b>, nhập kho; <b>Quyết định phát hành</b> rồi mới được phân phối.</li>
+<li><b>Thanh quyết toán</b>, trả nhuận bút.</li></ol>`},
+{h:"Thời hạn cần nhớ (theo dự thảo)",html:`<div class="tablewrap"><table class="nums"><thead><tr><th>Việc</th><th>Thời hạn</th></tr></thead><tbody>
+<tr><td>Biên tập viên biên tập bản thảo 200 trang (khổ 14,5 x 20,5 cm)</td><td>Tối đa 10 ngày làm việc; bản thảo phức tạp tối đa 20</td></tr>
+<tr><td>Lãnh đạo ban đọc duyệt</td><td>Tối đa 20 ngày (khó: 30); duyệt lại không quá ½ thời gian lần đầu</td></tr>
+<tr><td>Vụ Kế hoạch – Tài chính đọc kiểm tra</td><td>200 trang: 2 ngày làm việc; 300: 3; 500: 5; trên 500: 8</td></tr>
+<tr><td>Phó Giám đốc / Ủy viên Hội đồng đọc duyệt</td><td>Tối đa 10 ngày làm việc</td></tr>
+<tr><td>Giám đốc – Tổng Biên tập ký duyệt in</td><td>Tối đa 2 ngày làm việc</td></tr>
+<tr><td>Đã duyệt in 1 tháng mà chưa chuyển in</td><td>Phải báo cáo lý do, làm rõ trách nhiệm</td></tr>
+<tr><td>Vẽ bìa</td><td>1 ngày; bìa khó 2–3 ngày</td></tr>
+<tr><td>Chế bản 300 trang</td><td>Không có file: 7 ngày làm việc; có file: 2; thêm 1 ngày cho mỗi 100 trang</td></tr>
+<tr><td>Đọc bông 300 trang</td><td>4 ngày (bản viết tay: 7)</td></tr>
+<tr><td>In sách 400 trang</td><td>3 ngày; bìa cứng 7; chất lượng cao, sách ảnh, bìa vải 10</td></tr>
+<tr><td>Đọc sách mẫu 200 trang</td><td>1 ngày; thêm ½ ngày cho mỗi 200 trang</td></tr>
+<tr><td>Thanh toán nhuận bút cho đối tác</td><td>5 ngày làm việc từ khi có đề nghị được duyệt</td></tr>
+<tr><td>Sách trọng tâm, sách kỷ niệm</td><td>Ra sách trước ngày kỷ niệm ít nhất 15 ngày</td></tr>
+<tr><td>Sai sót không báo cáo</td><td>Sau 7 ngày: xem xét thi đua của đơn vị</td></tr>
+</tbody></table></div>`},
+{h:"Yêu cầu với bản thảo và hồ sơ trình duyệt",items:[
+"Bản thảo trình duyệt cấp Ban phải bảo đảm: <b>nội dung chính trị, pháp lý</b> đúng quan điểm, đường lối của Đảng, pháp luật của Nhà nước và điều ước quốc tế; <b>nội dung khoa học</b> chính xác, cập nhật, có căn cứ, hệ thống, lôgíc, đúng ngữ pháp, trích dẫn chính xác và rõ nguồn; <b>hình thức</b> đúng quy định của Nhà xuất bản.",
+"Hồ sơ trình duyệt cấp Nhà xuất bản: bản thảo có chữ ký biên tập viên và trưởng đơn vị ở trang bìa; Phiếu duyệt bản thảo; hợp đồng hoặc giấy chấp thuận sử dụng tác phẩm; Lời giới thiệu; nhận xét của hội đồng thẩm định hoặc chuyên gia (nếu có); bản quyền (sách liên quan bản quyền); bản khai thông tin tạo mã QR (sách Trung ương đặt hàng, liên kết trọn gói, quản lý phí).",
+"Bản thảo văn bản luật, văn kiện của Đảng và Nhà nước: thời gian đọc duyệt phải rút ngắn theo yêu cầu của lãnh đạo."]},
+{h:"Quy tắc biên tập viên phải nhớ",items:[
+"Không tự ý sửa chữa, bổ sung bản thảo sau khi lãnh đạo ban đã duyệt; mọi sửa đổi sau khi duyệt in phải báo cáo bằng văn bản và được Giám đốc – Tổng Biên tập đồng ý.",
+"<b>Biên tập viên tập sự và biên tập viên chưa có Chứng chỉ hành nghề biên tập không được đứng tên biên tập</b> của xuất bản phẩm.",
+"Sách tái bản phải trao đổi, thỏa thuận với tác giả theo quy định pháp luật.",
+"Chịu trách nhiệm trước thủ trưởng đơn vị và trước pháp luật về nội dung xuất bản phẩm mình biên tập; chủ động khai thác đề tài, bản thảo, thực hiện định mức.",
+"Không phân phối xuất bản phẩm khi chưa có Quyết định phát hành.",
+"Khi có sai sót phải báo cáo ngay để xử lý; gây thiệt hại thì phải xác định trách nhiệm, bồi thường."]},
+{h:"Quy trình gấp, tái bản, in nối bản",items:[
+"Sách gấp có 3 mức: <b>gấp, khẩn, thượng khẩn</b>; đơn vị biên tập lập tờ trình nêu mức độ, lý do, tiến độ; đăng ký xuất bản ngay trong ngày; ký duyệt in trong ngày; cấp mã sách, ISBN tối đa 2 giờ.",
+"Khi xuất bản gấp, Vụ Kế hoạch – Tài chính ưu tiên đọc trước và chỉ chịu trách nhiệm về nội dung chính trị.",
+"Tái bản thực hiện đủ các bước như xuất bản mới.",
+"In nối bản chỉ áp dụng với sách xuất bản trong cùng năm, có ý kiến của đơn vị biên tập, bảo đảm khả năng tiêu thụ; sửa lỗi đính chính (nếu có) trong 1 ngày."]},
+{h:"Đối chiếu với các nguồn công khai",items:[
+"Quy trình 7 bước mà Phó Giám đốc Nguyễn Thái Bình mô tả trên báo (thẩm định sơ bộ, biên tập, lãnh đạo ban duyệt, thư ký biên tập rà soát, Phó Giám đốc duyệt, Giám đốc duyệt in, biên tập kỹ thuật) khớp với dự thảo; nay khâu rà soát do Vụ Kế hoạch – Tài chính đảm nhiệm (sau khi Vụ Kế hoạch – Thư ký biên tập sáp nhập).",
+"Phó Giám đốc Phạm Thị Thinh nói biên tập viên đọc mỗi bản thảo ít nhất 3 lần và sau khi nộp lưu chiểu 10 ngày mới ký quyết định phát hành: khớp với các bước nộp lưu chiểu, quyết định phát hành trong dự thảo.",
+"Dự thảo vẫn dùng tên \"Nhà in Sự thật\", trong khi theo Quyết định 223-QĐ/TW đơn vị này nay là Xưởng in."]}
+],
+mm:[
+{n:"Bố cục: 6 chương, 35 điều",c:[{n:"Kế hoạch đề tài (Điều 5–7)"},{n:"Các công đoạn (Điều 8–18)"},{n:"Gấp, tái bản, in nối bản (Điều 19–21)"},{n:"Trách nhiệm các đơn vị (Điều 22–33)"}]},
+{n:"5 loại sách theo kinh phí",c:[{n:"Trung ương đặt hàng; trợ giá"},{n:"Tự phát hành"},{n:"Liên kết trọn gói; quản lý phí"}]},
+{n:"Các cấp duyệt",c:[{n:"Biên tập viên → lãnh đạo ban"},{n:"Vụ Kế hoạch – Tài chính đọc kiểm tra"},{n:"Phó Giám đốc / Ủy viên Hội đồng duyệt"},{n:"Giám đốc – Tổng Biên tập ký duyệt in"}]},
+{n:"Thời hạn",c:[{n:"Biên tập 200 trang ≤ 10 ngày làm việc"},{n:"Ký duyệt in ≤ 2 ngày làm việc"},{n:"Sách kỷ niệm ra trước ≥ 15 ngày"},{n:"Đăng ký xuất bản thứ Sáu hằng tuần"}]},
+{n:"Quy tắc biên tập viên",c:[{n:"Không tự sửa sau khi đã duyệt"},{n:"Chưa có chứng chỉ không đứng tên"},{n:"Tái bản phải thỏa thuận tác giả"}]}
+],
+sources:[]
+});
+
+NUMBERS.push(
+{doc:"quytrinh",what:"Bố cục dự thảo Quy định về Quy trình xuất bản",val:"6 chương, 35 điều",ref:"bản trình ký 11/2025"},
+{doc:"quytrinh",what:"Thời gian biên tập bản thảo 200 trang (phức tạp)",val:"≤ 10 (≤ 20) ngày làm việc",ref:"Điều 10"},
+{doc:"quytrinh",what:"Lãnh đạo ban đọc duyệt (bản thảo khó)",val:"≤ 20 (≤ 30) ngày",ref:"Điều 10"},
+{doc:"quytrinh",what:"Phó Giám đốc / Ủy viên Hội đồng đọc duyệt",val:"≤ 10 ngày làm việc",ref:"Điều 11"},
+{doc:"quytrinh",what:"Giám đốc – Tổng Biên tập ký duyệt in",val:"≤ 2 ngày làm việc",ref:"Điều 11"},
+{doc:"quytrinh",what:"Hạn đăng ký xuất bản cuối năm: sách TW đặt hàng / sách khác",val:"trước 15/11 / trước 15/12",ref:"Điều 9"},
+{doc:"quytrinh",what:"Sách kỷ niệm ngày lễ lớn ra trước ngày kỷ niệm",val:"≥ 15 ngày",ref:"Điều 17"},
+{doc:"quytrinh",what:"Thông báo xây dựng kế hoạch đề tài năm sau / gửi Ban Tuyên giáo và Dân vận TW",val:"tháng 8 / tháng 10",ref:"Điều 6, 7"}
+);
+
+FLASH.push(
+{doc:"quytrinh",q:"Năm loại sách theo nguồn kinh phí trong dự thảo quy trình?",a:"Sách Trung ương đặt hàng; sách trợ giá; sách tự phát hành; sách liên kết trọn gói; sách quản lý phí."},
+{doc:"quytrinh",q:"Tái bản khác in nối bản thế nào?",a:"<b>Tái bản</b>: xuất bản lại sách các năm trước (có hoặc không sửa), hoặc sách trong năm có sửa chữa, bổ sung. <b>In nối bản</b>: in thêm sách xuất bản trong năm, không sửa chữa."},
+{doc:"quytrinh",q:"Các cấp duyệt bản thảo theo thứ tự?",a:"Biên tập viên → lãnh đạo đơn vị biên tập → Vụ Kế hoạch – Tài chính đọc kiểm tra → Phó Giám đốc – Phó Tổng Biên tập hoặc Ủy viên Hội đồng Biên tập – Xuất bản → Giám đốc – Tổng Biên tập ký duyệt in."},
+{doc:"quytrinh",q:"Bản thảo trình duyệt cấp Ban phải đáp ứng những yêu cầu gì?",a:"Nội dung chính trị, pháp lý; nội dung khoa học (chính xác, cập nhật, có căn cứ, hệ thống, trích dẫn rõ nguồn); hình thức đúng quy định của Nhà xuất bản."},
+{doc:"quytrinh",q:"Biên tập viên nào không được đứng tên biên tập xuất bản phẩm?",a:"Biên tập viên tập sự và biên tập viên chưa có Chứng chỉ hành nghề biên tập."},
+{doc:"quytrinh",q:"Ba mức của quy trình sách gấp?",a:"Gấp, khẩn, thượng khẩn."},
+{doc:"quytrinh",q:"Khi nào xuất bản phẩm được phân phối?",a:"Sau khi nộp lưu chiểu và có <b>Quyết định phát hành xuất bản phẩm</b>."}
+);
+
+INTERVIEW.push({h:"Quy trình xuất bản của Nhà xuất bản (theo dự thảo 11/2025)",intro:"Dùng để trả lời câu hỏi nghiệp vụ. Chỉ nói ở mức quy trình chung, không trích dẫn văn bản nội bộ chưa ban hành.",items:[
+{q:"Mô tả đường đi của một bản thảo tại Nhà xuất bản.",a:`<ul><li>Kế hoạch đề tài → đăng ký xuất bản → biên tập viên biên tập, lập phiếu duyệt → lãnh đạo ban duyệt → bộ phận kế hoạch đọc kiểm tra → Phó Giám đốc duyệt → Giám đốc ký duyệt in.</li><li>Chuẩn bị in (bìa, chế bản, đọc bông, giá, hợp đồng) → quyết định xuất bản → in → đọc sách mẫu → nộp lưu chiểu → quyết định phát hành.</li><li>Nhấn mạnh: mỗi cấp chịu trách nhiệm về phần mình đã duyệt; không tự ý sửa sau khi đã duyệt.</li></ul>`},
+{q:"Biên tập viên mới vào cần lưu ý gì về quy trình?",a:`<ul><li>Chưa có chứng chỉ hành nghề thì chưa được đứng tên biên tập, nên học và thi chứng chỉ sớm.</li><li>Lập phiếu duyệt đầy đủ, ghi rõ đề xuất; trích dẫn phải chính xác, rõ nguồn.</li><li>Giữ đúng thời hạn; chậm thì báo cáo sớm, không để dồn.</li></ul>`},
+{q:"Sách kỷ niệm ngày lễ lớn cần chuẩn bị thế nào?",a:`<ul><li>Lên kế hoạch trước 6 tháng đến 1 năm; ra sách trước ngày kỷ niệm ít nhất 15 ngày để tuyên truyền.</li><li>Nếu đối tác chậm bản thảo hoặc chất lượng chưa đạt thì báo cáo lãnh đạo bằng văn bản.</li></ul>`}
+]});
+
+/* ===== Hiểu văn bản: hồ sơ ra đời các nghị quyết chiến lược 2022–2025 (tra cứu 22/10/2026) ===== */
+GUIDE.chains.push(
+{id:"g-nq27",kind:"party",so:"27-NQ/TW",docId:"nq27",
+title:"Nghị quyết 27-NQ/TW về tiếp tục xây dựng và hoàn thiện Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam trong giai đoạn mới",
+organ:"Ban Chấp hành Trung ương (Hội nghị Trung ương 6 khóa XIII); Tổng Bí thư Nguyễn Phú Trọng ký",date:"09/11/2022",
+prev:["NQ 48-NQ/TW (2005)","NQ 49-NQ/TW (2005)"],next:["Kế hoạch của Bộ Chính trị","NQ 66-NQ/TW (2025)"],
+origin:`<p>Hội nghị Trung ương 6 khóa XIII (3–9/10/2022) ban hành cùng lúc ba nghị quyết: 27 (Nhà nước pháp quyền), 28 (đổi mới phương thức lãnh đạo, cầm quyền của Đảng) và 29 (công nghiệp hóa, hiện đại hóa). Sau hơn 35 năm đổi mới, nghị quyết chỉ ra các hạn chế: quyền lực nhà nước chưa được kiểm soát hiệu quả, giám sát của Nhân dân chưa phát huy mạnh, ý thức chấp hành pháp luật chưa nghiêm, cải cách hành chính và tư pháp chưa đáp ứng yêu cầu.</p><p>Cùng lĩnh vực trước đó có Nghị quyết 48-NQ/TW (24/5/2005) về Chiến lược xây dựng và hoàn thiện hệ thống pháp luật và Nghị quyết 49-NQ/TW (2/6/2005) về Chiến lược cải cách tư pháp. <span class="muted">Toàn văn Nghị quyết 27 không ghi là thay thế hai văn bản này.</span></p>`,
+nature:"Nghị quyết của Hội nghị Trung ương, tức là văn bản của toàn Ban Chấp hành Trung ương, ở tầm cao hơn nghị quyết của Bộ Chính trị.",
+meaning:"Là nền tảng lý luận về Nhà nước pháp quyền cho giai đoạn đến 2030, tầm nhìn 2045. Văn kiện Đại hội XIV tiếp tục xác định xây dựng, hoàn thiện Nhà nước pháp quyền là nhiệm vụ trọng tâm.",
+content:`<ul><li>Mục tiêu 2030: hoàn thiện cơ bản cơ chế bảo đảm quyền làm chủ của Nhân dân, quyền con người, quyền công dân; nền hành chính và tư pháp chuyên nghiệp, hiện đại.</li><li>Tầm nhìn 2045: nước phát triển, thu nhập cao theo định hướng xã hội chủ nghĩa.</li><li>10 nhóm nhiệm vụ: hoàn thiện pháp luật; đổi mới Quốc hội; thiết chế Chủ tịch nước; nền tư pháp "chuyên nghiệp, hiện đại, công bằng, liêm chính"; kiểm soát quyền lực, phòng chống tham nhũng…</li></ul>`,
+links:"Nghị quyết 66-NQ/TW (2025) cụ thể hóa nhóm nhiệm vụ hoàn thiện pháp luật; định hướng cải cách tư pháp của Đại hội XIV dựa trên cả Nghị quyết 27 và 66. Luật Viên chức 2025 và các nghị định năm 2026 nằm trong dòng hoàn thiện thể chế này.",
+books:[["Tài liệu nghiên cứu các văn kiện Hội nghị lần thứ sáu Ban Chấp hành Trung ương Đảng khóa XIII (dùng cho cán bộ chủ chốt và báo cáo viên)","https://www.nxbctqg.org.vn/tai-lieu-nghien-cuu-cac-van-kien-hoi-nghi-lan-thu-sau-ban-chap-hanh-trung-uong-dang-khoa-xiii-dung-cho-can-bo-chu-chot-va-bao-cao-vien-.html","12/2022, Ban Tuyên giáo Trung ương và NXB biên soạn"],["Xây dựng, hoàn thiện Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam: Giai đoạn mới, yêu cầu mới","https://www.nxbctqg.org.vn/xay-dung-hoan-thien-nha-nuoc-phap-quyen-xa-hoi-chu-nghia-viet-nam-giai-doan-moi-yeu-cau-moi.html","7/2024, 708 trang, 43 bài"]]},
+
+{id:"g-nq57",kind:"party",so:"57-NQ/TW",docId:"nq57",
+title:"Nghị quyết 57-NQ/TW về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia",
+organ:"Bộ Chính trị; Tổng Bí thư Tô Lâm ký",date:"22/12/2024",
+prev:["NQ 20-NQ/TW (2012)","NQ 52-NQ/TW (2019)"],next:["NQ 193/2025/QH15","Chương trình hành động của Chính phủ"],
+origin:`<p>Nghị quyết nêu các hạn chế: phát triển còn chậm, khoảng cách lớn với nước phát triển; chưa làm chủ công nghệ chiến lược, cốt lõi; thể chế chưa đáp ứng, thiếu nhân lực chất lượng cao; hạ tầng số hạn chế; an ninh mạng còn nhiều thách thức.</p><p class="muted">Cùng lĩnh vực trước đó có Nghị quyết 20-NQ/TW (2012) về khoa học, công nghệ và Nghị quyết 52-NQ/TW (2019) về Cách mạng công nghiệp lần thứ tư; toàn văn Nghị quyết 57 không nhắc hai văn bản này.</p>`,
+nature:"Nghị quyết của Bộ Chính trị. Thành lập Ban Chỉ đạo Trung ương do Tổng Bí thư làm Trưởng ban.",
+meaning:`Nghị quyết xác định đây là <b>"đột phá quan trọng hàng đầu"</b>; thể chế là "điều kiện tiên quyết, cần đi trước một bước"; dữ liệu là "tư liệu sản xuất chính". Tổng Bí thư Tô Lâm xếp Nghị quyết 57 vào <b>"bộ tứ trụ cột"</b> (57, 59, 66, 68) ngày 18/5/2025.`,
+content:`<ul><li>Mục tiêu 2030: nhóm 3 nước dẫn đầu Đông Nam Á, nhóm 50 thế giới về năng lực cạnh tranh số và Chính phủ điện tử; kinh tế số tối thiểu <b>30% GDP</b>; chi nghiên cứu, phát triển <b>2% GDP</b>; ngân sách cho lĩnh vực ít nhất <b>3%</b> tổng chi; dịch vụ công trực tuyến trên 80%; phủ sóng 5G.</li><li>Tầm nhìn 2045: kinh tế số tối thiểu 50% GDP; nhóm 30 nước dẫn đầu.</li><li>7 nhóm nhiệm vụ, giải pháp.</li></ul>`,
+links:`Quốc hội thể chế hóa bằng <b>Nghị quyết 193/2025/QH15</b> (19/2/2025) về thí điểm cơ chế đặc biệt (miễn trách nhiệm dân sự trong nghiên cứu, khoán chi đến sản phẩm cuối cùng…). Nghị quyết 59, 71, 72 đều có nhóm giải pháp về chuyển đổi số. Với Nhà xuất bản: chuyển đổi số xuất bản, sách điện tử, sách nói.`,
+books:[["Hỏi – đáp về Nghị quyết số 57-NQ/TW (Ban Tuyên giáo và Dân vận Trung ương phối hợp với NXB biên soạn)","https://khodulieu.sohoa.tuyenquang.gov.vn/congthongtin/media/10a799a2391dc54712386c93bcdd4807.pdf","5/2025; bản PDF trên cổng tỉnh Tuyên Quang, chưa thấy trang sách trên website NXB"]]},
+
+{id:"g-nq59",kind:"party",so:"59-NQ/TW",
+title:"Nghị quyết 59-NQ/TW về hội nhập quốc tế trong tình hình mới",
+organ:"Bộ Chính trị khóa XIII",date:"24/01/2025",
+prev:["NQ 22-NQ/TW (10/4/2013)"],next:["NQ 153/NQ-CP (31/5/2025)","NQ 250/2025/QH15"],
+origin:`<p>Xây dựng trên cơ sở Đề án tổng kết 10 năm thực hiện Nghị quyết 22-NQ/TW (10/4/2013) về hội nhập quốc tế. Tư duy hội nhập phát triển qua các kỳ Đại hội: Đại hội IX "hội nhập kinh tế quốc tế"; Đại hội XI hội nhập trên mọi lĩnh vực; Đại hội XIII "toàn diện, sâu rộng, có hiệu quả".</p>`,
+nature:"Nghị quyết của Bộ Chính trị.",
+meaning:`Tổng Bí thư gọi là "quyết sách đột phá", "bước ngoặt có tính lịch sử". Thuộc "bộ tứ trụ cột" (18/5/2025); ngày 16/9/2025 được gọi là "Nghị quyết trụ cột" cùng ba nghị quyết chuyên đề 70, 71, 72.`,
+content:`<ul><li>6 quan điểm; "hội nhập kinh tế là trung tâm"; nội lực có vai trò quyết định; không tham gia liên minh của bên này chống bên kia.</li><li>Hai bước chuyển: từ "tiếp nhận sang đóng góp", từ "hội nhập sâu rộng sang hội nhập đầy đủ".</li><li>Không có chỉ tiêu định lượng.</li></ul>`,
+links:"Chương trình hành động của Chính phủ: Nghị quyết 153/NQ-CP (31/5/2025). Quốc hội ban hành Nghị quyết 250/2025/QH15 (10/12/2025) về cơ chế đặc thù nâng cao hiệu quả hội nhập quốc tế.",
+books:[["Bài phân tích Nghị quyết 59 trên Tạp chí Chính trị và Phát triển số 06/2025","https://vjol.info.vn/tcchinhtrivaphattrien/article/download/139687/114192/",""]]},
+
+{id:"g-nq66",kind:"party",so:"66-NQ/TW",docId:"nq66",
+title:"Nghị quyết 66-NQ/TW về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới",
+organ:"Bộ Chính trị; Tổng Bí thư Tô Lâm ký",date:"30/4/2025",
+prev:["NQ 48-NQ/TW (2005)","NQ 27-NQ/TW (2022)"],next:["NQ 197/2025/QH15","NQ 140/NQ-CP","Các luật sửa đổi 2025–2027"],
+origin:`<p>Thủ tướng Phạm Minh Chính gọi thể chế, pháp luật là "điểm nghẽn lớn nhất". Mục tiêu đầu tiên của nghị quyết là đến 2025 cơ bản tháo gỡ các "điểm nghẽn". <span class="muted">Chưa thấy nguồn nêu văn bản mà Nghị quyết 66 thay thế; cùng lĩnh vực có Nghị quyết 48 (2005) và nhóm nhiệm vụ hoàn thiện pháp luật của Nghị quyết 27 (2022).</span></p>`,
+nature:"Nghị quyết của Bộ Chính trị. Lập Ban Chỉ đạo Trung ương về hoàn thiện thể chế, pháp luật do Tổng Bí thư làm Trưởng ban.",
+meaning:`Xây dựng pháp luật là <b>"đột phá của đột phá"</b>; Tổng Bí thư gọi nghị quyết là "lời hiệu triệu cho một cuộc cải cách thể chế sâu sắc"; từ bỏ tư duy "không quản được thì cấm"; coi pháp luật là "lợi thế cạnh tranh". Thuộc "bộ tứ trụ cột".`,
+content:`<ul><li>Mốc: 2025 tháo gỡ điểm nghẽn; 2027 sửa xong luật cho mô hình chính quyền mới; 2028 môi trường đầu tư vào nhóm 3 ASEAN; 2030 hệ thống pháp luật dân chủ, công bằng, minh bạch, khả thi; 2045 chất lượng cao, hiện đại.</li><li>Kinh phí xây dựng pháp luật không dưới <b>0,5%</b> tổng chi ngân sách hằng năm.</li><li>7 nhiệm vụ, có ứng dụng trí tuệ nhân tạo và dữ liệu lớn.</li></ul>`,
+links:"Thể chế hóa: Nghị quyết 197/2025/QH15 về cơ chế đặc biệt trong xây dựng và thi hành pháp luật; Chương trình hành động 140/NQ-CP. Nghị quyết 66 không \"hình sự hóa\" quan hệ kinh tế, dân sự, gắn với Nghị quyết 68. Đại hội XIV gọi thể chế là \"khâu đột phá chiến lược mang tính quyết định\".",
+books:[["Tư liệu văn kiện: toàn văn Nghị quyết 66-NQ/TW","https://tulieuvankien.dangcongsan.vn/he-thong-van-ban/van-ban-cua-dang/nghi-quyet-so-66-nqtw-ngay-3042025-cua-bo-chinh-tri-ve-doi-moi-cong-tac-xay-dung-va-thi-hanh-phap-luat-dap-ung-yeu-11561","dangcongsan.vn; chưa tìm thấy sách riêng của NXB"]]},
+
+{id:"g-nq68",kind:"party",so:"68-NQ/TW",
+title:"Nghị quyết 68-NQ/TW về phát triển kinh tế tư nhân",
+organ:"Bộ Chính trị; Tổng Bí thư Tô Lâm ký",date:"04/5/2025",
+prev:["NQ 10-NQ/TW (2017)"],next:["NQ 198/2025/QH15","NQ 138/NQ-CP","NQ 139/NQ-CP"],
+origin:`<p>Mục tiêu của Nghị quyết 10-NQ/TW (2017) là 1,5 triệu doanh nghiệp và 55% GDP vào 2025 "vẫn chưa đạt được". Hạn chế: phần lớn doanh nghiệp siêu nhỏ, nhỏ và vừa; quyền tài sản, tự do kinh doanh chưa được bảo đảm đầy đủ; khó tiếp cận vốn, đất đai; chi phí kinh doanh cao.</p>`,
+nature:"Nghị quyết của Bộ Chính trị.",
+meaning:`Kinh tế tư nhân là <b>"một động lực quan trọng nhất"</b> của nền kinh tế; doanh nhân là "chiến sỹ trên mặt trận kinh tế". Thuộc "bộ tứ trụ cột".`,
+content:`<ul><li>Mục tiêu 2030: <b>2 triệu doanh nghiệp</b> (20 doanh nghiệp/1.000 dân); đóng góp 55–58% GDP, 35–40% thu ngân sách; tăng trưởng 10–12%/năm.</li><li>Tầm nhìn 2045: ít nhất 3 triệu doanh nghiệp, trên 60% GDP.</li><li>8 nhóm giải pháp.</li></ul>`,
+links:"Quốc hội ban hành Nghị quyết 198/2025/QH15 (hiệu lực 17/5/2025): thanh tra, kiểm tra tối đa 1 lần/năm; miễn thuế thu nhập doanh nghiệp 3 năm cho doanh nghiệp nhỏ và vừa; bỏ lệ phí môn bài từ 1/1/2026. Chính phủ: Nghị quyết 138/NQ-CP và 139/NQ-CP.",
+books:[["Nghị quyết số 68-NQ/TW của Bộ Chính trị: Đột phá để phát triển kinh tế tư nhân – Hỏi và đáp (Nguyễn Thái Bình chủ biên, 97 câu hỏi)","https://nxbctqg.org.vn/lam-ro-tu-duy-dot-pha-phat-trien-kinh-te-tu-nhan-tu-nghi-quyet-so-68-nq-tw-213.html","bài giới thiệu trên website NXB, 26/5/2026"]]},
+
+{id:"g-nq70",kind:"party",so:"70-NQ/TW",
+title:"Nghị quyết 70-NQ/TW về bảo đảm an ninh năng lượng quốc gia đến năm 2030, tầm nhìn đến năm 2045",
+organ:"Bộ Chính trị; Tổng Bí thư Tô Lâm ký",date:"20/8/2025",
+prev:["NQ 55-NQ/TW (2020)"],next:["NQ 253/2025/QH15"],
+origin:`<p>Nghị quyết đánh giá sau 5 năm thực hiện Nghị quyết 55-NQ/TW (2020): một số hạn chế "chưa được khắc phục triệt để", nhiều chỉ tiêu khó đạt; nguy cơ thiếu điện khi tăng trưởng hai con số. <span class="muted">Không ghi là thay thế Nghị quyết 55.</span></p>`,
+nature:"Nghị quyết của Bộ Chính trị (nghị quyết chuyên đề).",
+meaning:"Cùng Nghị quyết 71, 72 là ba nghị quyết chuyên đề, cùng Nghị quyết 59 họp thành \"bộ tứ\" được quán triệt ngày 16/9/2025.",
+content:`<ul><li>2030: năng lượng tái tạo 25–30% tổng cung năng lượng sơ cấp; công suất nguồn điện 183–236 GW; dự trữ xăng dầu khoảng 90 ngày nhập ròng.</li><li>Áp dụng giá thị trường, không bù chéo; phát triển điện hạt nhân, điện khí, giảm dần điện than.</li></ul>`,
+links:"Quốc hội ban hành Nghị quyết 253/2025/QH15 (11/12/2025) về cơ chế, chính sách phát triển năng lượng quốc gia 2026–2030.",
+books:[]},
+
+{id:"g-nq71",kind:"party",so:"71-NQ/TW",
+title:"Nghị quyết 71-NQ/TW về đột phá phát triển giáo dục và đào tạo",
+organ:"Bộ Chính trị; Tổng Bí thư Tô Lâm ký",date:"22/8/2025",
+prev:["NQ 29-NQ/TW (2013)"],next:["NQ 248/2025/QH15","QĐ 131/QĐ-TTg (2026)","Luật Giáo dục sửa đổi"],
+origin:`<p>Chuyển trọng tâm từ "đổi mới căn bản, toàn diện" của Nghị quyết 29-NQ/TW (2013) sang "đột phá chiến lược". Hạn chế: chênh lệch vùng miền; cơ sở vật chất, đội ngũ chưa đáp ứng; giáo dục đại học, nghề nghiệp còn manh mún.</p>`,
+nature:"Nghị quyết của Bộ Chính trị (nghị quyết chuyên đề).",
+meaning:`Giáo dục là "quốc sách hàng đầu"; phương châm "lấy chất lượng làm trục" (Tổng Bí thư, 16/9/2025).`,
+content:`<ul><li>2030: phổ cập mầm non 3–5 tuổi; chi cho giáo dục ≥ 20% tổng chi ngân sách; ít nhất 8 trường đại học vào top 200 châu Á.</li><li>2045: nhóm 20 nước đứng đầu thế giới về giáo dục.</li></ul>`,
+links:"Quốc hội: Nghị quyết 248/2025/QH15; Chính phủ: Quyết định 131/QĐ-TTg (19/1/2026); sửa Luật Giáo dục, Luật Giáo dục đại học, Luật Giáo dục nghề nghiệp.",
+books:[]},
+
+{id:"g-nq72",kind:"party",so:"72-NQ/TW",
+title:"Nghị quyết 72-NQ/TW về một số giải pháp đột phá, tăng cường bảo vệ, chăm sóc và nâng cao sức khỏe nhân dân",
+organ:"Bộ Chính trị",date:"09/9/2025",
+prev:["NQ 20-NQ/TW (25/10/2017)"],next:["NQ 261, 262/2025/QH15","Luật Phòng bệnh (hiệu lực 1/7/2026)"],
+origin:`<p>Cùng lĩnh vực trước đó có Nghị quyết 20-NQ/TW (25/10/2017, Trung ương 6 khóa XII). Hạn chế: y tế dự phòng và y tế cơ sở yếu; phụ thuộc nhập khẩu thuốc, thiết bị; thiếu nhân lực.</p>`,
+nature:"Nghị quyết của Bộ Chính trị (nghị quyết chuyên đề).",
+meaning:`"Dự phòng là then chốt" (Tổng Bí thư, 16/9/2025).`,
+content:`<ul><li>Từ 2026: khám sức khỏe định kỳ hoặc sàng lọc miễn phí ít nhất mỗi năm 1 lần.</li><li>Đến 2030: miễn viện phí ở mức cơ bản trong phạm vi bảo hiểm y tế, theo lộ trình; tuổi thọ 75,5.</li></ul>`,
+links:"Quốc hội: Nghị quyết 261/2025/QH15 (cơ chế đặc biệt), 262/2025/QH15 (Chương trình mục tiêu quốc gia); Luật Phòng bệnh (hiệu lực 1/7/2026).",
+books:[]},
+
+{id:"g-nq18",kind:"party",so:"18-NQ/TW",
+title:"Nghị quyết 18-NQ/TW về đổi mới, sắp xếp tổ chức bộ máy của hệ thống chính trị tinh gọn, hoạt động hiệu lực, hiệu quả",
+organ:"Ban Chấp hành Trung ương khóa XII (Hội nghị Trung ương 6)",date:"25/10/2017",
+prev:[],next:["KL 121-KL/TW (24/1/2025)","NQ 60-NQ/TW (2025)","Luật Viên chức 2025"],
+origin:"Năm 2024–2025, Trung ương tổng kết 7 năm thực hiện Nghị quyết 18 và tiến hành cuộc sắp xếp bộ máy lớn.",
+nature:"Nghị quyết của Hội nghị Trung ương.",
+meaning:"Tổng Bí thư Tô Lâm xếp Nghị quyết 18, 57 và 59 vào \"bộ ba chiến lược\" (bài viết 3/4/2025).",
+content:`<ul><li>Kết luận 121-KL/TW (24/1/2025): hợp nhất Ban Tuyên giáo và Ban Dân vận; đổi Ban Kinh tế thành Ban Chính sách, chiến lược; lập 4 đảng ủy trực thuộc Trung ương; hợp nhất nhiều bộ.</li><li>Nghị quyết 60-NQ/TW (Trung ương 11 khóa XIII): 34 tỉnh, thành phố; chính quyền địa phương 2 cấp, bỏ cấp huyện từ 1/7/2025.</li></ul>`,
+links:"Kéo theo việc Nhà xuất bản sắp xếp từ 17 xuống 14 đơn vị (Quyết định 223-QĐ/TW, 2024) và việc sửa Luật Viên chức, các nghị định về đơn vị sự nghiệp năm 2025–2026.",
+books:[]}
+);
+
+/* ===== Hiểu văn bản: văn bản năm 2026, Luật Viên chức, Luật Xuất bản (tra cứu 22/10/2026) ===== */
+GUIDE.chains.push(
+{id:"g-dh14",kind:"party",so:"Đại hội XIV",docId:"dh14",
+title:"Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV của Đảng và Chương trình hành động",
+organ:"Đại hội XIV (Trung tâm Hội nghị quốc gia, Hà Nội)",date:"19–23/01/2026",
+prev:["Văn kiện Đại hội XIII (2021)","9 nghị quyết chiến lược 2024–2025"],next:["Chỉ thị của Bộ Chính trị về học tập Nghị quyết","NQ 05-NQ/TW","NQ 25-NQ/TW","Chương trình, kế hoạch của cấp ủy (quý I/2026)"],
+origin:`<p>Ngày 21/10/2025 công bố báo cáo về những vấn đề mới trong dự thảo văn kiện. Lần đầu tiên <b>ba báo cáo</b> (chính trị; kinh tế – xã hội; tổng kết xây dựng Đảng) được tích hợp thành một Báo cáo chính trị, và lần đầu tiên có <b>Chương trình hành động</b> đi kèm. Trước Đại hội, Đảng đã ban hành 9 nghị quyết chiến lược; báo chí mô tả đây là bước chuyển từ "nghị quyết định hướng" sang "nghị quyết hành động".</p>`,
+nature:"Văn kiện của Đại hội, cơ quan lãnh đạo cao nhất của Đảng. Bộ sách Văn kiện gồm 10 văn kiện, trong đó có Báo cáo tổng kết 40 năm đổi mới và Báo cáo tổng kết 15 năm thi hành Điều lệ Đảng.",
+meaning:"Chuyển từ tổng kết nhiệm kỳ sang thiết kế chiến lược phát triển dài hạn; là nền tảng của mọi nghị quyết, chỉ thị ban hành trong năm 2026.",
+content:`<ul><li>Phương châm Đại hội: "Đoàn kết – Dân chủ – Kỷ cương – Đột phá – Phát triển".</li><li>Mục tiêu 2030: nước đang phát triển, công nghiệp hiện đại, thu nhập trung bình cao; tầm nhìn 2045: nước phát triển, thu nhập cao; tăng trưởng GDP từ 10%/năm.</li><li>Khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số là động lực chính; kinh tế tư nhân là "một động lực quan trọng nhất"; thể chế là "khâu đột phá chiến lược mang tính quyết định".</li></ul>`,
+links:`Chỉ thị của Bộ Chính trị về nghiên cứu, học tập Nghị quyết (Nhà xuất bản đăng 25/01/2026) yêu cầu chuyển từ "học tập, quán triệt" sang "hiểu sâu, hành động đúng, làm đến cùng"; cấp ủy làm chương trình, kế hoạch trong quý I/2026. Sau Đại hội: Hội nghị Trung ương 2 ban hành Nghị quyết 05 (kiểm tra, giám sát); Bộ Chính trị ban hành Nghị quyết 25 (công tác tư tưởng).`,
+books:[["Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV (trọn bộ 2 tập)","https://nxbctqg.org.vn/van-kien-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-tron-bo-2-tap--44.html","3/2026, phối hợp Văn phòng Trung ương Đảng (trang sách ghi 832 trang; báo ghi 823)"],["Những nội dung cơ bản trong Văn kiện Đại hội XIV của Đảng – Hỏi và đáp","https://nxbctqg.org.vn/nhung-noi-dung-co-ban-trong-van-kien-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-cua-dang-hoi-va-dap.html","6/2026, TS Ngô Đông Hải, PGS.TS Vũ Trọng Lâm đồng chủ biên"],["Tài liệu bồi dưỡng nhận thức về Đảng (lần thứ 24, theo Văn kiện XIV)","https://nxbctqg.org.vn/tai-lieu-boi-duong-nhan-thuc-ve-dang-xuat-ban-lan-thu-24-co-sua-chua-bo-sung-theo-van-kien-dai-hoi-lan-thu-xiv-cua-dang-.html",""],["Chỉ thị của Bộ Chính trị về nghiên cứu, học tập Nghị quyết Đại hội XIV (tin trên website NXB)","https://nxbctqg.org.vn/chi-thi-cua-bo-chinh-tri-ve-nghien-cuu-hoc-tap-quan-triet-tuyen-truyen-va-trien-khai-thuc-hien-nghi-quyet-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-cua-dang.html",""],["Chuyên mục Đại hội XIV trên website NXB","https://nxbctqg.org.vn/dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-cua-dang.html",""]]},
+
+{id:"g-ct04",kind:"party",so:"04-CT/TW",docId:"ct04",
+title:"Chỉ thị 04-CT/TW về tăng cường sự lãnh đạo của Đảng đối với hoạt động xuất bản trong tình hình mới",
+organ:"Ban Bí thư; đồng chí Trần Cẩm Tú, Thường trực Ban Bí thư, ký",date:"17/3/2026",
+prev:["CT 42-CT/TW (25/8/2004)","CT 44-CT/TW (16/4/2020)"],next:["HD 22-HD/BTGDVTW (28/5/2026)","Luật 17/2026/QH16"],
+origin:`<p>Chỉ thị 42-CT/TW (25/8/2004) về nâng cao chất lượng toàn diện hoạt động xuất bản đã "tạo nền tảng quan trọng" (Cục trưởng Nguyễn Nguyên); Hội nghị tổng kết 20 năm Chỉ thị 42 họp ngày 26/8/2025. Chỉ thị 44-CT/TW (16/4/2020) của Ban Bí thư về sách lý luận, chính trị được Nhà xuất bản sơ kết 5 năm tại hội thảo ngày 28/11/2025. <span class="muted">Chưa thấy nguồn ghi Chỉ thị 04 "thay thế" Chỉ thị 42; toàn văn Chỉ thị 04 do Nhà xuất bản đăng không nhắc Chỉ thị 42.</span></p>`,
+nature:"Chỉ thị của Ban Bí thư: văn bản lãnh đạo, chỉ đạo thực hiện một lĩnh vực; Ban Tuyên giáo và Dân vận Trung ương ra hướng dẫn thực hiện.",
+meaning:"Khẳng định xuất bản vừa là lĩnh vực văn hóa – tư tưởng, vừa là ngành kinh tế – công nghệ, công nghiệp sáng tạo; vai trò Nhà nước chuyển từ quản lý ngành sang kiến tạo hệ sinh thái. Là văn bản trực tiếp nhất với công việc biên tập viên.",
+content:`<ul><li>Đến 2030: <b>100%</b> nhà xuất bản tham gia xuất bản điện tử; 80% cơ sở in dùng công nghệ hiện đại; có tập đoàn xuất bản – truyền thông. Đến 2045: trung tâm hàng đầu Đông Nam Á.</li><li>Hoàn thiện pháp luật, nhất là bản quyền trong môi trường số và trí tuệ nhân tạo; bảo vệ biên tập viên trước vu khống, tấn công mạng; nền tảng dữ liệu xuất bản quốc gia; chống in lậu; phát triển văn hóa đọc.</li><li>Phân công: Đảng ủy Quốc hội hoàn thiện pháp luật xuất bản; Bộ Giáo dục và Đào tạo đưa tiết đọc sách vào trường.</li></ul>`,
+links:"Hướng dẫn 22-HD/BTGDVTW (28/5/2026) của Ban Tuyên giáo và Dân vận Trung ương. Thực hiện gắn với Nghị quyết Đại hội XIV, Nghị quyết 57 và Nghị quyết 80-NQ/TW (7/1/2026). Luật 17/2026/QH16 sửa Luật Xuất bản được thông qua ngày 24/8/2026, sau khi chỉ thị giao hoàn thiện pháp luật (báo chí không nêu trực tiếp quan hệ này).",
+books:[["Toàn văn Chỉ thị 04-CT/TW (website NXB, 27/3/2026)","https://nxbctqg.org.vn/tang-cuong-su-lanh-dao-cua-dang-doi-voi-hoat-dong-xuat-ban-trong-tinh-hinh-moi.html",""],["Biên tập viên phải coi chất lượng sách là danh dự nghề nghiệp (Phạm Thị Thinh)","https://nxbctqg.org.vn/bien-tap-vien-phai-coi-chat-luong-sach-la-danh-du-nghe-nghiep-61.html","29/6/2026"],["Cần siết chặt lại tất cả các khâu trong quy trình xuất bản sách (Nguyễn Thái Bình)","https://nxbctqg.org.vn/can-siet-chat-lai-tat-ca-cac-khau-trong-quy-trinh-xuat-ban-sach.html","29/6/2026"],["Vũ Trọng Lâm: Xuất bản sách lý luận, chính trị, góp phần xây dựng Đảng về chính trị, tư tưởng, đạo đức trong giai đoạn mới","https://vjol.info.vn/tcchinhtrivaphattrien/article/view/168617","TC Chính trị và Phát triển số 03/2024"]]},
+
+{id:"g-ct05",kind:"party",so:"05-CT/TW",docId:"ct05",
+title:"Chỉ thị 05-CT/TW về tăng cường sự lãnh đạo của Đảng đối với báo chí, truyền thông trên không gian mạng trong tình hình mới",
+organ:"Bộ Chính trị",date:"30/3/2026",
+prev:["Luật Báo chí 2016"],next:["HD 21-HD/BTGDVTW (28/5/2026)","Luật Báo chí 126/2025/QH15 (hiệu lực 1/7/2026)"],
+origin:"Bối cảnh chuyển đổi số và thông tin xấu độc trên mạng; chỉ thị được thực hiện gắn với Nghị quyết Đại hội XIV, Nghị quyết 57 và Nghị quyết 80. Chưa thấy nguồn nêu tên văn bản tiền thân.",
+nature:"Chỉ thị của Bộ Chính trị (cấp cao hơn chỉ thị của Ban Bí thư). Ban hành chỉ 13 ngày sau Chỉ thị 04, tạo thành cặp xuất bản – báo chí.",
+meaning:`Báo chí cách mạng là "bộ phận không thể tách rời của sự nghiệp cách mạng"; mục tiêu làm chủ mặt trận thông tin trên không gian mạng.`,
+content:`<ul><li>10 nhóm nhiệm vụ: Đảng lãnh đạo trực tiếp, toàn diện; hoàn thiện quy định và pháp luật; hệ thống báo chí tinh gọn, hiện đại.</li><li>Chuyển đổi số: tòa soạn hội tụ, trí tuệ nhân tạo, dữ liệu lớn; kỷ luật thông tin, không để khoảng trống thông tin.</li><li>Quản lý nền tảng xuyên biên giới; hướng dẫn người dân dùng Internet an toàn, nhận diện deepfake.</li></ul>`,
+links:"Hướng dẫn 21-HD/BTGDVTW (28/5/2026). Luật Báo chí 126/2025/QH15 (thông qua 10/12/2025, hiệu lực 1/7/2026) thay Luật Báo chí 2016. Nghị quyết 25-NQ/TW (8/2026) bao trùm cả phạm vi của Chỉ thị 04 và 05.",
+books:[["Luật Báo chí năm 2025 (sách điện tử)","https://sachquocgia.vn/luat-bao-chi-nam-2025-b1132.html","sachquocgia.vn"]]},
+
+{id:"g-nq25",kind:"party",so:"25-NQ/TW",docId:"nq25",
+title:"Nghị quyết 25-NQ/TW về Chiến lược công tác tư tưởng trong bối cảnh mới",
+organ:"Bộ Chính trị; Tổng Bí thư, Chủ tịch nước Tô Lâm ký",date:"22/8/2026",
+prev:["NQ 35-NQ/TW (22/10/2018), cùng lĩnh vực"],next:["Kế hoạch 08-KH/TW (22/8/2026)","Hội nghị quán triệt 3/9/2026"],
+origin:`<p>Bốn căn cứ: vai trò của công tác tư tưởng; các hạn chế (cấp ủy "khoán trắng", tư duy "quản lý thông tin", chưa theo kịp chính quyền địa phương hai cấp); bối cảnh quốc tế; yêu cầu của cách mạng. <span class="muted">Chưa thấy nguồn nêu Nghị quyết 35-NQ/TW (2018) về bảo vệ nền tảng tư tưởng là tiền thân; ở đây chỉ ghi là cùng lĩnh vực.</span></p>`,
+nature:"Nghị quyết của Bộ Chính trị; Ban Bí thư ban hành Kế hoạch 08-KH/TW cùng ngày. Trưởng Ban Tuyên giáo và Dân vận Trung ương Trịnh Văn Quyết trình bày tại hội nghị quán triệt 3/9/2026.",
+meaning:`"Lần đầu tiên công tác tư tưởng của Đảng được xác lập ở tầm chiến lược tổng thể" (Vietnam+).`,
+content:`<ul><li>Chuyển từ "quản lý thông tin" sang "dẫn dắt nhận thức xã hội"; phương châm "Chủ động – Sắc bén – Thuyết phục – Hiệu quả".</li><li>Đến 2030: giảm ít nhất 70% thông tin xấu độc so với năm 2026; 100% cấp xã có cán bộ chuyên trách công tác tư tưởng.</li><li>8 nhóm nhiệm vụ, 3 đột phá; nguyên tắc "6 rõ"; sơ kết 2028, tổng kết trước Đại hội XV.</li></ul>`,
+links:"Bao trùm phạm vi của Chỉ thị 04 (xuất bản) và Chỉ thị 05 (báo chí). Với Nhà xuất bản: sách bảo vệ nền tảng tư tưởng, Tủ sách Bảo vệ nền tảng tư tưởng Đảng.",
+books:[["Đấu tranh bảo vệ nền tảng tư tưởng của Đảng trong giai đoạn mới (Hội đồng Lý luận Trung ương)","https://nxbctqg.org.vn/dau-tranh-bao-ve-nen-tang-tu-tuong-cua-dang-trong-giai-doan-moi-7.html",""],["Tủ sách Bảo vệ nền tảng tư tưởng Đảng (BCĐ 35)","https://sachquocgia.vn/tu-sach-bao-ve-nen-tang-tu-tuong-dang-bcd-35-c3","sachquocgia.vn"]]},
+
+{id:"g-nq05",kind:"party",so:"05-NQ/TW",docId:"ktgs",
+title:"Nghị quyết 05-NQ/TW về đổi mới, nâng cao hiệu lực công tác kiểm tra, giám sát và kỷ luật đảng",
+organ:"Ban Chấp hành Trung ương (Hội nghị Trung ương 2 khóa XIV); Tổng Bí thư Tô Lâm ký",date:"07/4/2026",
+prev:["NQ 14-NQ/TW (30/7/2007, Trung ương 5 khóa X)"],next:["QĐ 21-QĐ/TW (4/2026) → QĐ 225-QĐ/TW (10/2026)","QĐ 207, 212-QĐ/TW"],
+origin:"Sau gần 20 năm thực hiện Nghị quyết Trung ương 5 khóa X (Nghị quyết 14-NQ/TW, 2007) về công tác kiểm tra, giám sát. Văn kiện Đại hội XIV nhấn mạnh kiểm tra, giám sát là phương thức lãnh đạo chủ yếu.",
+nature:"Nghị quyết của Hội nghị Trung ương (toàn Ban Chấp hành Trung ương).",
+meaning:`Kiểm tra, giám sát là "công cụ để kiểm soát quyền lực"; tinh thần "không có vùng cấm", "không có ngoại lệ".`,
+content:`<ul><li>Giám sát trên dữ liệu, cảnh báo sớm; bảo vệ cán bộ dám nghĩ, dám làm.</li><li>Chuyển đổi số toàn diện ngành Kiểm tra; kiện toàn ủy ban kiểm tra đến cấp xã.</li></ul>`,
+links:"Được cụ thể hóa bằng Quy định 21-QĐ/TW (11/4/2026), nay thay bằng Quy định 225-QĐ/TW (14/10/2026); cùng Quy định 207 (điều cấm) và 212 (kỷ luật). Xem văn bản \"Kiểm tra, giám sát, kỷ luật Đảng\" trong tab Văn bản.",
+books:[["Quy định về công tác kiểm tra, giám sát và kỷ luật của Đảng (tập văn bản, 12/2022; nay nhiều văn bản đã bị thay)","https://www.nxbctqg.org.vn/quy-dinh-ve-cong-tac-kiem-tra-giam-sat-va-ky-luat-cua-dang.html",""]]},
+
+{id:"g-luatvc",kind:"state",so:"129/2025/QH15",docId:"luatvc",
+title:"Luật Viên chức số 129/2025/QH15 và các nghị định hướng dẫn năm 2026",
+organ:"Quốc hội khóa XV, Kỳ họp thứ 10; Chủ tịch Quốc hội Trần Thanh Mẫn ký",date:"Thông qua 10/12/2025; hiệu lực 01/7/2026",
+prev:["Luật Viên chức 58/2010/QH12","Luật sửa đổi 52/2019/QH14"],next:["NĐ 259/2026 (tuyển dụng)","NĐ 233/2026 (đánh giá)","NĐ 234/2026 (kỷ luật)","NĐ 299/2026 (đơn vị sự nghiệp)"],
+origin:`<p>Bộ Nội vụ chủ trì soạn thảo; Chính phủ thông qua dự án bằng Nghị quyết 279/NQ-CP (15/9/2025); Ủy ban Thường vụ Quốc hội cho ý kiến 29/9/2025; Quốc hội nghe tờ trình 22/10/2025; thông qua 10/12/2025 với 437/442 đại biểu tán thành. Báo cáo thẩm tra dẫn Kết luận 121-KL/TW (2025, sắp xếp bộ máy), Nghị quyết 27-NQ/TW ngày 21/5/2018 (cải cách tiền lương theo vị trí việc làm), Nghị quyết 57 và Kết luận 91-KL/TW.</p>`,
+nature:"Luật của Quốc hội (văn bản quy phạm pháp luật có hiệu lực cao sau Hiến pháp); Chính phủ ban hành nghị định để hướng dẫn.",
+meaning:"Chuyển quản lý viên chức từ \"chức danh nghề nghiệp\" sang \"vị trí việc làm\"; mở rộng quyền của viên chức (góp vốn, quản lý doanh nghiệp khi không xung đột lợi ích).",
+content:`<ul><li>Ba nhóm vị trí: quản lý; chuyên môn nghiệp vụ; hỗ trợ. Bỏ thi, xét thăng hạng chức danh nghề nghiệp.</li><li>Tuyển dụng bằng thi tuyển hoặc xét tuyển; ba loại quan hệ: hợp đồng làm việc, hợp đồng lao động, hợp đồng dịch vụ.</li><li>Điều 10 cấm phát tán thông tin sai lệch; Điều 25 thêm tiêu chí đổi mới, sáng tạo; thời hiệu kỷ luật 5 năm (khiển trách), 10 năm (hành vi khác).</li><li>Hoàn thành bố trí vị trí việc làm, xếp lương trước 01/7/2027.</li></ul>`,
+links:`Nghị định 259 thay 115/2020 (và 85/2023); 233 thay 90/2020; 234 thay 112/2020; 299 về đơn vị sự nghiệp (hiệu lực 28/7/2026). <b>Dễ nhầm:</b> "Nghị quyết 27-NQ/TW" năm 2018 (cải cách tiền lương, khóa XII) khác hẳn Nghị quyết 27-NQ/TW năm 2022 (Nhà nước pháp quyền, khóa XIII), vì số hiệu văn bản Đảng đánh lại từ đầu mỗi khóa.`,
+books:[["Pháp luật về cán bộ, công chức: Thực trạng và định hướng hoàn thiện đáp ứng yêu cầu quản trị quốc gia","https://nxbctqg.org.vn/phap-luat-ve-can-bo-cong-chuc-thuc-trang-va-dinh-huong-hoan-thien-dap-ung-yeu-cau-quan-tri-quoc-gia.html","sách liên quan; chưa thấy sách riêng về Luật Viên chức 2025"]]},
+
+{id:"g-luatxb",kind:"state",so:"19/2012/QH13",docId:"luatxb",
+title:"Luật Xuất bản: 1993 → 2004 → 2012 → sửa đổi 2026",
+organ:"Quốc hội",date:"Luật 2012 hiệu lực 01/7/2013; Luật 17/2026/QH16 hiệu lực 01/3/2027",
+prev:["Luật Xuất bản 1993","Luật 30/2004/QH11 (sửa 2008)"],next:["NĐ 195/2013 (sửa bởi NĐ 150/2018)","Luật 17/2026/QH16","QĐ 1953/QĐ-TTg (8/10/2026)"],
+origin:`<p>Luật Xuất bản 30/2004/QH11 (3/12/2004, hiệu lực 1/7/2005) thay Luật Xuất bản 1993; theo GS.TS Đinh Xuân Dũng, Chỉ thị 42-CT/TW (8/2004) yêu cầu sửa Luật Xuất bản. Luật sửa đổi 12/2008/QH12 chuyển quản lý sang Bộ Thông tin và Truyền thông. Luật 19/2012/QH13 (20/11/2012) thay Luật 2004; được sửa bởi Luật 35/2018/QH14 và Luật 17/2026/QH16.</p>`,
+nature:"Luật của Quốc hội; Nghị định 195/2013/NĐ-CP hướng dẫn (sửa bởi Nghị định 150/2018).",
+meaning:`Điều 3 Luật 2012: "Hoạt động xuất bản thuộc lĩnh vực văn hóa, tư tưởng…". Luật sửa đổi 2026 thể hiện tinh thần Chỉ thị 04: xuất bản số, trí tuệ nhân tạo, tập đoàn xuất bản.`,
+content:`<ul><li>Luật 17/2026/QH16 (thông qua 24/8/2026, kỳ họp bất thường thứ nhất Quốc hội khóa XVI): xuất bản phẩm có nội dung do trí tuệ nhân tạo tạo ra phải thông báo, gắn nhãn; bổ sung sách điện tử, sách nói, nền tảng trung gian.</li><li>Thẩm định sau khi nộp lưu chiểu; giữ nguyên tắc không kiểm duyệt trước.</li><li>Hình thành cơ quan xuất bản – truyền thông chủ lực quốc gia, tập đoàn xuất bản.</li></ul>`,
+links:"Quyết định 1953/QĐ-TTg (8/10/2026) ban hành kế hoạch thi hành: nghị định mới thay Nghị định 195/2013 trình Chính phủ tháng 12/2026; thông tư mới thay Thông tư 01/2020/TT-BTTTT. Chỉ thị 42 (2004) → Luật 2004; Chỉ thị 04 (2026) → Luật sửa đổi 2026.",
+books:[["Cần siết chặt lại tất cả các khâu trong quy trình xuất bản sách (dẫn Điều 28 Luật Xuất bản 2012: phát hành sau 10 ngày kể từ khi nộp lưu chiểu)","https://nxbctqg.org.vn/can-siet-chat-lai-tat-ca-cac-khau-trong-quy-trinh-xuat-ban-sach.html","website NXB"]]}
+);
+CONFUSE.push(
+{doc:"luatvc",a:"Báo cáo thẩm tra Luật Viên chức 2025 dẫn \"Nghị quyết 27-NQ/TW\" tức là nghị quyết về Nhà nước pháp quyền.",b:"Không. Đó là <b>Nghị quyết 27-NQ/TW ngày 21/5/2018</b> (Trung ương 7 khóa XII) về cải cách tiền lương. Nghị quyết 27-NQ/TW ngày 9/11/2022 (Trung ương 6 khóa XIII) mới là về Nhà nước pháp quyền. Số hiệu văn bản của Đảng đánh lại từ đầu mỗi khóa.",tip:"Luôn nhớ số kèm năm"}
+);
+
+/* ===== Hệ thống văn bản của Đảng và Nhà nước, thể chế hóa (tra cứu 22/10/2026) ===== */
+GUIDE.intro=`Tab này giúp hiểu văn bản như một hệ thống: văn bản nào của Đảng, văn bản nào của Nhà nước, ai ban hành, văn bản nào cụ thể hóa văn bản nào. Mỗi hồ sơ trả lời 5 câu hỏi: <b>ra đời thế nào, bản chất là gì, ý nghĩa ra sao, nội dung cốt lõi, liên hệ với văn bản khác</b>, kèm sách và bài của Nhà xuất bản Chính trị quốc gia Sự thật. Khung 5 câu hỏi này là cách tự học do sổ tay đề xuất, không phải khung chính thức.`;
+
+GUIDE.system=[
+{eyebrow:"Văn bản của Đảng",h:"Quy định 399-QĐ/TW (09/01/2026): 25 thể loại",html:`<p><b>Quy định 399-QĐ/TW</b> của Ban Bí thư (đồng chí Trần Cẩm Tú ký, hiệu lực từ ngày ký) thay <b>Quy định 66-QĐ/TW (06/02/2017)</b> và <b>Quyết định 223-QĐ/TW (06/3/2020)</b>. Bố cục 5 phần, 19 điều.</p>
+<ul><li><b>Điều 5:</b> 25 thể loại, như cương lĩnh, điều lệ, chiến lược, <b>nghị quyết, quyết định, chỉ thị, kết luận</b>, quy chế, quy định, thông tri, hướng dẫn, thông báo, báo cáo, kế hoạch, chương trình, đề án, tờ trình, công văn, biên bản.</li><li><b>Điều 6:</b> 8 loại giấy tờ hành chính (giấy giới thiệu, giấy mời, thư công…).</li><li><b>Điều 8–13:</b> thẩm quyền theo cấp: Trung ương (Đại hội, Ban Chấp hành Trung ương, Bộ Chính trị, Ban Bí thư), tỉnh, xã, chi bộ, cơ quan tham mưu.</li><li><b>Hướng dẫn 05-HD/VPTW (27/5/2026)</b> của Văn phòng Trung ương về thể thức, kỹ thuật trình bày thay Hướng dẫn 36-HD/VPTW (2018).</li></ul>`},
+{eyebrow:"Văn bản quy phạm pháp luật",h:"Luật 64/2025/QH15, sửa bởi Luật 87/2025/QH15: 15 loại",html:`<p>Luật Ban hành văn bản quy phạm pháp luật số <b>64/2025/QH15</b> (thông qua 19/02/2025, hiệu lực 01/4/2025; 9 chương, 72 điều), sửa bởi Luật <b>87/2025/QH15</b> (25/6/2025, hiệu lực 01/7/2025) khi bỏ cấp huyện.</p>
+<ul><li>Quốc hội: Hiến pháp, bộ luật, luật, nghị quyết. Ủy ban Thường vụ Quốc hội: pháp lệnh, nghị quyết.</li><li>Chủ tịch nước: lệnh, quyết định. Chính phủ: nghị định, nghị quyết. Thủ tướng: quyết định. Bộ trưởng và tương đương: thông tư.</li><li>Địa phương: nghị quyết Hội đồng nhân dân, quyết định Ủy ban nhân dân cấp tỉnh và cấp xã; quyết định Chủ tịch Ủy ban nhân dân tỉnh (mới).</li><li>Điều 58: văn bản mâu thuẫn thì áp dụng văn bản có <b>hiệu lực cao hơn</b>; cùng cơ quan thì áp dụng <b>văn bản ban hành sau</b>.</li></ul>`},
+{eyebrow:"Đảng lãnh đạo, Nhà nước thể chế hóa",h:"Từ nghị quyết của Đảng đến luật, nghị định",html:`<p>Hiến pháp 2013, Điều 4: Đảng là "lực lượng lãnh đạo Nhà nước và xã hội"; tổ chức đảng và đảng viên "hoạt động trong khuôn khổ Hiến pháp và pháp luật". Cương lĩnh 2011: "Đảng lãnh đạo bằng cương lĩnh, chiến lược, các định hướng về chính sách và chủ trương lớn".</p>
+<p>Văn bản của Đảng <b>không phải văn bản quy phạm pháp luật</b> (không có trong Điều 4 Luật 64/2025). Muốn thành quy tắc bắt buộc với mọi người, chủ trương phải được <b>thể chế hóa</b>: Quốc hội làm luật, Chính phủ ra nghị định, bộ ra thông tư, địa phương lập kế hoạch.</p>
+<p class="muted">Ví dụ có thật: NQ 66-NQ/TW (30/4/2025) → KH 04-KH/BCĐTW (10/6/2025) → NQ 140/NQ-CP (chương trình hành động của Chính phủ) → NQ 206/2025/QH15 (24/6/2025) → QĐ 1785/QĐ-TTg (kế hoạch thi hành).</p>`},
+{eyebrow:"Đọc số, ký hiệu",h:"Vì sao cùng số mà khác văn bản",html:`<ul><li>Văn bản của Ban Chấp hành Trung ương, Bộ Chính trị, Ban Bí thư đều ghi cơ quan là <b>Ban Chấp hành Trung ương</b>, nên cùng ký hiệu <b>/TW</b>.</li><li>Số đánh liên tục từ 01 <b>cho mỗi thể loại trong một nhiệm kỳ</b>; sang khóa mới đánh lại. Vì vậy có hai "Hướng dẫn 01-HD/TW" (khóa XIII: 28/9/2021; khóa XIV: 19/5/2026), hai "Quyết định 223-QĐ/TW", hai "Nghị quyết 27-NQ/TW".</li><li>Phân biệt nghị quyết của Ban Chấp hành Trung ương (thông qua tại hội nghị Trung ương) với nghị quyết của Bộ Chính trị: xem trích yếu và khối chữ ký "T/M Bộ Chính trị".</li><li><b>Quy tắc của biên tập viên:</b> luôn ghi đủ thể loại + số, ký hiệu + ngày + cơ quan ban hành.</li></ul>`}
+];
+
+GUIDE.howto=`<ol>
+<li><b>Ra đời:</b> số, ký hiệu, ngày, cơ quan, hội nghị nào, khóa nào; phần "tình hình" nói văn bản giải quyết vấn đề gì; văn bản trước đó cùng lĩnh vực.</li>
+<li><b>Bản chất:</b> thể loại gì (nghị quyết, chỉ thị, kết luận, quy định…), cấp nào ban hành; là văn bản của Đảng hay văn bản quy phạm pháp luật.</li>
+<li><b>Nội dung:</b> đọc theo cấu trúc quan điểm → mục tiêu (các mốc năm, chỉ tiêu số) → nhiệm vụ, giải pháp → tổ chức thực hiện. Chọn 3 điểm mới.</li>
+<li><b>Ý nghĩa:</b> câu đánh giá ngắn của nguồn chính thống ("lần đầu tiên…", "đột phá…").</li>
+<li><b>Mối liên hệ:</b> kế hoạch của Bộ Chính trị, Ban Bí thư; chương trình hành động của Chính phủ; luật, nghị quyết của Quốc hội; hướng dẫn học tập của Ban Tuyên giáo và Dân vận Trung ương.</li>
+<li><b>Liên hệ nghề:</b> Nhà xuất bản xuất bản sách gì để tuyên truyền văn bản đó (tài liệu học tập, hỏi – đáp, sách chuyên khảo).</li>
+</ol>
+<p class="muted">Kế hoạch 42-KH/BTGDVTW (31/3/2026) yêu cầu khi học nghị quyết phải nắm "nội dung cốt lõi" và "điểm mới", rồi cụ thể hóa thành chương trình, kế hoạch hành động.</p>`;
+
+GUIDE.sources.push(
+["Quy định 399-QĐ/TW về thể loại, thẩm quyền ban hành và thể thức văn bản của Đảng (Đại hội Đảng toàn quốc)","https://daihoidangtoanquoc.vn/quy-dinh-so-399-qdtw-ve-the-loai-tham-quyen-ban-hanh-va-the-thuc-van-ban-cua-dang-post1875.html"],
+["Quy định 399-QĐ/TW (Xây dựng chính sách – Chính phủ)","https://xaydungchinhsach.chinhphu.vn/quy-dinh-so-399-qd-tw-cua-ban-bi-thu-ve-the-loai-tham-quyen-ban-hanh-va-the-thuc-van-ban-cua-dang-119260119124508363.htm"],
+["Hướng dẫn 05-HD/VPTW về thể thức và kỹ thuật trình bày văn bản của Đảng (Tư liệu văn kiện)","https://tulieuvankien.dangcongsan.vn/xay-dung-dang/huong-dan-ve-the-thuc-va-ky-thuat-trinh-bay-van-ban-cua-dang.html"],
+["Luật sửa đổi Luật Ban hành văn bản quy phạm pháp luật 87/2025/QH15 (LuatVietnam)","https://luatvietnam.vn/tin-van-ban-moi/da-co-luat-sua-doi-luat-ban-hanh-van-ban-quy-pham-phap-luat-2025-so-87-2025-qh15-186-102714-article.html"],
+["Nghị quyết 66-NQ/TW (VnEconomy)","https://vneconomy.vn/nghi-quyet-so-66-nq-tw-ve-doi-moi-cong-tac-xay-dung-va-thi-hanh-phap-luat.htm"],
+["Mạch Quang Thắng: Mối quan hệ giữa Đảng lãnh đạo, Nhà nước quản lý, Nhân dân làm chủ (Chính trị và Phát triển, 2/2026)","https://chinhtrivaphattrien.vn/moi-quan-he-giua-dang-lanh-dao-nha-nuoc-quan-ly-nhan-dan-lam-chu-a9841.html"],
+["Kế hoạch 42-KH/BTGDVTW học tập Nghị quyết Hội nghị Trung ương 2 khóa XIV (PDF)","https://www.sav.gov.vn/Files/Others/d6e9e96d-55f2-4814-a650-e329a56a1c67/42.KH.BTGDVTW.pdf"]
+);
+
+GUIDE.chains.unshift(
+{id:"g-qd399",kind:"party",so:"399-QĐ/TW",docId:"hethongvb",
+title:"Quy định 399-QĐ/TW về thể loại, thẩm quyền ban hành và thể thức văn bản của Đảng",
+organ:"Ban Bí thư; đồng chí Trần Cẩm Tú, Thường trực Ban Bí thư, ký",date:"09/01/2026",
+prev:["QĐ 66-QĐ/TW (06/02/2017)","QĐ 223-QĐ/TW (06/3/2020)","HD 36-HD/VPTW (2018)"],next:["HD 05-HD/VPTW (27/5/2026)"],
+origin:"Ban hành sau khi sắp xếp bộ máy và chính quyền địa phương hai cấp: Điều 10 quy định riêng thẩm quyền của đảng bộ xã, phường, đặc khu; đồng thời bãi bỏ các công văn hướng dẫn của Văn phòng Trung ương năm 2019 và 2025. Ký ngày 09/01/2026, trước Đại hội XIV, nên số 399 thuộc dãy số của khóa XIII (suy ra từ quy tắc đánh số, chưa thấy trang nào nói thẳng).",
+nature:"Quy định của Ban Bí thư: văn bản nêu nguyên tắc, chuẩn mực áp dụng cho toàn hệ thống tổ chức đảng.",
+meaning:"Là \"luật văn bản\" của Đảng: căn cứ để biên tập viên ghi đúng tên loại, số, ký hiệu, cơ quan ban hành khi trích dẫn văn bản trong sách.",
+content:`<ul><li>5 phần, 19 điều; 25 thể loại (Điều 5); 8 loại giấy tờ hành chính (Điều 6).</li><li>Thẩm quyền theo cấp (Điều 8–13); thể thức, thành phần bắt buộc, bổ sung, bản sao (Điều 14–17).</li><li>Điều 4: văn bản chỉ được sửa, thay, bãi bỏ bởi chính cơ quan đã ban hành hoặc cơ quan đảng cấp trên có thẩm quyền.</li></ul>`,
+links:"Hướng dẫn 05-HD/VPTW (27/5/2026) hướng dẫn thể thức và kỹ thuật trình bày. Dễ nhầm: Quyết định 223-QĐ/TW ngày 06/3/2020 (bị Quy định 399 thay) khác Quyết định 223-QĐ/TW ngày 28/12/2024 về chức năng của Nhà xuất bản.",
+books:[["Hướng dẫn nghiệp vụ công tác văn phòng cấp ủy ở cơ sở (Đỗ Quốc Toán chủ biên; có phần thể loại, thể thức văn bản theo quy định trước 2026)","https://www.nxbctqg.org.vn/hng-dn-nghip-v-cong-tac-vn-phong-cp-y--c-s.html",""],["Kỹ năng soạn thảo văn bản và ứng dụng tin học trong công tác tổ chức, cán bộ (Học viện Chính trị khu vực II, 2019)","https://www.nxbctqg.org.vn/ky-nang-soan-thao-van-ban-va-ung-dung-tin-hoc-trong-cong-tac-to-chuc-can-bo.html",""],["Tài liệu bồi dưỡng nghiệp vụ công tác đảng dành cho bí thư chi bộ và cấp ủy viên cơ sở (lần 23, 3/2025)","https://www.nxbctqg.org.vn/tai-lieu-boi-duong-nghiep-vu-cong-tac-dang-danh-cho-bi-thu-chi-bo-va-cap-uy-vien-co-so-xuat-ban-lan-thu-23-co-sua-chua-bo-sung-.html",""]]},
+{id:"g-luatbh",kind:"state",so:"64/2025/QH15",docId:"hethongvb",
+title:"Luật Ban hành văn bản quy phạm pháp luật 2025 (sửa đổi bởi Luật 87/2025/QH15)",
+organ:"Quốc hội khóa XV",date:"19/02/2025, hiệu lực 01/4/2025; sửa đổi 25/6/2025, hiệu lực 01/7/2025",
+prev:["Luật 80/2015/QH13 (sửa 2020)"],next:["Luật 87/2025/QH15","Nghị định hướng dẫn của Chính phủ"],
+origin:"Thực hiện chủ trương đổi mới công tác xây dựng pháp luật, gỡ \"điểm nghẽn\" thể chế. Luật 87/2025 sửa ngay khi sắp xếp đơn vị hành chính, bỏ cấp huyện từ 01/7/2025.",
+nature:"Luật của Quốc hội quy định thẩm quyền, hình thức, trình tự ban hành văn bản quy phạm pháp luật.",
+meaning:"Điều 5, khoản 1 ghi nguyên tắc \"bảo đảm sự lãnh đạo toàn diện, trực tiếp của Đảng\"; tách quy trình chính sách khỏi quy trình soạn thảo; cho Chính phủ ban hành nghị quyết quy phạm để xử lý vấn đề cấp bách.",
+content:`<ul><li>9 chương, 72 điều; sau sửa đổi có 15 loại văn bản quy phạm pháp luật (Điều 4).</li><li>Luật 87: bỏ quyết định của Ủy ban nhân dân cấp huyện; nghị quyết Hội đồng nhân dân huyện thay bằng nghị quyết Hội đồng nhân dân xã; thêm quyết định của Chủ tịch Ủy ban nhân dân tỉnh và quyết định của Ủy ban nhân dân xã.</li><li>Điều 58: áp dụng văn bản có hiệu lực cao hơn; cùng cơ quan thì văn bản ban hành sau; ưu tiên điều ước quốc tế, trừ Hiến pháp.</li></ul>`,
+links:"Cùng giai đoạn với Nghị quyết 66-NQ/TW (30/4/2025). Chưa thấy nguồn nói Luật 87 trực tiếp thực hiện Nghị quyết 66.",
+books:[["Những kỹ năng cơ bản về tìm hiểu và sử dụng văn bản quy phạm pháp luật (LS Phạm Thanh Hữu, 9/2023; viết trước Luật 2025)","https://www.nxbctqg.org.vn/nhung-ky-nang-co-ban-ve-tim-hieu-va-su-dung-van-ban-quy-pham-phap-luat.html",""],["Văn bản của chính quyền địa phương cấp xã: Lý thuyết và tình huống thực tiễn (9/2024)","https://www.nxbctqg.org.vn/van-ban-cua-chinh-quyen-dia-phuong-cap-xa-ly-thuyet-va-tinh-huong-thuc-tien-sach-chuyen-khao-.html",""],["Thực hiện và áp dụng pháp luật ở Việt Nam (TS Nguyễn Minh Đoan)","https://www.nxbctqg.org.vn/thc-hin-ap-dng-va-phap-lut-vit-nam.html",""]]}
+);
+
+DOCS.push({id:"hethongvb",group:"pro",short:"Hệ thống văn bản của Đảng và Nhà nước – thể loại, thẩm quyền, thể chế hóa",mmLabel:"Hệ thống văn bản Đảng – Nhà nước",so:"399-QĐ/TW · 64/2025/QH15",
+title:"Hệ thống văn bản của Đảng (Quy định 399-QĐ/TW, Hướng dẫn 05-HD/VPTW) và văn bản quy phạm pháp luật (Luật 64/2025/QH15, sửa đổi 2025); mối quan hệ thể chế hóa",
+meta:[["Văn bản của Đảng","Quy định 399-QĐ/TW ngày 09/01/2026 của Ban Bí thư; Hướng dẫn 05-HD/VPTW ngày 27/5/2026 của Văn phòng Trung ương"],["Văn bản nhà nước","Luật Ban hành văn bản quy phạm pháp luật 64/2025/QH15, sửa bởi Luật 87/2025/QH15"],["Đã bị thay","Quy định 66-QĐ/TW (2017), Quyết định 223-QĐ/TW (2020), Hướng dẫn 36-HD/VPTW (2018)"],["Dùng để","Ghi đúng tên văn bản khi biên tập; trả lời câu hỏi về quan hệ Đảng – Nhà nước"]],
+tldr:`Văn bản của Đảng có <mark>25 thể loại</mark> theo <b>Quy định 399-QĐ/TW (09/01/2026)</b>, thay Quy định 66 (2017). Văn bản quy phạm pháp luật có <mark>15 loại</mark> theo <b>Luật 64/2025/QH15</b> đã sửa bởi Luật 87/2025. Văn bản của Đảng <b>không</b> là văn bản quy phạm pháp luật; chủ trương của Đảng được <b>thể chế hóa</b> thành luật, nghị định, thông tư. Ký hiệu <b>/TW</b> dùng chung cho Ban Chấp hành Trung ương, Bộ Chính trị, Ban Bí thư; số đánh lại mỗi nhiệm kỳ, nên khi trích dẫn phải ghi kèm ngày.`,
+sections:[
+{h:"Văn bản gốc hiện hành và văn bản đã bị thay",html:`<div class="tablewrap"><table class="nums"><thead><tr><th>Văn bản hiện hành</th><th>Cơ quan, ngày</th><th>Thay văn bản</th></tr></thead><tbody>
+<tr><td>Quy định 399-QĐ/TW về thể loại, thẩm quyền ban hành và thể thức văn bản của Đảng</td><td>Ban Bí thư, 09/01/2026, hiệu lực từ ngày ký</td><td>QĐ 66-QĐ/TW (06/02/2017); QĐ 223-QĐ/TW (06/3/2020)</td></tr>
+<tr><td>Hướng dẫn 05-HD/VPTW về thể thức và kỹ thuật trình bày văn bản của Đảng</td><td>Văn phòng Trung ương Đảng, 27/5/2026</td><td>HD 36-HD/VPTW (2018)</td></tr>
+<tr><td>Luật Ban hành văn bản quy phạm pháp luật 64/2025/QH15</td><td>Quốc hội, 19/02/2025, hiệu lực 01/4/2025</td><td>Luật 80/2015/QH13</td></tr>
+<tr><td>Luật 87/2025/QH15 sửa Luật 64</td><td>Quốc hội, 25/6/2025, hiệu lực 01/7/2025</td><td>(sửa Điều 4 và các điều liên quan)</td></tr>
+</tbody></table></div><p class="muted">Ngày của Hướng dẫn 36: phần lớn nguồn ghi 04/3/2018, một trang ghi 03/4/2018.</p>`},
+{h:"25 thể loại văn bản của Đảng",html:`<p>Cương lĩnh chính trị; Điều lệ Đảng; Chiến lược; <b>Nghị quyết</b> (NQ); <b>Quyết định</b> (QĐ); <b>Chỉ thị</b> (CT); <b>Kết luận</b> (KL); Quy chế (QC); <b>Quy định</b> (QĐ); Thông tri (TT); Hướng dẫn (HD); Thông báo (TB); Thông cáo; Tuyên bố; Lời kêu gọi; Báo cáo (BC); Kế hoạch (KH); Quy hoạch; Chương trình (CTr); Đề án; Phương án; Dự án; Tờ trình (TTr); Công văn (CV); Biên bản.</p>
+<ul><li><b>Nghị quyết:</b> ghi các quyết định được thông qua tại đại hội, hội nghị. <b>Chỉ thị:</b> chỉ đạo cấp dưới thực hiện. <b>Kết luận:</b> ý kiến chính thức về một vấn đề. <b>Quy định:</b> nguyên tắc, tiêu chuẩn, chế độ cho một lĩnh vực. <b>Hướng dẫn:</b> chỉ dẫn cách thực hiện văn bản cấp trên.</li><li>Quyết định và Quy định cùng viết tắt <b>QĐ</b>: phải đọc trích yếu mới biết là loại nào.</li></ul>
+<p class="muted">Định nghĩa từng thể loại lấy theo Quy định 66 cũ; chưa đối chiếu được nguyên văn Quy định 399 (bản PDF là ảnh quét).</p>`},
+{h:"Thẩm quyền và số, ký hiệu",items:[
+"Cấp Trung ương có 4 chủ thể ban hành: <b>Đại hội đại biểu toàn quốc, Ban Chấp hành Trung ương, Bộ Chính trị, Ban Bí thư</b> (Điều 8 Quy định 399).",
+"Văn bản của 3 cơ quan Ban Chấp hành Trung ương, Bộ Chính trị, Ban Bí thư đều ghi tên cơ quan là Ban Chấp hành Trung ương, ký hiệu <b>/TW</b>.",
+"Số của cấp ủy đánh liên tục từ 01 <b>cho mỗi thể loại trong một nhiệm kỳ</b>; văn bản của đại hội đánh số chung cho mọi thể loại. Văn bản mật dùng chung dãy số với văn bản thường.",
+"Cách viết: số Ả-rập, dưới 10 thêm số 0; gạch nối giữa số và ký hiệu (05-CT/TW); gạch chéo giữa tên loại và cơ quan.",
+"Nghị quyết của Ban Chấp hành Trung ương được thông qua tại hội nghị Trung ương (ví dụ NQ 27-NQ/TW, Trung ương 6 khóa XIII); nghị quyết của Bộ Chính trị do Tổng Bí thư ký thay mặt Bộ Chính trị (ví dụ NQ 66-NQ/TW)."
+]},
+{h:"15 loại văn bản quy phạm pháp luật (Điều 4, sau sửa đổi)",html:`<div class="tablewrap"><table class="nums"><thead><tr><th>Cơ quan</th><th>Văn bản</th></tr></thead><tbody>
+<tr><td>Quốc hội</td><td>Hiến pháp; bộ luật, luật, nghị quyết</td></tr>
+<tr><td>Ủy ban Thường vụ Quốc hội</td><td>Pháp lệnh, nghị quyết; nghị quyết liên tịch với Đoàn Chủ tịch Ủy ban Trung ương Mặt trận</td></tr>
+<tr><td>Chủ tịch nước</td><td>Lệnh, quyết định</td></tr>
+<tr><td>Chính phủ</td><td>Nghị định, nghị quyết; nghị quyết liên tịch với Mặt trận</td></tr>
+<tr><td>Thủ tướng Chính phủ</td><td>Quyết định</td></tr>
+<tr><td>Hội đồng Thẩm phán Tòa án nhân dân tối cao</td><td>Nghị quyết</td></tr>
+<tr><td>Chánh án, Viện trưởng, Bộ trưởng, Thủ trưởng cơ quan ngang bộ, Tổng Kiểm toán nhà nước</td><td>Thông tư; thông tư liên tịch</td></tr>
+<tr><td>Cấp tỉnh</td><td>Nghị quyết Hội đồng nhân dân; quyết định Ủy ban nhân dân; quyết định Chủ tịch Ủy ban nhân dân (mới)</td></tr>
+<tr><td>Đơn vị hành chính – kinh tế đặc biệt</td><td>Văn bản của chính quyền địa phương ở đó</td></tr>
+<tr><td>Cấp xã</td><td>Nghị quyết Hội đồng nhân dân; quyết định Ủy ban nhân dân (mới)</td></tr>
+</tbody></table></div><p>Hiến pháp có hiệu lực pháp lý cao nhất. Điều 58: văn bản mâu thuẫn thì áp dụng văn bản có hiệu lực cao hơn; cùng một cơ quan thì áp dụng văn bản ban hành sau.</p>`},
+{h:"Đảng lãnh đạo, Nhà nước thể chế hóa",items:[
+"Hiến pháp 2013, Điều 4: Đảng là \"lực lượng lãnh đạo Nhà nước và xã hội\", \"chịu trách nhiệm trước Nhân dân về những quyết định của mình\"; tổ chức đảng, đảng viên \"hoạt động trong khuôn khổ Hiến pháp và pháp luật\".",
+"Cương lĩnh 2011: \"Đảng lãnh đạo bằng cương lĩnh, chiến lược, các định hướng về chính sách và chủ trương lớn\" (Cương lĩnh 1991 viết \"chủ trương công tác\").",
+"Tổng Bí thư Tô Lâm (21/10/2024): \"Đảng lãnh đạo bằng đường lối, chính sách; lãnh đạo thể chế hóa đường lối, chính sách thành pháp luật\".",
+"Nghị quyết 66-NQ/TW yêu cầu \"thể chế hóa đầy đủ, đúng đắn, kịp thời chủ trương, đường lối của Đảng\"; giao Đảng ủy Quốc hội, Đảng ủy Chính phủ thực hiện.",
+"Ví dụ chuỗi: NQ 66-NQ/TW (30/4/2025) → KH 04-KH/BCĐTW (10/6/2025) → NQ 140/NQ-CP → NQ 206/2025/QH15 (24/6/2025) → QĐ 1785/QĐ-TTg.",
+"Quy định 178-QĐ/TW (27/6/2024) của Bộ Chính trị về kiểm soát quyền lực, chống tham nhũng, tiêu cực trong công tác xây dựng pháp luật."
+]},
+{h:"Áp dụng khi biên tập",items:[
+"Ghi đủ: <b>thể loại + số, ký hiệu + ngày + cơ quan ban hành + trích yếu</b>. Ví dụ: Chỉ thị số 04-CT/TW ngày 17/3/2026 của Ban Bí thư về tăng cường sự lãnh đạo của Đảng đối với hoạt động xuất bản trong tình hình mới.",
+"Không gọi văn bản ký hiệu QĐ là \"nghị quyết\"; không gọi chỉ thị của Ban Bí thư là \"chỉ thị của Bộ Chính trị\".",
+"Kiểm tra văn bản còn hiệu lực hay đã bị thay (Quy định 66 → 399; Quy định 37 → 207…).",
+"Khi gặp số trùng (01-HD/TW, 223-QĐ/TW, 27-NQ/TW), đối chiếu ngày và khóa."
+]}
+],
+mm:[
+{n:"Văn bản của Đảng",c:[{n:"QĐ 399-QĐ/TW (9/1/2026): 25 thể loại"},{n:"HD 05-HD/VPTW (27/5/2026): thể thức"},{n:"Ký hiệu /TW: BCH TW, BCT, BBT"},{n:"Số đánh lại mỗi nhiệm kỳ"}]},
+{n:"Văn bản quy phạm pháp luật",c:[{n:"Luật 64/2025/QH15"},{n:"Sửa bởi Luật 87/2025 (bỏ cấp huyện)"},{n:"15 loại; Hiến pháp cao nhất"}]},
+{n:"Thể chế hóa",c:[{n:"Hiến pháp Điều 4"},{n:"Cương lĩnh 2011"},{n:"NQ 66 → NQ 140/NQ-CP → NQ 206/QH15"}]}
+],
+sources:[
+["Quy định 399-QĐ/TW (Đại hội Đảng toàn quốc)","https://daihoidangtoanquoc.vn/quy-dinh-so-399-qdtw-ve-the-loai-tham-quyen-ban-hanh-va-the-thuc-van-ban-cua-dang-post1875.html"],
+["Quy định 399-QĐ/TW (Báo Lâm Đồng)","https://baolamdong.vn/quy-dinh-so-399-qd-tw-cua-ban-bi-thu-ve-the-loai-tham-quyen-ban-hanh-va-the-thuc-van-ban-cua-dang-419481.html"],
+["Hướng dẫn 05-HD/VPTW (Tư liệu văn kiện)","https://tulieuvankien.dangcongsan.vn/xay-dung-dang/huong-dan-ve-the-thuc-va-ky-thuat-trinh-bay-van-ban-cua-dang.html"],
+["Hướng dẫn 05-HD/VPTW (PDF, Kiểm toán nhà nước)","https://www.sav.gov.vn/Files/Others/761e611b-48d7-4b86-a5a2-4c17bac0f753/05.HD.VPTW.pdf"],
+["Luật Ban hành văn bản quy phạm pháp luật 2025 (LuatVietnam)","https://luatvietnam.vn/tin-van-ban-moi/da-co-luat-ban-hanh-van-ban-quy-pham-phap-luat-2025-186-101161-article.html"],
+["Luật 87/2025/QH15 (LuatVietnam)","https://luatvietnam.vn/tin-van-ban-moi/da-co-luat-sua-doi-luat-ban-hanh-van-ban-quy-pham-phap-luat-2025-so-87-2025-qh15-186-102714-article.html"],
+["Điều 58 Luật 64/2025 (Hệ thống pháp luật)","https://hethongphapluat.com/luat-ban-hanh-van-ban-quy-pham-phap-luat-2025/dieu-58"],
+["Hiến định vai trò lãnh đạo của Đảng (Báo Pháp luật)","https://baophapluat.vn/viec-hien-dinh-vai-tro-lanh-dao-cua-dang-cong-san-viet-nam-doi-voi-nha-nuoc-va-xa-hoi-post174073.html"],
+["Triển khai thi hành Nghị quyết 206/2025/QH15 (Luật sư Việt Nam)","https://lsvn.vn/trien-khai-thi-hanh-nghi-quyet-ve-co-che-dac-biet-xu-ly-vuong-mac-do-quy-dinh-phap-luat-a162145.html"]
+]});
+
+NUMBERS.push(
+{doc:"hethongvb",what:"Quy định về thể loại, thẩm quyền, thể thức văn bản của Đảng hiện hành",val:"399-QĐ/TW, 09/01/2026",ref:"Ban Bí thư; 5 phần, 19 điều"},
+{doc:"hethongvb",what:"Số thể loại văn bản của Đảng",val:"25 thể loại",ref:"Điều 5 Quy định 399; cùng 25 tên loại như Quy định 66"},
+{doc:"hethongvb",what:"Số loại giấy tờ hành chính của Đảng",val:"8 loại",ref:"Điều 6 Quy định 399"},
+{doc:"hethongvb",what:"Hướng dẫn thể thức, kỹ thuật trình bày văn bản của Đảng",val:"05-HD/VPTW, 27/5/2026",ref:"thay Hướng dẫn 36-HD/VPTW (2018)"},
+{doc:"hethongvb",what:"Luật Ban hành văn bản quy phạm pháp luật",val:"64/2025/QH15: thông qua 19/02/2025, hiệu lực 01/4/2025",ref:"9 chương, 72 điều"},
+{doc:"hethongvb",what:"Luật sửa Luật Ban hành văn bản quy phạm pháp luật",val:"87/2025/QH15: 25/6/2025, hiệu lực 01/7/2025",ref:"bỏ văn bản cấp huyện"},
+{doc:"hethongvb",what:"Số loại văn bản quy phạm pháp luật sau sửa đổi",val:"15 loại",ref:"Điều 4 (bản gốc 14 loại)"}
+);
+
+CONFUSE.push(
+{doc:"hethongvb",a:"Quyết định 223-QĐ/TW bị Quy định 399 thay là văn bản về Nhà xuất bản Chính trị quốc gia Sự thật.",b:"Không. Có <b>hai</b> văn bản 223-QĐ/TW: <b>ngày 06/3/2020</b> bổ sung thẩm quyền ban hành văn bản của Ban Bí thư (bị Quy định 399 thay); <b>ngày 28/12/2024</b> của Bộ Chính trị về chức năng, nhiệm vụ của Nhà xuất bản (vẫn hiện hành).",tip:"Số văn bản của Đảng đánh lại mỗi khóa: luôn nhớ số kèm ngày."},
+{doc:"hethongvb",a:"Quy định 66-QĐ/TW (2017) vẫn là văn bản về thể loại, thể thức văn bản của Đảng.",b:"Đã bị thay bởi <b>Quy định 399-QĐ/TW ngày 09/01/2026</b>. Hướng dẫn 36-HD/VPTW cũng đã bị thay bởi <b>Hướng dẫn 05-HD/VPTW ngày 27/5/2026</b>.",tip:"66 → 399; 36 → 05."},
+{doc:"hethongvb",a:"Ký hiệu /TW nghĩa là văn bản của Ban Chấp hành Trung ương (hội nghị Trung ương).",b:"Không hẳn. Văn bản của <b>Ban Chấp hành Trung ương, Bộ Chính trị và Ban Bí thư</b> đều ghi /TW. Phải xem trích yếu và khối chữ ký (\"T/M Bộ Chính trị\", \"T/M Ban Bí thư\").",tip:"NQ 27-NQ/TW (2022): Trung ương; NQ 66-NQ/TW (2025): Bộ Chính trị."},
+{doc:"hethongvb",a:"Nghị quyết của Đảng là văn bản quy phạm pháp luật.",b:"Không. Điều 4 Luật 64/2025 không có văn bản của Đảng. Chủ trương của Đảng được <b>thể chế hóa</b> thành luật, nghị quyết của Quốc hội, nghị định của Chính phủ…",tip:"Đảng lãnh đạo → Nhà nước thể chế hóa, quản lý."},
+{doc:"hethongvb",a:"Cương lĩnh 2011 viết \"Đảng lãnh đạo bằng… chủ trương công tác\".",b:"\"Chủ trương công tác\" là chữ của <b>Cương lĩnh 1991</b>. Cương lĩnh 2011: \"cương lĩnh, chiến lược, các định hướng về chính sách và <b>chủ trương lớn</b>\".",tip:"1991: công tác; 2011: lớn."}
+);
+
+FLASH.push(
+{doc:"hethongvb",q:"Văn bản hiện hành quy định thể loại, thẩm quyền ban hành và thể thức văn bản của Đảng?",a:"<b>Quy định 399-QĐ/TW ngày 09/01/2026</b> của Ban Bí thư, thay Quy định 66-QĐ/TW (2017) và Quyết định 223-QĐ/TW (2020)."},
+{doc:"hethongvb",q:"Văn bản hướng dẫn thể thức, kỹ thuật trình bày văn bản của Đảng hiện hành?",a:"<b>Hướng dẫn 05-HD/VPTW ngày 27/5/2026</b> của Văn phòng Trung ương Đảng, thay Hướng dẫn 36-HD/VPTW (2018)."},
+{doc:"hethongvb",q:"Bốn chủ thể ban hành văn bản của Đảng ở cấp Trung ương?",a:"Đại hội đại biểu toàn quốc, Ban Chấp hành Trung ương, Bộ Chính trị, Ban Bí thư."},
+{doc:"hethongvb",q:"Số văn bản của cấp ủy được đánh thế nào?",a:"Liên tục từ 01 <b>cho mỗi thể loại trong một nhiệm kỳ cấp ủy</b>; sang nhiệm kỳ mới đánh lại. Văn bản của đại hội đánh số chung cho mọi thể loại."},
+{doc:"hethongvb",q:"Luật Ban hành văn bản quy phạm pháp luật hiện hành?",a:"<b>Luật 64/2025/QH15</b> (19/02/2025, hiệu lực 01/4/2025), sửa bởi <b>Luật 87/2025/QH15</b> (25/6/2025, hiệu lực 01/7/2025)."},
+{doc:"hethongvb",q:"Văn bản quy phạm pháp luật mâu thuẫn nhau thì áp dụng văn bản nào?",a:"Văn bản có <b>hiệu lực pháp lý cao hơn</b>; nếu cùng một cơ quan ban hành thì áp dụng <b>văn bản ban hành sau</b> (Điều 58 Luật 64/2025)."},
+{doc:"hethongvb",q:"\"Thể chế hóa\" chủ trương của Đảng là gì? Ví dụ?",a:"Nhà nước chuyển chủ trương của Đảng thành pháp luật, chính sách bắt buộc thi hành. Ví dụ: NQ 66-NQ/TW → NQ 140/NQ-CP → NQ 206/2025/QH15 → QĐ 1785/QĐ-TTg."},
+{doc:"hethongvb",q:"Hiến pháp 2013 quy định về Đảng ở điều nào, nội dung chính?",a:"<b>Điều 4</b>: Đảng là lực lượng lãnh đạo Nhà nước và xã hội; chịu trách nhiệm trước Nhân dân; tổ chức đảng, đảng viên hoạt động trong khuôn khổ Hiến pháp và pháp luật."}
+);
+
+QUIZ.push(
+{doc:"hethongvb",q:"Văn bản hiện hành quy định về thể loại, thẩm quyền ban hành và thể thức văn bản của Đảng là:",opts:["Quy định 399-QĐ/TW ngày 09/01/2026 của Ban Bí thư","Quy định 66-QĐ/TW ngày 06/02/2017 của Ban Bí thư","Hướng dẫn 36-HD/VPTW năm 2018 của Văn phòng Trung ương","Quyết định 223-QĐ/TW ngày 28/12/2024 của Bộ Chính trị"],ans:0,ex:"Quy định 399 thay Quy định 66 và Quyết định 223 năm 2020. Quyết định 223 năm 2024 là về chức năng của Nhà xuất bản.",ref:"Quy định 399-QĐ/TW"},
+{doc:"hethongvb",q:"Theo Quy định 399-QĐ/TW, văn bản của Đảng có bao nhiêu thể loại?",opts:["25","19","15","8"],ans:0,ex:"Điều 5: 25 thể loại. 19 là số điều của Quy định; 15 là số loại văn bản quy phạm pháp luật; 8 là số loại giấy tờ hành chính.",ref:"Điều 5 Quy định 399"},
+{doc:"hethongvb",q:"Văn bản của cơ quan nào KHÔNG mang ký hiệu /TW?",opts:["Văn phòng Trung ương Đảng","Bộ Chính trị","Ban Bí thư","Ban Chấp hành Trung ương"],ans:0,ex:"Văn phòng Trung ương ghi /VPTW (ví dụ 05-HD/VPTW). Ba cơ quan còn lại đều ghi tên cơ quan ban hành là Ban Chấp hành Trung ương.",ref:"Hướng dẫn 05-HD/VPTW"},
+{doc:"hethongvb",q:"Luật 87/2025/QH15 sửa Luật Ban hành văn bản quy phạm pháp luật có hiệu lực từ:",opts:["01/7/2025","01/4/2025","01/01/2026","01/7/2026"],ans:0,ex:"Luật 87 thông qua 25/6/2025, hiệu lực 01/7/2025, cùng ngày bỏ cấp huyện. 01/4/2025 là ngày hiệu lực của Luật 64/2025.",ref:"Luật 87/2025/QH15"},
+{doc:"hethongvb",q:"Văn bản quy phạm pháp luật nào là văn bản MỚI được bổ sung bởi Luật 87/2025/QH15?",opts:["Quyết định của Chủ tịch Ủy ban nhân dân cấp tỉnh","Quyết định của Ủy ban nhân dân cấp huyện","Thông tư của Bộ trưởng","Nghị quyết của Hội đồng Thẩm phán Tòa án nhân dân tối cao"],ans:0,ex:"Luật 87 bỏ quyết định của Ủy ban nhân dân cấp huyện, thêm quyết định của Chủ tịch Ủy ban nhân dân tỉnh và quyết định của Ủy ban nhân dân xã.",ref:"Điều 4 Luật 64/2025 (sửa đổi)"},
+{doc:"hethongvb",q:"Câu \"Đảng lãnh đạo bằng cương lĩnh, chiến lược, các định hướng về chính sách và chủ trương lớn\" thuộc văn kiện nào?",opts:["Cương lĩnh năm 2011","Cương lĩnh năm 1991","Hiến pháp năm 2013","Nghị quyết 66-NQ/TW"],ans:0,ex:"Cương lĩnh 1991 viết \"chủ trương công tác\". Hiến pháp 2013 Điều 4 nói Đảng là lực lượng lãnh đạo Nhà nước và xã hội.",ref:"Cương lĩnh 2011"}
+);
+
+INTERVIEW.push({h:"Hiểu văn bản của Đảng và Nhà nước",intro:"Câu hỏi kiểm tra cách đọc, cách ghi văn bản; trả lời ngắn, có ví dụ văn bản cụ thể và ngày.",items:[
+{q:"Văn bản của Đảng khác văn bản quy phạm pháp luật thế nào?",a:`<ul><li>Văn bản của Đảng (25 thể loại theo Quy định 399-QĐ/TW) có giá trị bắt buộc trong Đảng; không phải văn bản quy phạm pháp luật.</li><li>Văn bản quy phạm pháp luật (15 loại theo Luật 64/2025, sửa 2025) bắt buộc với mọi người.</li><li>Hiến pháp Điều 4: Đảng lãnh đạo nhưng hoạt động trong khuôn khổ Hiến pháp, pháp luật; chủ trương được thể chế hóa thành luật.</li></ul>`},
+{q:"Nêu một ví dụ về thể chế hóa nghị quyết của Đảng.",a:`<ul><li>Nghị quyết 66-NQ/TW (30/4/2025) của Bộ Chính trị → Kế hoạch 04-KH/BCĐTW → Nghị quyết 140/NQ-CP của Chính phủ → Nghị quyết 206/2025/QH15 của Quốc hội → Quyết định 1785/QĐ-TTg.</li><li>Liên hệ nghề: Chỉ thị 04-CT/TW (3/2026) về xuất bản và Luật 17/2026/QH16 sửa Luật Xuất bản cùng hướng tới xuất bản số, chống in lậu.</li></ul>`},
+{q:"Khi biên tập gặp tên một văn bản, anh/chị kiểm tra những gì?",a:`<ul><li>Đủ 5 yếu tố: thể loại, số và ký hiệu, ngày, cơ quan ban hành, trích yếu.</li><li>Văn bản còn hiệu lực không (Quy định 66 → 399; Quy định 37 → 207).</li><li>Số trùng giữa các khóa (01-HD/TW, 223-QĐ/TW, 27-NQ/TW): đối chiếu ngày.</li><li>Không gọi quyết định là nghị quyết; không nhầm Ban Bí thư với Bộ Chính trị.</li></ul>`}
+]});
+
+/* ===== Sách của NXB Chính trị quốc gia Sự thật theo từng năm (tra cứu 22/10/2026) ===== */
+BOOKS.intro=`Các đầu sách, sự kiện và số liệu tiêu biểu của Nhà xuất bản từ 2019 đến tháng 10/2026, lấy từ website Nhà xuất bản và báo Nhân Dân, Sài Gòn Giải Phóng, Đại biểu Nhân dân. Mỗi dòng có đường link để mở trang gốc. Đây là danh sách chọn lọc để ôn, không phải danh mục đầy đủ: tra cứu đầy đủ dùng ấn phẩm <b>Danh mục sách xuất bản 1945–2025</b> (3 tập, 12/2025) của Nhà xuất bản. Số liệu năm 2024 giữa các báo không khớp nhau, nên khi trả lời phải nêu nguồn.`;
+
+BOOKS.cats=`<p><b>Website nxbctqg.org.vn có 12 danh mục sách:</b> <a href="https://www.nxbctqg.org.vn/kinh-dien.html" target="_blank" rel="noopener">Kinh điển</a>; <a href="https://www.nxbctqg.org.vn/chu-tich-ho-chi-minh.html" target="_blank" rel="noopener">Chủ tịch Hồ Chí Minh</a>; <a href="https://www.nxbctqg.org.vn/lanh-dao-dang-nha-nuoc.html" target="_blank" rel="noopener">Lãnh đạo Đảng, Nhà nước</a>; <a href="https://www.nxbctqg.org.vn/van-kien.html" target="_blank" rel="noopener">Văn kiện</a>; <a href="https://www.nxbctqg.org.vn/xay-dung-dang-nha-nuoc.html" target="_blank" rel="noopener">Xây dựng Đảng, Nhà nước</a>; <a href="https://www.nxbctqg.org.vn/kinh-te.html" target="_blank" rel="noopener">Kinh tế</a>; <a href="https://www.nxbctqg.org.vn/van-hoa-xa-hoi.html" target="_blank" rel="noopener">Văn hóa, xã hội</a>; <a href="https://www.nxbctqg.org.vn/phap-luat.html" target="_blank" rel="noopener">Pháp luật</a>; <a href="https://www.nxbctqg.org.vn/nhung-van-de-quoc-te.html" target="_blank" rel="noopener">Những vấn đề quốc tế</a>; <a href="https://www.nxbctqg.org.vn/quoc-phong-an-ninh-doi-ngoai.html" target="_blank" rel="noopener">Quốc phòng, an ninh, đối ngoại</a>; <a href="https://www.nxbctqg.org.vn/sach-danh-cho-xa-phuong-thi-tran--60.html" target="_blank" rel="noopener">Sách dành cho xã, phường, thị trấn</a>; <a href="https://www.nxbctqg.org.vn/cac-an-pham-khac.html" target="_blank" rel="noopener">Các ấn phẩm khác</a>. Theo dõi sách mới ở mục <a href="https://www.nxbctqg.org.vn/sach-moi.html" target="_blank" rel="noopener">Sách mới</a> và <a href="https://www.nxbctqg.org.vn/sach-sap-xuat-ban-565.html" target="_blank" rel="noopener">Sách sắp xuất bản</a>.</p>
+<p><b>Ba nền tảng số:</b> <a href="https://stbook.vn/" target="_blank" rel="noopener">stbook.vn</a> (sách điện tử, có các tủ sách: bảo vệ nền tảng tư tưởng của Đảng; học tập và làm theo Bác; Chi bộ; đồng chí Nguyễn Phú Trọng; Chủ tịch Hồ Chí Minh; Chào mừng Đại hội XIV; tiếng Lào, tiếng Tây Ban Nha); <a href="https://sachquocgia.vn/" target="_blank" rel="noopener">sachquocgia.vn</a> (tủ sách BCĐ 35, Chi bộ, Pháp luật, Giáo trình, Lý luận chính trị, Bác Hồ, Tổng Bí thư…); thuviencoso.vn (thư viện sách xã, phường, thị trấn, ra mắt 2019).</p>
+<p><b>Mốc tủ sách điện tử:</b> 2021 ra mắt 4 tủ sách (bảo vệ nền tảng tư tưởng; học tập và làm theo Bác; thanh niên học Bác; Công an học Bác) · 19/4/2022 Tủ sách Chi bộ điện tử (hơn 80 đầu sách) · 15/10/2024 Tủ sách điện tử Tổng Bí thư Nguyễn Phú Trọng (66 ấn phẩm) · 14/5/2025 Tủ sách điện tử Chủ tịch Hồ Chí Minh (135 cuốn).</p>`;
+
+BOOKS.years.push(
+{y:"2026",note:`Năm Đại hội XIV và Luật Xuất bản sửa đổi. Sơ kết 6 tháng: <b>263 đầu sách giấy, hơn 5 triệu bản; 109 sách điện tử và sách nói</b>; 14 ấn phẩm phục vụ Kỳ họp thứ nhất Quốc hội khóa XVI. Lưu ý: chưa thấy tin ra mắt tập nào của bộ Văn kiện Đảng Toàn tập 80 tập.`,items:[
+{t:"Tái bản Hồ Chí Minh Toàn tập (15 tập), Biên niên tiểu sử (10 tập), Chủ tịch Hồ Chí Minh – Ngày này năm xưa (2 tập)",when:"1/2026",note:"Chào mừng Đại hội XIV",url:"https://nhandan.vn/tai-ban-cac-an-pham-dac-biet-ve-chu-tich-ho-chi-minh-post936714.html"},
+{t:"Tự hào cơ đồ Việt Nam",when:"30/1/2026",note:"Gần 600 trang, song ngữ Việt – Anh",url:"https://www.nxbctqg.org.vn/le-gioi-thieu-cuon-sach-“tu-hao-co-do-viet-nam”.html"},
+{t:"Rạng rỡ Việt Nam – Dấu ấn thành tựu nhiệm kỳ Đại hội XIII",when:"24/2/2026",url:"https://www.nxbctqg.org.vn/le-gioi-thieu-cuon-sach-“rang-ro-viet-nam-dau-an-thanh-tuu-nhiem-ky-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiii-cua-dang”.html"},
+{t:"Bộ 34 sách luật thông qua tại Kỳ họp thứ 10, Quốc hội khóa XV",when:"24/2/2026",note:"Chủ tịch Quốc hội Trần Thanh Mẫn dự lễ giới thiệu",url:"https://www.nxbctqg.org.vn/chu-tich-quoc-hoi-tran-thanh-man-du-le-gioi-thieu-bo-sach-luat-duoc-thong-qua-tai-ky-hop-thu-10-quoc-hoi-khoa-xv.html"},
+{t:"Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV (trọn bộ 2 tập)",a:"Đảng Cộng sản Việt Nam",when:"3/2026",note:"Phối hợp Văn phòng Trung ương Đảng; trang sách ghi 832 trang, báo ghi 823",url:"https://www.nxbctqg.org.vn/van-kien-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-tron-bo-2-tap--44.html"},
+{t:"Đổi mới, kiến tạo, hội nhập, phát triển",a:"Nguyễn Tấn Dũng",when:"6/3/2026",note:"Hơn 900 trang",url:"https://www.nxbctqg.org.vn/le-gioi-thieu-cuon-sach-“doi-moi-kien-tao-hoi-nhap-phat-trien”-cua-nguyen-thu-tuong-nguyen-tan-dung.html"},
+{t:"Giải thưởng Sách Quốc gia lần VIII",when:"8/3/2026",note:"Giải B: Quản trị quốc gia hiện đại, hiệu quả… (Nguyễn Bá Chiến, Lê Hải Bình); giải C: Địa chiến lược Việt Nam tầm nhìn 2030… (Trần Khánh); khuyến khích: Phòng, chống tiêu cực trong cán bộ, đảng viên… (Nguyễn Xuân Trường)",url:"https://www.nxbctqg.org.vn/sach-nha-xuat-ban-chinh-tri-quoc-gia-su-that-doat-giai-tai-giai-thuong-sach-quoc-gia-lan-thu-viii-nam-2026.html"},
+{t:"Nghị quyết 68-NQ/TW: Đột phá để phát triển kinh tế tư nhân – Hỏi và đáp",a:"Nguyễn Thái Bình chủ biên",when:"26/5/2026",note:"97 câu hỏi",url:"https://www.nxbctqg.org.vn/lam-ro-tu-duy-dot-pha-phat-trien-kinh-te-tu-nhan-tu-nghi-quyet-so-68-nq-tw-213.html"},
+{t:"Những nội dung cơ bản trong Văn kiện Đại hội XIV của Đảng – Hỏi và đáp",when:"6/2026",note:"272 trang",url:"https://www.nxbctqg.org.vn/nhung-noi-dung-co-ban-trong-van-kien-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-cua-dang-hoi-va-dap.html"},
+{t:"Công tác tư tưởng của Đảng – Nền tảng đưa đất nước tiến bước trong kỷ nguyên mới",a:"Nguyễn Trọng Nghĩa",when:"8/6/2026",url:"https://www.nxbctqg.org.vn/ra-mat-sach-ve-cong-tac-tu-tuong-cua-dang-trong-ky-nguyen-moi-cua-dai-tuong-nguyen-trong-nghia.html"},
+{t:"Xây dựng Chính phủ liêm chính, kiến tạo trong kỷ nguyên mới",a:"Nguyễn Hòa Bình",when:"19/6/2026",note:"91 bài",url:"https://www.nxbctqg.org.vn/le-gioi-thieu-cuon-sach-xay-dung-chinh-phu-liem-chinh-kien-tao-trong-ky-nguyen-moi-.html"},
+{t:"Tuyển tập các tác phẩm chọn lọc của Tổng Tư lệnh Fidel Castro Ruz",when:"5/8/2026",note:"24 tập, tiếng Tây Ban Nha",url:"https://www.nxbctqg.org.vn/le-gioi-thieu-bo-sach-tuyen-tap-cac-tac-pham-chon-loc-cua-tong-tu-lenh-fidel-castro-ruz.html"},
+{t:"Sức mạnh của dân tộc Việt Nam trong sự nghiệp xây dựng và bảo vệ Tổ quốc",a:"Lương Cường",when:"27/8/2026",note:"444 trang, 51 bài",url:"https://www.nxbctqg.org.vn/le-gioi-thieu-cuon-sach-suc-manh-cua-dan-toc-viet-nam-trong-su-nghiep-xay-dung-va-bao-ve-to-quoc-.html"},
+{t:"Phát triển lực lượng sản xuất mới để đột phá trong kỷ nguyên số",a:"Vũ Thanh Sơn",when:"4/10/2026",note:"Giải Nhì Giải thưởng Sách khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số 2026",url:"https://www.nxbctqg.org.vn/sach-cua-nha-xuat-ban-chinh-tri-quoc-gia-su-that-doat-giai-nhi-tai-giai-thuong-sach-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-nam-2026.html"},
+{t:"Kiên định chủ nghĩa Mác – Lênin, tư tưởng Hồ Chí Minh và con đường đi lên chủ nghĩa xã hội ở nước ta",a:"Trần Đại Quang",when:"12/10/2026",note:"70 tác phẩm",url:"https://www.nxbctqg.org.vn/le-gioi-thieu-cuon-sach-kien-dinh-chu-nghia-mac-lenin-tu-tuong-ho-chi-minh-va-con-duong-di-len-chu-nghia-xa-hoi-o-nuoc-ta.html"},
+{t:"Sơ kết công tác 6 tháng đầu năm 2026",when:"7/2026",note:"Số liệu ở phần đầu năm",url:"https://www.nxbctqg.org.vn/so-ket-cong-tac-chuyen-mon-va-cong-tac-dang-6-thang-dau-nam-trien-khai-phuong-huong-nhiem-vu-6-thang-cuoi-nam-2026.html"}
+]},
+{y:"2025",note:`Năm kỷ niệm <b>80 năm Nhà xuất bản</b> (Huân chương Lao động hạng Nhất). Tổng kết 16/12/2025: 685 bản thảo nộp duyệt; hơn 700 sách điện tử; hơn 210 mã QR sách nói; doanh thu phát hành tăng 167,9%; 16 hội thảo (13 hội thảo quốc gia).`,items:[
+{t:"Ra mắt Tủ sách điện tử Chủ tịch Hồ Chí Minh trên stbook.vn",when:"14/5/2025",note:"135 cuốn; kèm sách mới 79 câu chuyện của Bác Hồ từ Phủ Chủ tịch",url:"https://baovanhoa.vn/chinh-tri/le-ra-mat-tu-sach-dien-tu-chu-tich-ho-chi-minh-134645.html"},
+{t:"Hỏi – đáp về Nghị quyết 57-NQ/TW của Bộ Chính trị",when:"6/2025",note:"176 trang; Ban Tuyên giáo và Dân vận Trung ương phối hợp; sách không bán",url:"https://www.nxbctqg.org.vn/hoi-dap-ve-nghi-quyet-so-57-nq-tw-ngay-22-12-2024-cua-bo-chinh-tri-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia.html"},
+{t:"Sách lý luận chính trị cháy hàng (Znews)",when:"13/6/2025",note:"Đại thắng mùa Xuân 1975; Hồ Chí Minh qua hồi ức của những cựu tù chính trị Côn Đảo; sách của Nguyễn Thị Bình bán hết",url:"https://znews.vn/khi-sach-ly-luan-chinh-tri-chay-hang-post1560417.html"},
+{t:"Hiến pháp 2013 (sửa đổi, bổ sung năm 2025) và Luật Tổ chức chính quyền địa phương 2025",when:"7/2025",url:"https://www.nxbctqg.org.vn/xuat-ban-hai-tai-lieu-phap-ly-quan-trong-thiet-yeu.html"},
+{t:"Sơ kết 6 tháng 2025; triển khai bộ Văn kiện Đảng Toàn tập 80 tập",when:"7/2025",note:"164 đầu sách in, hơn 2,6 triệu bản; 70 sách điện tử",url:"https://www.sggp.org.vn/trien-khai-bien-tap-xuat-ban-bo-sach-van-kien-dang-toan-tap-80-tap-post804159.html"},
+{t:"Đảng Cộng sản Việt Nam qua các kỳ đại hội – Những quyết sách lịch sử; Lúc dân cần, lúc dân khó, có Công an",a:"Vũ Trọng Lâm chủ biên (cuốn đầu)",when:"28/8/2025",url:"https://daibieunhandan.vn/print/10384995.html"},
+{t:"Nghị quyết 57-NQ/TW với việc phát triển đội ngũ giảng viên lý luận chính trị",when:"10/2025",note:"Kỷ yếu hội thảo, 46 bài",url:"https://www.nxbctqg.org.vn/nghi-quyet-so-57-nq-tw-ngay-22-12-2024-cua-bo-chinh-tri-voi-viec-phat-trien-doi-ngu-giang-vien-dap-ung-yeu-cau-giang-day-ly-luan-chinh-tri-trong-ky-nguyen-so-ky-nguyen-vuon-minh-cua-dan-toc-viet-nam.html"},
+{t:"Con người Việt Nam vào kỷ nguyên mới",a:"Nguyễn Hồng Vinh",when:"26/10/2025",url:"https://www.nxbctqg.org.vn/ra-mat-cuon-sach-con-nguoi-viet-nam-vao-ky-nguyen-moi-104.html"},
+{t:"Bình chọn Sách hay nhất năm 2025",when:"11/2025",note:"Biển, đảo Việt Nam (5 tập); Lịch sử quân sự Việt Nam (14 tập); Kinh tế Việt Nam – Thăng trầm và đột phá; Việt Nam – Một góc nhìn từ Nhật Bản…",url:"https://www.nxbctqg.org.vn/-binh-chon-cuon-sach-yeu-thich-nhat-nam-2025.html"},
+{t:"Kỷ niệm 80 năm Ngày truyền thống (5/12/1945 – 5/12/2025)",when:"1/12/2025",note:"Huân chương Lao động hạng Nhất",url:"https://www.nxbctqg.org.vn/ky-niem-80-nam-ngay-truyen-thong-nha-xuat-ban-chinh-tri-quoc-gia-su-that-05-12-1945-05-12-2025--45.html"},
+{t:"Danh mục sách xuất bản (1945–2025)",when:"12/2025",note:"3 tập: 1945–2000; 2001–2014; 2015–2025",url:"https://www.nxbctqg.org.vn/“danh-muc-sach-xuat-ban-1945-2025-”-an-pham-tong-hop-phuc-vu-cong-tac-tra-cuu-sach-cua-nha-xuat-ban-chinh-tri-quoc-gia-su-that.html"},
+{t:"Giải Nhì hạng mục Sách, Giải thưởng toàn quốc về Thông tin đối ngoại lần XI",when:"12/12/2025",note:"Việt Nam – Một góc nhìn từ Nhật Bản (Furuta Motoo)",url:"https://www.nxbctqg.org.vn/nha-xuat-ban-chinh-tri-quoc-gia-su-that-nhan-giai-thuong-toan-quoc-ve-thong-tin-doi-ngoai.html"},
+{t:"Tổng kết công tác năm 2025, triển khai nhiệm vụ năm 2026",when:"16/12/2025",url:"https://www.nxbctqg.org.vn/nha-xuat-ban-tong-ket-cong-tac-nam-2025-trien-khai-nhiem-vu-nam-2026.html"}
+]},
+{y:"2024",note:`Khởi động bộ <b>Văn kiện Đảng Toàn tập 80 tập</b> (4/4/2024). Tổng kết năm theo Nhân Dân: 355 lượt đầu sách chuyển in, 1.866.876 bản, doanh thu 96,25 tỷ đồng, 135 sách điện tử. <span class="muted">SGGP ghi 648 cuốn; Giám đốc nói với Znews "hơn 700 đầu sách": các số này đếm theo cách khác nhau.</span> Lưu ý: cuốn sách của Tổng Bí thư Tô Lâm về người Công an cách mạng ra mắt 3/2/2025 là của Nhà xuất bản Công an nhân dân.`,items:[
+{t:"Hai cuốn sách của Tổng Bí thư Nguyễn Phú Trọng thể hiện quyết tâm thực hiện Nghị quyết Đại hội XIII",a:"Nguyễn Phú Trọng",when:"2/2024",url:"https://www.nxbctqg.org.vn/xuat-ban-hai-cuon-sach-cua-tong-bi-thu-nguyen-phu-trong-the-hien-quyet-tam-thuc-hien-thang-loi-nghi-quyet-dai-hoi-xiii-cua-dang-phat-trien-dat-nuoc-ngay-cang-giau-manh-phon-vinh-van-minh-hanh-phuc.html"},
+{t:"Đổi mới phương thức lãnh đạo của Đảng đối với Công an nhân dân…",a:"Tô Lâm chủ biên",when:"2/2/2024",note:"Phối hợp Bộ Công an",url:"https://www.sggp.org.vn/ra-mat-sach-do-dong-chi-dai-tuong-gs-ts-to-lam-bo-truong-bo-cong-an-lam-chu-bien-post725520.html"},
+{t:"Khởi động bộ Văn kiện Đảng Toàn tập (1924–2020), 80 tập",when:"4/4/2024",note:"Dự kiến xong năm 2030, dịp 100 năm thành lập Đảng",url:"https://nhandan.vn/van-kien-dang-toan-tap-1924-2020-se-ra-mat-vao-dip-ky-niem-100-nam-ngay-thanh-lap-dang-post803156.html"},
+{t:"Xây dựng và phát triển nền văn hóa Việt Nam tiên tiến, đậm đà bản sắc dân tộc",a:"Nguyễn Phú Trọng",when:"21/6/2024",note:"92 bài",url:"https://nhandan.vn/ra-mat-sach-cua-tong-bi-thu-nguyen-phu-trong-post815552.html"},
+{t:"Quốc hội trong tiến trình đổi mới đáp ứng yêu cầu xây dựng, hoàn thiện Nhà nước pháp quyền…",a:"Nguyễn Phú Trọng",when:"16/7/2024",note:"95 bài",url:"https://www.sggp.org.vn/ra-mat-sach-cua-tong-bi-thu-nguyen-phu-trong-ve-tien-trinh-doi-moi-quoc-hoi-post749566.html"},
+{t:"Xây dựng, hoàn thiện Nhà nước pháp quyền XHCN Việt Nam: Giai đoạn mới, yêu cầu mới",a:"Vũ Công Giao và cộng sự",when:"7/2024",note:"708 trang; về Nghị quyết 27-NQ/TW (2022)",url:"https://www.nxbctqg.org.vn/xay-dung-hoan-thien-nha-nuoc-phap-quyen-xa-hoi-chu-nghia-viet-nam-giai-doan-moi-yeu-cau-moi.html"},
+{t:"Ra mắt Tủ sách điện tử Tổng Bí thư Nguyễn Phú Trọng",when:"15/10/2024",note:"66 ấn phẩm",url:"https://daibieunhandan.vn/le-ra-mat-tu-sach-dien-tu-tong-bi-thu-nguyen-phu-trong-10349200.html"},
+{t:"Giải thưởng Sách Quốc gia lần VII",when:"11/2024",note:"Giải B: Võ Văn Kiệt – Trí tuệ và sáng tạo (3 tập, Hoàng Lại Giang)",url:"https://nhandan.vn/tac-gia-104-tuoi-duoc-trao-giai-a-sach-quoc-gia-post847739.html"},
+{t:"Văn kiện Đảng về an ninh, trật tự (1924–2024)",when:"12/2024",note:"25 tập, 11.585 trang",url:"https://www.nxbctqg.org.vn/bo-sach-van-kien-dang-ve-an-ninh-trat-tu-1924-2024-25-tap-.html"},
+{t:"Tổng kết năm 2024 (Nhân Dân)",when:"12/2024",url:"https://nhandan.vn/tiep-tuc-la-cau-noi-quan-trong-ly-luan-voi-thuc-tien-cung-cap-tri-thuc-nang-cao-nhan-thuc-chinh-tri-cho-can-bo-dang-vien-va-nhan-dan-post853279.html"}
+]},
+{y:"2023",note:`Năm nhiều sách của Tổng Bí thư Nguyễn Phú Trọng. Cả năm: <b>923 đề tài</b>, doanh thu ước 110 tỷ đồng; ra mắt Không gian Văn hóa Hồ Chí Minh; trao 3 tủ sách điện tử.`,items:[
+{t:"Kiên quyết, kiên trì đấu tranh phòng, chống tham nhũng, tiêu cực, góp phần xây dựng Đảng và Nhà nước ta ngày càng trong sạch, vững mạnh",a:"Nguyễn Phú Trọng",when:"11/1/2023",note:"Khoảng 600 trang; phối hợp Ban Nội chính Trung ương",url:"https://www.sggp.org.vn/xuat-ban-sach-cua-tong-bi-thu-nguyen-phu-trong-ve-dau-tranh-phong-chong-tham-nhung-tieu-cuc-post675341.html"},
+{t:"Tái bản ấn phẩm nhân 133 năm Ngày sinh Chủ tịch Hồ Chí Minh",when:"5/2023",note:"Nhật ký trong tù; Hồ Chí Minh vĩ đại một con người (Trần Văn Giàu)…",url:"https://www.nxbctqg.org.vn/tai-ban-mot-so-an-pham-tieu-bieu-nhan-ky-niem-133-ngay-sinh-chu-tich-ho-chi-minh.html"},
+{t:"Một số vấn đề về đường lối quân sự, chiến lược quốc phòng…",a:"Nguyễn Phú Trọng",when:"18/7/2023",note:"39 bài; có bản điện tử miễn phí",url:"https://baolaocai.vn/ra-mat-cuon-sach-cua-tong-bi-thu-nguyen-phu-trong-ve-duong-loi-quan-su-chien-luoc-quoc-phong-post370942.html"},
+{t:"Cả nước đồng lòng… quyết tâm thực hiện thắng lợi Nghị quyết Đại hội XIII của Đảng",a:"Nguyễn Phú Trọng",when:"20/10/2023",note:"Hơn 500 trang, 40 bài",url:"https://www.sggp.org.vn/ra-mat-sach-moi-cua-tong-bi-thu-nguyen-phu-trong-voi-nhung-tu-tuong-quan-diem-va-dinh-huong-chien-luoc-post710638.html"},
+{t:"Xây dựng và phát triển nền đối ngoại, ngoại giao Việt Nam toàn diện, hiện đại, mang đậm bản sắc “cây tre Việt Nam”",a:"Nguyễn Phú Trọng",when:"21/11/2023",url:"https://www.sggp.org.vn/ra-mat-sach-cua-tong-bi-thu-nguyen-phu-trong-ve-xay-dung-nen-doi-ngoai-ngoai-giao-viet-nam-post715114.html"},
+{t:"Tài liệu nghiên cứu các văn kiện Hội nghị Trung ương 8 khóa XIII",when:"12/2023",note:"376 trang; dùng cho cán bộ chủ chốt và báo cáo viên",url:"https://www.nxbctqg.org.vn/tai-lieu-nghien-cuu-cac-van-kien-hoi-nghi-lan-thu-tam-ban-chap-hanh-trung-uong-dang-khoa-xiii-dung-cho-can-bo-chu-chot-va-bao-cao-vien-.html"},
+{t:"Giải thưởng Sách Quốc gia lần VI",when:"12/2023",note:"Chủ nghĩa tư bản không có tư bản (Haskel, Westlake); nguồn không ghi hạng giải",url:"https://tuoitre.vn/giai-thuong-sach-quoc-gia-ton-vinh-nhung-cuon-sach-mang-tinh-than-khai-phong-20231226185441695.htm"},
+{t:"Tổng kết năm 2023",when:"12/2023",url:"https://nhandan.vn/post-790786.html"}
+]},
+{y:"2022",note:`Năm ra mắt <b>Tủ sách Chi bộ điện tử</b>. Doanh thu 107,411 tỷ đồng; trưng bày hơn 300 sách về Bác tại trụ sở UNESCO.`,items:[
+{t:"Biên niên sự kiện Lịch sử Đảng Cộng sản Việt Nam",a:"Viện Lịch sử Đảng",when:"1/2022",note:"7 tập (1930–2010)",url:"https://www.nxbctqg.org.vn/“bien-nien-su-kien-lich-su-dang-cong-san-viet-nam”-bo-sach-khang-dinh-truyen-thong-ve-vang-va-vai-tro-lanh-dao-cua-dang-voi-cach-mang-viet-nam.html"},
+{t:"Một số vấn đề lý luận và thực tiễn về chủ nghĩa xã hội và con đường đi lên chủ nghĩa xã hội ở Việt Nam",a:"Nguyễn Phú Trọng",when:"9/2/2022",note:"29 bài",url:"https://www.sggp.org.vn/ra-mat-sach-cua-tong-bi-thu-nguyen-phu-trong-ve-con-duong-di-len-cnxh-o-viet-nam-post626347.html"},
+{t:"Bách khoa thư làng Việt cổ truyền",when:"3/2022",url:"https://www.nxbctqg.org.vn/bach-khoa-thu-lang-viet-co-truyen-.html"},
+{t:"Ra mắt Tủ sách Chi bộ điện tử trên stbook.vn",when:"19/4/2022",note:"Hơn 80 đầu sách; Tủ sách bảo vệ nền tảng tư tưởng có hơn 160 đầu sách",url:"https://www.sggp.org.vn/doc-gia-duoc-doc-mien-phi-sach-cua-dang-tren-stbookvn-post633863.html"},
+{t:"Tài liệu nghiên cứu các văn kiện Hội nghị Trung ương 5 khóa XIII",when:"7/2022",note:"Nghị quyết 18, 19, 20, 21-NQ/TW",url:"https://voh.com.vn/xay-dung-dang/tai-lieu-nghien-cuu-cac-van-kien-hoi-nghi-lan-thu-nam-ban-chap-hanh-trung-uong-dang-khoa-xiii-441798.html"},
+{t:"Tự chỉ trích",a:"Nguyễn Văn Cừ",when:"7/2022",url:"https://www.nxbctqg.org.vn/gioi-thieu-cuon-sach-tu-chi-trich-cua-nguyen-van-cu.html"},
+{t:"Tổng kết năm 2022",when:"12/2022",url:"https://nhandan.vn/tiep-tuc-thuc-hien-tot-nhiem-vu-chinh-tri-khong-ngung-nang-cao-doi-song-nguoi-lao-dong-post734741.html"}
+]},
+{y:"2021",note:`Năm Đại hội XIII. Tổng kết: <b>832 lượt tên sách; 6.979.913 bản</b>; doanh thu 98,86 tỷ đồng; 201 sách điện tử; Văn kiện Đại hội XIII bằng 7 ngoại ngữ; ra mắt 4 tủ sách điện tử.`,items:[
+{t:"Bộ giáo trình lý luận chính trị bậc đại học",when:"3–7/2021",note:"5 môn, 10 cuốn; phối hợp Bộ Giáo dục và Đào tạo",url:"https://www.nxbctqg.org.vn/phat-hanh-bo-giao-trinh-ly-luan-chinh-tri-danh-cho-bac-dai-hoc.html"},
+{t:"Văn kiện Đại hội đại biểu toàn quốc lần thứ XIII",when:"3/2021",note:"2 tập, 648 trang",url:"https://voh.com.vn/xay-dung-dang/xuat-ban-van-kien-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiii-396391.html"},
+{t:"Sách phục vụ bầu cử Quốc hội khóa XV và Hội đồng nhân dân các cấp nhiệm kỳ 2021–2026",when:"3/2021",url:"https://www.nxbctqg.org.vn/xuat-ban-sach-phuc-vu-bau-cu-dai-bieu-quoc-hoi-khoa-xv-va-dai-bieu-hoi-dong-nhan-dan-cac-cap-nhiem-ky-2021-2026.html"},
+{t:"Hồ Chí Minh Toàn tập, xuất bản lần thứ ba có sửa chữa",when:"7/2021",note:"15 tập",url:"https://www.nxbctqg.org.vn/phat-hanh-bo-sach-ho-chi-minh-toan-tap-xuat-ban-lan-thu-ba-co-sua-chua-.html"},
+{t:"Trưng bày Sách lý luận chính trị 1/4 thế kỷ",when:"11/2021",note:"318 đầu sách làm cùng Hội đồng Lý luận Trung ương từ 1995",url:"https://tuoitre.vn/trung-bay-sach-ly-luan-chinh-tri-cua-tong-bi-thu-nguyen-phu-trong-va-nhieu-tac-gia-20211111190038367.htm"},
+{t:"Tổng kết năm 2021",when:"2/2022",url:"https://nhandan.vn/nha-xuat-ban-chinh-tri-quoc-gia-su-that-thuc-hien-tot-nhiem-vu-chinh-tri-gan-voi-thi-truong-va-nhu-cau-ban-doc-post686198.html"}
+]},
+{y:"2020",note:`Kỷ niệm <b>75 năm Nhà xuất bản</b>. Giai đoạn 2015–2020: gần 6.000 đầu sách, hơn 24 triệu bản, trung bình 995 đầu sách mỗi năm; 454 đầu sách thuộc Đề án sách xã, phường, thị trấn.`,items:[
+{t:"Lễ công bố sách lần thứ nhất năm 2020",when:"23/7/2020",note:"Bảo vệ nền tảng tư tưởng của Đảng trong tình hình mới; Báo cáo 10 năm thực hiện Cương lĩnh 2011; Văn hóa biển đảo Việt Nam (9 tập)…",url:"https://nhandan.vn/nxb-chinh-tri-quoc-gia-su-that-cong-bo-sach-xuat-ban-lan-thu-nhat-nam-2020-post609717.html"},
+{t:"Giải thưởng Sách Quốc gia lần III",when:"10/2020",note:"Hai giải B: Kiểm soát quyền lực ở nước ta qua công tác kiểm tra, giám sát và kỷ luật Đảng (Mai Trực chủ biên); Mặt trái của công nghệ",url:"https://www.nxbctqg.org.vn/nhung-tac-pham-dat-giai-b-tai-giai-thuong-sach-quoc-gia-lan-thu-ba.html"},
+{t:"Nhà xuất bản 75 năm xây dựng và phát triển",when:"12/2020",url:"https://nhandan.vn/nxb-chinh-tri-quoc-gia-su-that-75-nam-xay-dung-va-phat-trien-post626516.html"}
+]},
+{y:"2019",note:`Ra mắt <b>thuviencoso.vn</b> (hơn 400 đầu sách); khai trương Nhà sách Sự thật tại TP Hồ Chí Minh (26/12/2019); dự Hội chợ sách Frankfurt.`,items:[
+{t:"Tổng Bí thư, Chủ tịch nước Nguyễn Phú Trọng với tình cảm của nhân dân trong nước và bạn bè quốc tế",when:"20/6/2019",note:"600 trang, 130 bài; phối hợp Báo Nhân Dân",url:"https://nhandan.vn/ra-mat-tac-pham-tong-bi-thu-chu-tich-nuoc-nguyen-phu-trong-voi-tinh-cam-cua-nhan-dan-trong-nuoc-va-ban-be-quoc-te-post362245.html"},
+{t:"Quyết tâm ngăn chặn và đẩy lùi tham nhũng",a:"Nguyễn Phú Trọng",when:"12/7/2019",note:"31 bài",url:"https://baolaocai.vn/ra-mat-sach-cua-tong-bi-thu-chu-tich-nuoc-ve-day-lui-tham-nhung-post281267.html"},
+{t:"Lễ công bố sách lần thứ nhất năm 2019",when:"12/7/2019",note:"Các đại hội và hội nghị Trung ương của Đảng (1930–2018); Thể chế phát triển nhanh – bền vững…",url:"https://nhandan.vn/nha-xuat-ban-chinh-tri-quoc-gia-su-that-cong-bo-sach-xuat-ban-lan-thu-nhat-nam-2019-post364454.html"},
+{t:"10 dấu ấn tiêu biểu năm 2019",when:"12/2019",note:"Giải Sách Quốc gia lần II: giải A Vùng đất Nam Bộ (Phan Huy Lê tổng chủ biên); 5 tập đầu Văn kiện Trung ương Cục miền Nam",url:"https://www.nxbctqg.org.vn/10-dau-an-tieu-bieu-cua-nha-xuat-ban-chinh-tri-quoc-gia-su-that-nam-2019.html"}
+]}
+);
+
+BOOKS.study.push(
+["Tài liệu nghiên cứu các văn kiện Hội nghị Trung ương 5 khóa XIII (7/2022)","https://voh.com.vn/xay-dung-dang/tai-lieu-nghien-cuu-cac-van-kien-hoi-nghi-lan-thu-nam-ban-chap-hanh-trung-uong-dang-khoa-xiii-441798.html","NQ 18, 19, 20, 21"],
+["Tài liệu nghiên cứu các văn kiện Hội nghị Trung ương 8 khóa XIII (12/2023)","https://www.nxbctqg.org.vn/tai-lieu-nghien-cuu-cac-van-kien-hoi-nghi-lan-thu-tam-ban-chap-hanh-trung-uong-dang-khoa-xiii-dung-cho-can-bo-chu-chot-va-bao-cao-vien-.html","cùng loạt có bản hỏi – đáp và bản cho cơ sở"],
+["Hỏi – đáp về Nghị quyết 57-NQ/TW (6/2025)","https://www.nxbctqg.org.vn/hoi-dap-ve-nghi-quyet-so-57-nq-tw-ngay-22-12-2024-cua-bo-chinh-tri-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia.html",""],
+["Nghị quyết 68-NQ/TW – Hỏi và đáp (5/2026)","https://www.nxbctqg.org.vn/lam-ro-tu-duy-dot-pha-phat-trien-kinh-te-tu-nhan-tu-nghi-quyet-so-68-nq-tw-213.html",""],
+["Văn kiện Đại hội XIV (3/2026)","https://www.nxbctqg.org.vn/van-kien-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-tron-bo-2-tap--44.html",""],
+["Những nội dung cơ bản trong Văn kiện Đại hội XIV – Hỏi và đáp (6/2026)","https://www.nxbctqg.org.vn/nhung-noi-dung-co-ban-trong-van-kien-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-cua-dang-hoi-va-dap.html",""],
+["Tài liệu bồi dưỡng nhận thức về Đảng (lần thứ 24, theo Văn kiện XIV)","https://www.nxbctqg.org.vn/tai-lieu-boi-duong-nhan-thuc-ve-dang-xuat-ban-lan-thu-24-co-sua-chua-bo-sung-theo-van-kien-dai-hoi-lan-thu-xiv-cua-dang-.html",""],
+["Chưa thấy sách tài liệu riêng của Nhà xuất bản về Nghị quyết 27, 59, 66, 70, 71, 72, Nghị quyết 25, Chỉ thị 04, Chỉ thị 05 và Luật Viên chức 2025 (tra cứu 22/10/2026)","",""]
+);
+
+BOOKS.series.push(
+["Văn kiện Đảng Toàn tập (1924–2020), 80 tập: khởi động 4/2024, dự kiến xong 2030; đến 10/2026 chưa thấy tin ra mắt tập nào","https://nhandan.vn/van-kien-dang-toan-tap-1924-2020-se-ra-mat-vao-dip-ky-niem-100-nam-ngay-thanh-lap-dang-post803156.html",""],
+["Hồ Chí Minh Toàn tập: lần 1 (1990, 10 tập), lần 2 (12 tập), lần 3 (2011, 15 tập); bản sửa chữa 7/2021; tái bản 1/2026","https://www.nxbctqg.org.vn/phat-hanh-bo-sach-ho-chi-minh-toan-tap-xuat-ban-lan-thu-ba-co-sua-chua-.html",""],
+["Hồ Chí Minh – Biên niên tiểu sử, 10 tập; tái bản 1/2026","https://nhandan.vn/tai-ban-cac-an-pham-dac-biet-ve-chu-tich-ho-chi-minh-post936714.html",""],
+["Biên niên sự kiện Lịch sử Đảng Cộng sản Việt Nam, 7 tập (1/2022)","https://www.nxbctqg.org.vn/“bien-nien-su-kien-lich-su-dang-cong-san-viet-nam”-bo-sach-khang-dinh-truyen-thong-ve-vang-va-vai-tro-lanh-dao-cua-dang-voi-cach-mang-viet-nam.html",""],
+["Văn kiện Đảng về an ninh, trật tự (1924–2024), 25 tập (12/2024)","https://www.nxbctqg.org.vn/bo-sach-van-kien-dang-ve-an-ninh-trat-tu-1924-2024-25-tap-.html",""],
+["Văn kiện Trung ương Cục miền Nam 1946–1975 (5 tập đầu năm 2019)","https://www.nxbctqg.org.vn/van-kien.html&page=4",""],
+["Tuyển tập tác phẩm chọn lọc của Fidel Castro, 24 tập tiếng Tây Ban Nha (8/2026)","https://www.nxbctqg.org.vn/le-gioi-thieu-bo-sach-tuyen-tap-cac-tac-pham-chon-loc-cua-tong-tu-lenh-fidel-castro-ruz.html",""],
+["Danh mục sách xuất bản (1945–2025), 3 tập (12/2025)","https://www.nxbctqg.org.vn/“danh-muc-sach-xuat-ban-1945-2025-”-an-pham-tong-hop-phuc-vu-cong-tac-tra-cuu-sach-cua-nha-xuat-ban-chinh-tri-quoc-gia-su-that.html",""]
+);
+
+BOOKS.sources.push(
+["Trang chủ Nhà xuất bản Chính trị quốc gia Sự thật","https://www.nxbctqg.org.vn/"],
+["Mục Hoạt động Nhà xuất bản","https://www.nxbctqg.org.vn/hoat-dong-nha-xuat-ban-.html"],
+["Mục Tin xuất bản","https://www.nxbctqg.org.vn/tin-xuat-ban.html"],
+["Danh mục sách mới (file theo tháng, 10/2024–8/2025)","https://www.nxbctqg.org.vn/danh-muc-sach-moi.html"],
+["stbook.vn","https://stbook.vn/"],
+["sachquocgia.vn","https://sachquocgia.vn/"]
+);
+
+NUMBERS.push(
+{doc:"nxbst",what:"Đầu sách giai đoạn 2015–2020",val:"Gần 6.000 đầu sách, hơn 24 triệu bản (trung bình 995 đầu sách/năm)",ref:"Nhân Dân, kỷ niệm 75 năm (12/2020)"},
+{doc:"nxbst",what:"Kết quả năm 2021",val:"832 lượt tên sách; 6.979.913 bản; doanh thu 98,86 tỷ đồng",ref:"Nhân Dân 18/2/2022"},
+{doc:"nxbst",what:"Kết quả 6 tháng đầu năm 2026",val:"263 đầu sách giấy, hơn 5 triệu bản; 109 sách điện tử và sách nói",ref:"Sơ kết 6 tháng 2026"},
+{doc:"nxbst",what:"Bộ Văn kiện Đảng Toàn tập mới",val:"80 tập (1924–2020); khởi động 4/4/2024; dự kiến xong 2030",ref:"Nhân Dân"},
+{doc:"nxbst",what:"Tủ sách điện tử Tổng Bí thư Nguyễn Phú Trọng / Chủ tịch Hồ Chí Minh",val:"66 ấn phẩm (15/10/2024) / 135 cuốn (14/5/2025)",ref:"Đại biểu Nhân dân; Báo Văn hóa"}
+);
+
+QUIZ.push(
+{doc:"nxbst",q:"Bộ Văn kiện Đảng Toàn tập (1924–2020) Nhà xuất bản khởi động biên tập năm 2024 gồm bao nhiêu tập?",opts:["80 tập","54 tập","69 tập","15 tập"],ans:0,ex:"Bộ mới 80 tập: các tập cũ cơ cấu lại thành 70 tập (1924–2010), thêm 10 tập (2011–2020); dự kiến hoàn thành năm 2030.",ref:"Nhân Dân 4/2024"},
+{doc:"nxbst",q:"Tủ sách Chi bộ điện tử được ra mắt trên stbook.vn vào năm nào?",opts:["2022","2019","2024","2025"],ans:0,ex:"19/4/2022. Năm 2019 ra mắt thuviencoso.vn; 2024 ra mắt Tủ sách điện tử Tổng Bí thư Nguyễn Phú Trọng; 2025 ra mắt Tủ sách điện tử Chủ tịch Hồ Chí Minh.",ref:"SGGP"},
+{doc:"nxbst",q:"Năm 2026, sách nào của Nhà xuất bản đạt giải B Giải thưởng Sách Quốc gia lần VIII?",opts:["Quản trị quốc gia hiện đại, hiệu quả… (Nguyễn Bá Chiến, Lê Hải Bình)","Võ Văn Kiệt – Trí tuệ và sáng tạo","Vùng đất Nam Bộ","Mặt trái của công nghệ"],ans:0,ex:"Võ Văn Kiệt – Trí tuệ và sáng tạo: giải B lần VII (2024). Vùng đất Nam Bộ: giải A lần II (2019). Mặt trái của công nghệ: giải B lần III (2020).",ref:"Website NXB 8/3/2026"}
+);
+
 </script>
 <script>
 (function(){
@@ -3581,6 +4205,7 @@ OVERVIEW.mustKnow.push(
 const store={get(k,d){try{const v=localStorage.getItem("ontvc:"+k);return v===null?d:JSON.parse(v)}catch(e){return d}},
              set(k,v){try{localStorage.setItem("ontvc:"+k,JSON.stringify(v))}catch(e){}}};
 const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const el=(tag,attrs={},html)=>{const e=document.createElement(tag);for(const k in attrs){if(k==="class")e.className=attrs[k];else if(k.startsWith("on"))e.addEventListener(k.slice(2),attrs[k]);else e.setAttribute(k,attrs[k]);}if(html!==undefined)e.innerHTML=html;return e;};
 const docById=Object.fromEntries(DOCS.map(d=>[d.id,d]));
 const docShort=id=>docById[id]?docById[id].short:id;
@@ -3594,14 +4219,16 @@ const TABS=[
  {id:"tongquan",label:"Tổng quan"},
  {id:"bando",label:"Bản đồ tư duy"},
  {id:"vanban",label:"Văn bản",count:()=>DOCS.length},
+ {id:"hieuvb",label:"Hiểu văn bản",count:()=>GUIDE.chains.length},
  {id:"conso",label:"Con số cần nhớ",count:()=>NUMBERS.length},
  {id:"denham",label:"Dễ nhầm",count:()=>CONFUSE.length},
  {id:"the",label:"Thẻ ghi nhớ",count:()=>FLASH.length},
  {id:"tracnghiem",label:"Trắc nghiệm",count:()=>QUIZ.length},
  {id:"bode",label:"Bộ đề thi thử",count:()=>EXAMSETS.length+WRITTEN.length},
  {id:"tuluan",label:"Tự luận",count:()=>ESSAY.length},
- {id:"phongvan",label:"Phỏng vấn",count:()=>INTERVIEW.reduce((n,s)=>n+s.items.length,0)}
-];
+ {id:"phongvan",label:"Phỏng vấn",count:()=>INTERVIEW.reduce((n,s)=>n+s.items.length,0)},
+ {id:"sachnxb",label:"Sách NXB theo năm",count:()=>BOOKS.years.length}
+].filter(t=>t.id==="hieuvb"?GUIDE.chains.length>0:t.id==="sachnxb"?BOOKS.years.length>0:true);
 const views={};
 const rendered={};
 let current=null;
@@ -3639,6 +4266,7 @@ function renderOverview(v){
     <div class="stat"><b>${EXAMSETS.length+WRITTEN.length}</b><span>bộ đề thi thử</span></div>
     <div class="stat"><b>${INTERVIEW.reduce((n,s)=>n+s.items.length,0)}</b><span>câu hỏi phỏng vấn</span></div>
   </div>
+  ${quickLinks()}
   ${EXAMINFO.length?`<div class="panel"><div class="eyebrow">Kỳ thi gồm những gì</div><div style="display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:6px">${EXAMINFO.slice(0,1).map(x=>`<h3>${x.h}</h3><div>${x.html}</div>`).join("")}</div><div style="margin-top:10px"><button class="btn primary" id="ovGoExam">Xem cấu trúc đề và làm bộ đề thi thử</button></div></div>`:""}
   <div class="grid g2">
     <div class="panel"><div class="eyebrow">Tiến độ ôn</div>
@@ -3660,6 +4288,7 @@ function renderOverview(v){
     <div class="panel"><div class="eyebrow">Mẹo làm bài tự luận / vấn đáp</div><ul class="dots">${OVERVIEW.tipsEssay.map(x=>`<li>${x}</li>`).join("")}</ul></div>
   </div>`;
   const gx=$("#ovGoExam",v);if(gx)gx.onclick=()=>show("bode");
+  bindGo(v);
   const list=$("#ovList",v);
   const upd=()=>{$("#ovDone",v).textContent=nDone();$("#ovBar",v).style.width=(nDone()/DOCS.length*100)+"%";};
   DOCS.forEach(d=>{
@@ -4052,6 +4681,7 @@ function renderInterview(v){
   const all=[];INTERVIEW.forEach(s=>s.items.forEach(it=>all.push({h:s.h,it})));
   if(!all.length){v.innerHTML=`<div class="view-head"><div><h2>Chuẩn bị phỏng vấn</h2><p>Chưa có câu hỏi.</p></div></div>`;return;}
   v.innerHTML=`<div class="view-head"><div><h2>Chuẩn bị phỏng vấn</h2><p>Mỗi câu có gợi ý ý chính để bạn tự diễn đạt bằng lời của mình, không học thuộc nguyên văn. Cách luyện: bấm "Câu hỏi ngẫu nhiên", trả lời thành tiếng trong 2 phút, sau đó mới mở gợi ý để đối chiếu.</p></div></div>
+    ${(typeof docById!=="undefined"&&docById.hoidong)?`<div class="panel" style="margin:12px 0"><div class="eyebrow">Trước khi luyện</div><p style="margin:6px 0 0">Đọc hồ sơ những người có thể ngồi hội đồng và quy trình xuất bản của Nhà xuất bản.</p><div class="golinks">${goBtn("doc:hoidong","Hồ sơ hội đồng phỏng vấn")}${goBtn("doc:quytrinh","Quy trình xuất bản (dự thảo)")}</div></div>`:""}
     <div class="ivdrill"><div class="eyebrow">Luyện nói ngẫu nhiên</div><div class="muted" id="ivH" style="font-size:.85rem"></div><div class="q" id="ivQ">Bấm nút bên dưới để nhận câu hỏi.</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn primary" id="ivNext">Câu hỏi ngẫu nhiên</button><span class="timer" id="ivT">02:00</span><button class="btn" id="ivShow" disabled>Xem gợi ý</button></div>
       <div id="ivA" hidden></div></div>
@@ -4062,9 +4692,69 @@ function renderInterview(v){
     left=120;t.textContent=fmt(left);t.classList.remove("low");if(ivTimer)clearInterval(ivTimer);
     ivTimer=setInterval(()=>{left--;t.textContent=fmt(left);t.classList.toggle("low",left<=20);if(left<=0){clearInterval(ivTimer);ivTimer=null;}},1000);};
   sb.onclick=()=>{a.hidden=!a.hidden;sb.textContent=a.hidden?"Xem gợi ý":"Ẩn gợi ý";};
+  bindGo(v);
 }
 
-const RENDER={tongquan:renderOverview,bando:renderMindmap,vanban:renderDocs,conso:renderNumbers,denham:renderConfuse,the:renderFlash,tracnghiem:renderQuiz,bode:renderSets,tuluan:renderEssay,phongvan:renderInterview};
+
+/* ---------- Lối tắt, Hiểu văn bản, Sách NXB theo năm ---------- */
+function goBtn(target,label){const [k,id]=target.split(":");if(k==="doc"&&!docById[id])return"";if(k==="tab"&&!TABS.some(t=>t.id===id))return"";return `<button class="btn" data-go="${target}">${label}</button>`;}
+function quickLinks(){
+  const b=[goBtn("doc:hoidong","Hội đồng phỏng vấn"),goBtn("doc:quytrinh","Quy trình xuất bản (dự thảo 11/2025)"),goBtn("tab:hieuvb","Hiểu văn bản của Đảng và Nhà nước"),goBtn("tab:sachnxb","Sách NXB theo năm"),goBtn("doc:ktgs","Kiểm tra, giám sát, kỷ luật Đảng 2026")].join("");
+  return b?`<div class="panel"><div class="eyebrow">Mới cập nhật</div><div class="golinks">${b}</div></div>`:"";
+}
+function bindGo(root){root.querySelectorAll("[data-go]").forEach(b=>{b.onclick=()=>{const [k,id]=b.dataset.go.split(":");if(k==="doc")show("vanban",{doc:id});else show(id);};});}
+function gLinks(arr){return arr&&arr.length?`<ul class="dots">${arr.map(x=>`<li>${x[1]?`<a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a>`:x[0]}${x[2]?` <span class="muted">${x[2]}</span>`:""}</li>`).join("")}</ul>`:"";}
+let gdKind="all";
+function renderGuide(v){
+  v.innerHTML=`<div class="view-head"><div><h2>Hiểu văn bản của Đảng và Nhà nước</h2><p>${GUIDE.intro}</p></div></div>
+  <div class="grid g2" style="margin-top:12px">${GUIDE.system.map(x=>`<div class="panel"><div class="eyebrow">${x.eyebrow||""}</div><h3 style="margin:4px 0 8px">${x.h}</h3><div class="gsys">${x.html}</div></div>`).join("")}</div>
+  ${GUIDE.howto?`<div class="panel" style="margin-top:14px"><div class="eyebrow">Cách học một nghị quyết, một đạo luật</div><div class="gsys" style="margin-top:6px">${GUIDE.howto}</div></div>`:""}
+  <div class="view-head" style="margin-top:22px"><div><h2 style="font-size:1.35rem">Hồ sơ từng văn bản</h2><p>Mỗi văn bản: ra đời từ đâu, thuộc loại gì, có ý nghĩa gì, nội dung cốt lõi, liên hệ với văn bản khác, và sách, bài của Nhà xuất bản để đọc thêm.</p></div></div>
+  <div class="chips" id="gdF" style="margin-top:10px"><button class="chip" data-k="all">Tất cả</button><button class="chip" data-k="party">Văn bản của Đảng</button><button class="chip" data-k="state">Văn bản của Nhà nước</button></div>
+  <div class="gdlist" id="gdList"></div>
+  ${GUIDE.sources.length?`<details class="acc" style="margin-top:14px"><summary>Nguồn tra cứu</summary><div class="srcs">${gLinks(GUIDE.sources)}</div></details>`:""}`;
+  const list=$("#gdList",v);
+  const draw=()=>{
+    $$("#gdF .chip",v).forEach(c=>c.setAttribute("aria-pressed",c.dataset.k===gdKind?"true":"false"));
+    list.innerHTML=GUIDE.chains.filter(c=>gdKind==="all"||c.kind===gdKind).map(c=>`<article class="gcard ${c.kind}" id="g-${c.id}">
+      <header><span class="tag ${c.kind==="state"?"law":"party"}">${c.kind==="state"?"Nhà nước":"Đảng"}</span><span class="gstamp">${c.so}</span>
+      <h3>${c.title}</h3><div class="muted" style="font-size:.88rem">${c.organ||""}${c.date?` · ${c.date}`:""}</div></header>
+      ${(c.prev&&c.prev.length)||(c.next&&c.next.length)?`<div class="flow"><span class="flab">Tiền thân</span>${(c.prev||[]).map(p=>`<span class="node">${p}</span>`).join("")||'<span class="node muted">—</span>'}<span class="arr" aria-hidden="true">→</span><span class="node cur">${c.so}</span><span class="arr" aria-hidden="true">→</span>${(c.next||[]).map(p=>`<span class="node">${p}</span>`).join("")||'<span class="node muted">—</span>'}<span class="flab">Thể chế hóa, hướng dẫn</span></div>`:""}
+      ${[["Lịch sử ra đời",c.origin],["Bản chất",c.nature],["Ý nghĩa",c.meaning],["Nội dung cốt lõi",c.content],["Mối liên hệ",c.links]].filter(x=>x[1]).map((x,i)=>`<details${i===0?" open":""}><summary>${x[0]}</summary><div>${x[1]}</div></details>`).join("")}
+      ${c.books&&c.books.length?`<details><summary>Sách, bài của NXB Chính trị quốc gia Sự thật</summary><div>${gLinks(c.books)}</div></details>`:""}
+      ${c.docId&&docById[c.docId]?`<div><button class="btn" data-go="doc:${c.docId}">Xem tóm tắt đầy đủ trong tab Văn bản</button></div>`:""}
+    </article>`).join("");
+    bindGo(list);
+  };
+  $$("#gdF .chip",v).forEach(c=>c.onclick=()=>{gdKind=c.dataset.k;draw();});
+  draw();
+}
+let byYear=null;
+function renderBooks(v){
+  const ys=BOOKS.years.map(y=>y.y);
+  if(!byYear||!ys.includes(byYear))byYear=ys[0];
+  v.innerHTML=`<div class="view-head"><div><h2>Sách của Nhà xuất bản theo từng năm</h2><p>${BOOKS.intro}</p></div></div>
+  ${BOOKS.cats?`<div class="panel" style="margin-top:12px"><div class="eyebrow">Danh mục, tủ sách</div><div class="gsys" style="margin-top:6px">${BOOKS.cats}</div></div>`:""}
+  <div class="chips" id="byY" style="margin-top:16px">${ys.map(y=>`<button class="chip" data-y="${y}">${y}</button>`).join("")}</div>
+  <div id="byBody" style="margin-top:12px"></div>
+  <div class="grid g2" style="margin-top:14px">
+   ${BOOKS.study.length?`<div class="panel"><div class="eyebrow">Sách tài liệu học tập nghị quyết, văn kiện</div>${gLinks(BOOKS.study)}</div>`:""}
+   ${BOOKS.series.length?`<div class="panel"><div class="eyebrow">Bộ sách nhiều tập</div>${gLinks(BOOKS.series)}</div>`:""}
+  </div>
+  ${BOOKS.sources.length?`<details class="acc" style="margin-top:14px"><summary>Nguồn tra cứu</summary><div class="srcs">${gLinks(BOOKS.sources)}</div></details>`:""}`;
+  const body=$("#byBody",v);
+  const draw=()=>{
+    $$("#byY .chip",v).forEach(c=>c.setAttribute("aria-pressed",c.dataset.y===byYear?"true":"false"));
+    const Y=BOOKS.years.find(y=>y.y===byYear);
+    body.innerHTML=`<div class="panel"><h3 style="margin:0 0 6px">Năm ${Y.y}</h3>${Y.note?`<div class="gsys">${Y.note}</div>`:""}
+      <div class="tablewrap" style="margin-top:10px"><table class="nums bktable"><thead><tr><th>Sách, sự kiện</th><th>Tác giả, chủ biên</th><th>Thời điểm</th><th>Ghi chú</th></tr></thead><tbody>
+      ${Y.items.map(it=>`<tr><td class="bt">${it.url?`<a href="${it.url}" target="_blank" rel="noopener">${it.t}</a>`:it.t}</td><td class="ba">${it.a||""}</td><td class="bw">${it.when||""}</td><td class="bn">${it.note||""}</td></tr>`).join("")}
+      </tbody></table></div></div>`;
+  };
+  $$("#byY .chip",v).forEach(c=>c.onclick=()=>{byYear=c.dataset.y;draw();});
+  draw();
+}
+const RENDER={tongquan:renderOverview,bando:renderMindmap,vanban:renderDocs,conso:renderNumbers,denham:renderConfuse,the:renderFlash,tracnghiem:renderQuiz,bode:renderSets,tuluan:renderEssay,phongvan:renderInterview,hieuvb:renderGuide,sachnxb:renderBooks};
 
 $("#mastSub").innerHTML=OVERVIEW.sub;
 $("#foot").innerHTML=OVERVIEW.footer;
