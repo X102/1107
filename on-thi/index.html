@@ -282,6 +282,13 @@ table.nums td.r{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);wh
   .pair{grid-template-columns:1fr}
   .pair>div+div{border-left:0;border-top:1px solid var(--line)}
 }
+/* Liên kết stbook */
+.stb{display:inline-block;font-size:.66rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:0 5px;border-radius:4px;background:var(--ok-soft);color:var(--ok);vertical-align:1px;white-space:nowrap}
+.lk{font-size:.8rem;color:var(--muted);font-weight:400}
+.lk a{color:var(--muted)}
+.lk a:hover{color:var(--accent)}
+.sxl{display:block;margin-top:2px}
+.access{border-left:3px solid var(--ok);background:var(--ok-soft);padding:10px 14px;border-radius:0 8px 8px 0}
 /* Tìm kiếm toàn trang */
 .masthead>*{min-width:0}
 .slaunch{min-width:0;display:flex;align-items:center;gap:10px;width:100%;max-width:640px;margin-top:4px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);cursor:text;text-align:left;box-shadow:var(--shadow)}
@@ -355,7 +362,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:.84rem;border-top:1p
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
-const GUIDE={intro:"",system:[],howto:"",chains:[],sources:[]},BOOKS={intro:"",cats:"",years:[],study:[],series:[],sources:[]};
+const GUIDE={intro:"",system:[],howto:"",chains:[],sources:[]},BOOKS={intro:"",access:"",cats:"",years:[],study:[],series:[],sources:[]};
 const DOCS=[],NUMBERS=[],CONFUSE=[],FLASH=[],QUIZ=[],ESSAY=[],WRITTEN=[],INTERVIEW=[],EXAMINFO=[];
 const OVERVIEW={
 sub:"Bộ ôn thi cho vị trí Biên tập viên: pháp luật về viên chức, chủ trương của Đảng, văn kiện Đại hội Đảng (trọng tâm Đại hội XIV), kiến thức chuyên môn xuất bản – biên tập. Có tóm tắt, bản đồ tư duy, bảng con số, điểm dễ nhầm, thẻ ghi nhớ, bộ đề thi thử có tính giờ, đề viết 90 phút có đáp án gợi ý và phần chuẩn bị phỏng vấn.",
@@ -4252,6 +4259,105 @@ QUIZ.push(
 {doc:"nxbst",q:"Năm 2026, sách nào của Nhà xuất bản đạt giải B Giải thưởng Sách Quốc gia lần VIII?",opts:["Quản trị quốc gia hiện đại, hiệu quả… (Nguyễn Bá Chiến, Lê Hải Bình)","Võ Văn Kiệt – Trí tuệ và sáng tạo","Vùng đất Nam Bộ","Mặt trái của công nghệ"],ans:0,ex:"Võ Văn Kiệt – Trí tuệ và sáng tạo: giải B lần VII (2024). Vùng đất Nam Bộ: giải A lần II (2019). Mặt trái của công nghệ: giải B lần III (2020).",ref:"Website NXB 8/3/2026"}
 );
 
+/* ===== Gắn link stbook.vn (sách điện tử của NXB) cho các sách; kiểm tra ngày 22/10/2026 ===== */
+(function(){
+const slug=t=>t.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[đĐ]/g,"d").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const SB={
+ 1120:"Hồ Chí Minh Toàn tập, Tập 1",1135:"Hồ Chí Minh - Biên niên tiểu sử, Tập 1",
+ 1493:"Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV - Tập I",1494:"Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV - Tập II",
+ 1490:"Sức mạnh của dân tộc Việt Nam trong sự nghiệp xây dựng và bảo vệ Tổ quốc",
+ 1282:"Quản trị quốc gia hiện đại, hiệu quả",1035:"Địa chiến lược Việt Nam tầm nhìn 2030",
+ 1068:"Biến thách thức thành cơ hội",1057:"Xây dựng Đảng và hệ thống chính trị trong sạch, vững mạnh",
+ 1055:"Xây dựng và phát triển nền văn hóa Việt Nam tiên tiến, đậm đà bản sắc dân tộc",1054:"Quốc hội trong tiến trình đổi mới",
+ 665:"Võ Văn Kiệt - Trí tuệ và sáng tạo, Tập I",1487:"Võ Văn Kiệt - Trí tuệ và sáng tạo, Tập II",
+ 677:"Kiên quyết, kiên trì đấu tranh phòng, chống tham nhũng, tiêu cực",1129:"Nhật ký trong tù",213:"Hồ Chí Minh - Vĩ đại một con người",
+ 805:"Một số vấn đề về đường lối quân sự, chiến lược quốc phòng",857:"Cả nước đồng lòng",890:"Xây dựng và phát triển nền đối ngoại, ngoại giao Việt Nam",
+ 491:"Một số vấn đề lý luận và thực tiễn về chủ nghĩa xã hội",584:"Bách khoa thư làng Việt cổ truyền",
+ 596:"Tài liệu nghiên cứu các văn kiện Hội nghị Trung ương 5 khóa XIII",597:"Tài liệu học tập các văn kiện Hội nghị Trung ương 5 khóa XIII",598:"Tài liệu hỏi - đáp về các văn kiện Hội nghị Trung ương 5 khóa XIII",
+ 249:"Văn kiện Đại hội đại biểu toàn quốc lần thứ XIII (tập I)",250:"Văn kiện Đại hội đại biểu toàn quốc lần thứ XIII (tập II)",
+ 392:"Bảo vệ nền tảng tư tưởng của Đảng trong tình hình mới",363:"Tổng Bí thư, Chủ tịch nước Nguyễn Phú Trọng với tình cảm của nhân dân",
+ 366:"Quyết tâm ngăn chặn và đẩy lùi tham nhũng",334:"Vùng đất Nam Bộ, Tập 1",536:"Tài liệu bồi dưỡng nhận thức về Đảng (lần 20)",538:"Tài liệu bồi dưỡng nghiệp vụ công tác Đảng dành cho bí thư chi bộ (lần 20)",
+ 1499:"Tài liệu hỏi - đáp về nội dung cơ bản của Văn kiện Đại hội XIV",1497:"Tài liệu nghiên cứu về những điểm mới, nội dung cốt lõi trong Văn kiện Đại hội XIV",
+ 1498:"Tìm hiểu một số thuật ngữ trong Văn kiện Đại hội XIV",1500:"Tài liệu chuyên đề theo tinh thần Nghị quyết Đại hội XIV",1501:"Những nội dung cơ bản về chuyển đổi số: Hỏi và đáp",
+ 1502:"Văn kiện Hội nghị lần thứ hai Ban Chấp hành Trung ương khóa XIV",1495:"Văn kiện Hội nghị lần thứ ba Ban Chấp hành Trung ương khóa XIV - Tập I",1496:"Văn kiện Hội nghị lần thứ ba Ban Chấp hành Trung ương khóa XIV - Tập II",
+ 1436:"Điểm mới trong Văn kiện Đại hội XIV: Tư duy, tầm nhìn và định hướng phát triển đất nước",1503:"Điều lệ Đảng và Hướng dẫn thi hành Điều lệ Đảng"
+};
+const U=id=>"https://stbook.vn/store_detail/"+slug(SB[id])+"/"+id;
+const P=(label,id)=>[label,U(id)];
+/* sách theo năm: st = trang sách (tiêu đề trỏ thẳng tới), sx = sách liên quan */
+const MAP=[
+ ["Tái bản Hồ Chí Minh Toàn tập",{st:[P("Toàn tập, Tập 1",1120),P("Biên niên tiểu sử, Tập 1",1135)]}],
+ ["Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV (trọn bộ",{st:[P("Tập I",1493),P("Tập II",1494)]}],
+ ["Sức mạnh của dân tộc Việt Nam",{st:U(1490)}],
+ ["Giải thưởng Sách Quốc gia lần VIII",{sx:[P("Quản trị quốc gia hiện đại, hiệu quả",1282),P("Địa chiến lược Việt Nam tầm nhìn 2030",1035)]}],
+ ["Hai cuốn sách của Tổng Bí thư Nguyễn Phú Trọng",{sx:[P("Biến thách thức thành cơ hội…",1068),P("Xây dựng Đảng và hệ thống chính trị trong sạch, vững mạnh…",1057)]}],
+ ["Xây dựng và phát triển nền văn hóa Việt Nam",{st:U(1055)}],
+ ["Quốc hội trong tiến trình đổi mới",{st:U(1054)}],
+ ["Giải thưởng Sách Quốc gia lần VII",{sx:[P("Võ Văn Kiệt – Trí tuệ và sáng tạo, Tập I",665),P("Tập II",1487)]}],
+ ["Kiên quyết, kiên trì đấu tranh",{st:U(677)}],
+ ["Tái bản ấn phẩm nhân 133 năm",{sx:[P("Nhật ký trong tù",1129),P("Hồ Chí Minh – Vĩ đại một con người",213)]}],
+ ["Một số vấn đề về đường lối quân sự",{st:U(805)}],
+ ["Cả nước đồng lòng",{st:U(857)}],
+ ["Xây dựng và phát triển nền đối ngoại",{st:U(890)}],
+ ["Một số vấn đề lý luận và thực tiễn về chủ nghĩa xã hội",{st:U(491)}],
+ ["Bách khoa thư làng Việt cổ truyền",{st:U(584)}],
+ ["Tài liệu nghiên cứu các văn kiện Hội nghị Trung ương 5 khóa XIII",{st:U(596),sx:[P("Tài liệu học tập (cho cơ sở)",597),P("Tài liệu hỏi – đáp",598)]}],
+ ["Văn kiện Đại hội đại biểu toàn quốc lần thứ XIII",{st:[P("Tập I",249),P("Tập II",250)]}],
+ ["Hồ Chí Minh Toàn tập, xuất bản lần thứ ba",{st:[P("Tập 1",1120)]}],
+ ["Lễ công bố sách lần thứ nhất năm 2020",{sx:[P("Bảo vệ nền tảng tư tưởng của Đảng trong tình hình mới",392)]}],
+ ["Tổng Bí thư, Chủ tịch nước Nguyễn Phú Trọng với tình cảm",{st:U(363)}],
+ ["Quyết tâm ngăn chặn và đẩy lùi tham nhũng",{st:U(366)}],
+ ["10 dấu ấn tiêu biểu năm 2019",{sx:[P("Vùng đất Nam Bộ, Tập 1",334)]}]
+];
+let hit=0;
+BOOKS.years.forEach(Y=>Y.items.forEach(it=>{const m=MAP.find(x=>it.t.startsWith(x[0]));if(m){Object.assign(it,m[1]);hit++;}}));
+BOOKS.__hits=hit;
+/* sách mới năm 2026 có trên stbook.vn (danh mục "Văn kiện Đại hội XIV, các hội nghị Trung ương khóa XIV và tài liệu tham khảo") */
+const Y26=BOOKS.years.find(y=>y.y==="2026");
+if(Y26)Y26.items.push(
+ {t:"Văn kiện Hội nghị lần thứ hai Ban Chấp hành Trung ương khóa XIV",a:"Đảng Cộng sản Việt Nam",when:"2026",note:"308 trang; Hội nghị ban hành Nghị quyết 05-NQ/TW về kiểm tra, giám sát",st:U(1502)},
+ {t:"Văn kiện Hội nghị lần thứ ba Ban Chấp hành Trung ương khóa XIV",a:"Đảng Cộng sản Việt Nam",when:"2026",note:"2 tập (280 và 272 trang)",st:[P("Tập I",1495),P("Tập II",1496)]},
+ {t:"Tài liệu hỏi – đáp về nội dung cơ bản của Văn kiện Đại hội XIV của Đảng (dùng cho cán bộ, đảng viên và tuyên truyền trong nhân dân)",a:"Ban Tuyên giáo và Dân vận Trung ương, Hội đồng Lý luận Trung ương",when:"2026",note:"274 trang",st:U(1499)},
+ {t:"Tài liệu nghiên cứu về những điểm mới, nội dung cốt lõi trong Văn kiện Đại hội XIV của Đảng (dùng cho cán bộ chủ chốt và báo cáo viên)",a:"Ban Tuyên giáo và Dân vận Trung ương, Hội đồng Lý luận Trung ương",when:"2026",note:"120 trang",st:U(1497)},
+ {t:"Tìm hiểu một số thuật ngữ trong Văn kiện Đại hội XIV của Đảng",a:"Ban Tuyên giáo và Dân vận Trung ương, Hội đồng Lý luận Trung ương",when:"2026",note:"252 trang; dùng cho cấp ủy viên từ cơ sở trở lên",st:U(1498)},
+ {t:"Tài liệu chuyên đề: Nhiệm vụ, giải pháp xây dựng, phát triển văn hóa và con người Việt Nam, giáo dục, khoa học và công nghệ theo tinh thần Nghị quyết Đại hội XIV",a:"Ban Tuyên giáo và Dân vận Trung ương, Hội đồng Lý luận Trung ương",when:"2026",note:"216 trang; dùng cho lãnh đạo các cơ quan báo chí, xuất bản…",st:U(1500)},
+ {t:"Những nội dung cơ bản về chuyển đổi số: Hỏi và đáp",a:"Ban Tuyên giáo và Dân vận Trung ương, Bộ Khoa học và Công nghệ, NXB Chính trị quốc gia Sự thật",when:"2026",note:"224 trang",st:U(1501)},
+ {t:"Điểm mới trong Văn kiện Đại hội XIV của Đảng: Tư duy, tầm nhìn và định hướng phát triển đất nước",a:"NXB Chính trị quốc gia Sự thật, Ban Tuyên giáo và Dân vận Trung ương, Trường ĐH KHXH&NV",when:"2026",note:"Kỷ yếu hội thảo khoa học quốc gia, 828 trang",st:U(1436)},
+ {t:"Điều lệ Đảng và Hướng dẫn thi hành Điều lệ Đảng",a:"Ban Chấp hành Trung ương Đảng",when:"2026",st:U(1503)}
+);
+const Y25=BOOKS.years.find(y=>y.y==="2025");
+if(Y25)Y25.items.push({t:"Quản trị quốc gia hiện đại, hiệu quả – Cơ sở lý luận và thực tiễn ở Việt Nam hiện nay",a:"Nguyễn Bá Chiến, Lê Hải Bình đồng chủ biên",when:"2025",note:"408 trang; giải B Giải thưởng Sách Quốc gia lần VIII (2026)",st:U(1282)});
+/* tài liệu học tập */
+BOOKS.study.forEach(s=>{
+ if(s[0].startsWith("Tài liệu nghiên cứu các văn kiện Hội nghị Trung ương 5"))s[3]=U(596);
+ if(s[0].startsWith("Văn kiện Đại hội XIV"))s[3]=[P("Tập I",1493),P("Tập II",1494)];
+ if(s[0].startsWith("Tài liệu bồi dưỡng nhận thức về Đảng"))s[4]=[P("bản lần thứ 20 (2022)",536)];
+});
+BOOKS.study.splice(BOOKS.study.length-1,0,
+ ["Tài liệu hỏi – đáp về nội dung cơ bản của Văn kiện Đại hội XIV (2026)","","Ban Tuyên giáo và Dân vận TW, Hội đồng Lý luận TW",U(1499)],
+ ["Tài liệu nghiên cứu về những điểm mới, nội dung cốt lõi trong Văn kiện Đại hội XIV (2026)","","dùng cho cán bộ chủ chốt và báo cáo viên",U(1497)],
+ ["Tìm hiểu một số thuật ngữ trong Văn kiện Đại hội XIV (2026)","","",U(1498)],
+ ["Văn kiện Hội nghị lần thứ hai Ban Chấp hành Trung ương khóa XIV (2026)","","",U(1502)],
+ ["Văn kiện Hội nghị lần thứ ba Ban Chấp hành Trung ương khóa XIV (2026)","","",[P("Tập I",1495),P("Tập II",1496)]],
+ ["Điều lệ Đảng và Hướng dẫn thi hành Điều lệ Đảng (2026)","","",U(1503)]
+);
+BOOKS.series.forEach(s=>{
+ if(s[0].startsWith("Hồ Chí Minh Toàn tập"))s[3]=[P("Tập 1",1120)];
+ if(s[0].startsWith("Hồ Chí Minh – Biên niên tiểu sử"))s[3]=[P("Tập 1",1135)];
+});
+BOOKS.sources.push(["stbook.vn – danh mục Văn kiện Đại hội XIV, các hội nghị Trung ương khóa XIV và tài liệu tham khảo","https://stbook.vn/category/van-kien-dai-hoi-xiv-cac-hoi-nghi-trung-uong-khoa-xiv-va-tai-lieu-tham-khao/35"]);
+/* hồ sơ văn bản trong tab Hiểu văn bản */
+const ch=id=>GUIDE.chains.find(c=>c.id===id);
+const dh=ch("g-dh14");
+if(dh){dh.books.forEach(b=>{if(b[0].startsWith("Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV"))b[3]=[P("Tập I",1493),P("Tập II",1494)];if(b[0].startsWith("Tài liệu bồi dưỡng nhận thức về Đảng"))b[4]=[P("bản lần thứ 20 (2022)",536)];});
+ dh.books.splice(2,0,["Tài liệu hỏi – đáp về nội dung cơ bản của Văn kiện Đại hội XIV","","2026, Ban Tuyên giáo và Dân vận TW",U(1499)],["Tài liệu nghiên cứu về những điểm mới, nội dung cốt lõi trong Văn kiện Đại hội XIV","","2026",U(1497)],["Tìm hiểu một số thuật ngữ trong Văn kiện Đại hội XIV","","2026",U(1498)]);}
+const k5=ch("g-nq05");if(k5)k5.books.unshift(["Văn kiện Hội nghị lần thứ hai Ban Chấp hành Trung ương khóa XIV","","2026, 308 trang",U(1502)]);
+const q399=ch("g-qd399");if(q399)q399.books.forEach(b=>{if(b[0].startsWith("Tài liệu bồi dưỡng nghiệp vụ công tác đảng"))b[4]=[P("bản lần thứ 20 (2022)",538)];});
+/* lưu ý truy cập */
+BOOKS.access=`<b>Không mở được link nxbctqg.org.vn?</b> Ngày 22/10/2026, website Nhà xuất bản (nxbctqg.org.vn) và tulieuvankien.dangcongsan.vn không vào được từ mạng ở Nga, dù máy chủ ở Mỹ vẫn mở được, nên link không sai. Có thể hai trang này chặn một số mạng nước ngoài. Vì vậy, sách nào có trên <a href="https://stbook.vn/" target="_blank" rel="noopener">stbook.vn</a> (thư viện sách điện tử của chính Nhà xuất bản, mở được từ nước ngoài) thì tên sách đã trỏ sang stbook, có nhãn <span class="stb">stbook</span>; link bài trên web NXB vẫn để bên cạnh. Sự kiện, tin tức chỉ có trên web NXB thì giữ nguyên link cũ.`;
+GUIDE.intro+=` <span class="muted">Sách có nhãn <span class="stb">stbook</span> mở trên stbook.vn (vào được cả từ nước ngoài); link nxbctqg.org.vn có thể không mở được ngoài Việt Nam.</span>`;
+})();
+
 </script>
 <script>
 (function(){
@@ -4759,7 +4865,18 @@ function quickLinks(){
   return b?`<div class="panel"><div class="eyebrow">Mới cập nhật</div><div class="golinks">${b}</div></div>`:"";
 }
 function bindGo(root){root.querySelectorAll("[data-go]").forEach(b=>{b.onclick=()=>{const [k,id]=b.dataset.go.split(":");if(k==="doc")show("vanban",{doc:id});else show(id);};});}
-function gLinks(arr){return arr&&arr.length?`<ul class="dots">${arr.map(x=>`<li>${x[1]?`<a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a>`:x[0]}${x[2]?` <span class="muted">${x[2]}</span>`:""}</li>`).join("")}</ul>`:"";}
+const A=(u,t)=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
+function linkCell(t,url,st,sx){
+  const S=Array.isArray(st)?st:(st?[["",st]]:[]);
+  let h=S.length?A(S[0][1],t)+' <span class="stb" title="Sách điện tử của Nhà xuất bản, mở được cả từ nước ngoài">stbook</span>':(url?A(url,t)+(/nxbctqg|tulieuvankien/.test(url)?` <span class="lk" title="Trang này có thể không mở được từ nước ngoài">(${/nxbctqg/.test(url)?"web NXB":"tulieuvankien"})</span>`:''):t);
+  const ex=[];
+  if(S.length>1)S.forEach(x=>ex.push(A(x[1],x[0])));
+  if(S.length&&url)ex.push(A(url,/nxbctqg/.test(url)?"bài trên web NXB":"bài giới thiệu"));
+  if(ex.length)h+=` <span class="lk">${ex.join(" · ")}</span>`;
+  if(sx&&sx.length)h+=`<span class="lk sxl">Đọc trên stbook: ${sx.map(x=>A(x[1],x[0])).join(" · ")}</span>`;
+  return h;
+}
+function gLinks(arr){return arr&&arr.length?`<ul class="dots">${arr.map(x=>`<li>${linkCell(x[0],x[1],x[3],x[4])}${x[2]?` <span class="muted">${x[2]}</span>`:""}</li>`).join("")}</ul>`:"";}
 let gdKind="all";
 function renderGuide(v){
   v.innerHTML=`<div class="view-head"><div><h2>Hiểu văn bản của Đảng và Nhà nước</h2><p>${GUIDE.intro}</p></div></div>
@@ -4790,6 +4907,7 @@ function renderBooks(v){
   const ys=BOOKS.years.map(y=>y.y);
   if(!byYear||!ys.includes(byYear))byYear=ys[0];
   v.innerHTML=`<div class="view-head"><div><h2>Sách của Nhà xuất bản theo từng năm</h2><p>${BOOKS.intro}</p></div></div>
+  ${BOOKS.access?`<div class="access" style="margin-top:12px">${BOOKS.access}</div>`:""}
   ${BOOKS.cats?`<div class="panel" style="margin-top:12px"><div class="eyebrow">Danh mục, tủ sách</div><div class="gsys" style="margin-top:6px">${BOOKS.cats}</div></div>`:""}
   <div class="chips" id="byY" style="margin-top:16px">${ys.map(y=>`<button class="chip" data-y="${y}">${y}</button>`).join("")}</div>
   <div id="byBody" style="margin-top:12px"></div>
@@ -4804,7 +4922,7 @@ function renderBooks(v){
     const Y=BOOKS.years.find(y=>y.y===byYear);
     body.innerHTML=`<div class="panel"><h3 style="margin:0 0 6px">Năm ${Y.y}</h3>${Y.note?`<div class="gsys">${Y.note}</div>`:""}
       <div class="tablewrap" style="margin-top:10px"><table class="nums bktable"><thead><tr><th>Sách, sự kiện</th><th>Tác giả, chủ biên</th><th>Thời điểm</th><th>Ghi chú</th></tr></thead><tbody>
-      ${Y.items.map(it=>`<tr><td class="bt">${it.url?`<a href="${it.url}" target="_blank" rel="noopener">${it.t}</a>`:it.t}</td><td class="ba">${it.a||""}</td><td class="bw">${it.when||""}</td><td class="bn">${it.note||""}</td></tr>`).join("")}
+      ${Y.items.map(it=>`<tr><td class="bt">${linkCell(it.t,it.url,it.st,it.sx)}</td><td class="ba">${it.a||""}</td><td class="bw">${it.when||""}</td><td class="bn">${it.note||""}</td></tr>`).join("")}
       </tbody></table></div></div>`;
   };
   $$("#byY .chip",v).forEach(c=>c.onclick=()=>{byYear=c.dataset.y;draw();});
