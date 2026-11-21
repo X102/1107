@@ -397,6 +397,41 @@
   .btn:active { transform: translateY(5px); box-shadow: 0 1px 0 #b9324a, 0 6px 12px rgba(232, 71, 90, .3); }
   .url { font-size: .9rem; color: #8a77a0; }
 
+  /* ---------- Thu gọn những đám mây đã qua ---------- */
+  .dau-may { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .nut-gon {
+    flex: none;
+    margin-top: 6px;
+    padding: 5px 14px;
+    border: 1.5px solid #f3c3c9;
+    border-radius: 99px;
+    background: transparent;
+    font: 600 .85rem var(--body);
+    color: var(--coral-deep);
+    cursor: pointer;
+  }
+  .nut-gon:hover { background: #fde6e8; }
+  .nut-gon:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .ghi-gon { display: none; margin: 4px 0 0; font-size: .9rem; color: #8a77a0; }
+  .cloud-wrap.gon { margin-bottom: 36px; }
+  .cloud-wrap.gon .than { display: none; }
+  .cloud-wrap.gon .ghi-gon { display: block; }
+  .cloud-wrap.gon .cloud { padding-top: 24px; padding-bottom: 44px; }
+  .cloud-wrap.gon .cloud h2 { font-size: 1.375rem; }
+  .cloud-wrap.gon .eave { display: none; }
+
+  /* Mốc đăng bài tiếp theo của đợt 81 năm */
+  .moc-bai {
+    margin: -8px 0 4px;
+    padding: 10px 14px;
+    border-radius: 16px;
+    background: #ffe6e3;
+    font-size: .95rem;
+    line-height: 1.5;
+  }
+  .moc-bai b { color: var(--coral-deep); font-variant-numeric: tabular-nums; }
+  .moc-bai:empty { display: none; }
+
   a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 999px; }
 
   /* ---------- Chân trang ---------- */
@@ -461,36 +496,69 @@
     </main>
   </div>
 
-  <section class="cloud-wrap" aria-labelledby="moc-tieu-de">
+  <section class="cloud-wrap" aria-labelledby="moc-tieu-de" data-khoa="moc">
     <div class="cloud">
-      <h2 id="moc-tieu-de">Những cột mốc</h2>
-      <p class="lead" id="moc-dan">Cột mốc tiếp theo đang tới gần.</p>
-      <ol class="mocs" id="mocs"></ol>
-      <div class="mocs-chan">
-        <p class="hanh-trinh" id="hanh-trinh"></p>
-        <button type="button" class="nut-mo" id="nut-mo" aria-expanded="false" aria-controls="mocs">Xem đủ các cột mốc</button>
+      <div class="dau-may">
+        <h2 id="moc-tieu-de">Những cột mốc</h2>
+        <button type="button" class="nut-gon" aria-controls="than-moc" aria-expanded="true">Thu gọn</button>
+      </div>
+      <p class="ghi-gon">Đang thu gọn. Bấm Mở ra để xem lại các cột mốc.</p>
+      <div class="than" id="than-moc">
+        <p class="lead" id="moc-dan">Cột mốc tiếp theo đang tới gần.</p>
+        <ol class="mocs" id="mocs"></ol>
+        <div class="mocs-chan">
+          <p class="hanh-trinh" id="hanh-trinh"></p>
+          <button type="button" class="nut-mo" id="nut-mo" aria-expanded="false" aria-controls="mocs">Xem đủ các cột mốc</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cloud-wrap" aria-labelledby="nho-tieu-de">
+  <section class="cloud-wrap" aria-labelledby="nho-tieu-de" data-khoa="nho">
     <div class="cloud">
-      <h2 id="nho-tieu-de">Ngày cần nhớ</h2>
-      <p class="lead" id="nho-dan">Những ngày cần chúc nhau trong năm.</p>
-      <p class="chu-giai"><span><i class="rieng"></i>của hai đứa</span><span><i class="le"></i>ngày lễ</span><span><i class="am"></i>âm lịch</span></p>
-      <ul class="nhos" id="nhos"></ul>
-      <div class="mocs-chan">
-        <a class="nut-lich" href="ngay-can-nho.ics">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 13.2v4.6M9.7 15.5h4.6"/></svg>
-          Thêm vào lịch điện thoại
-        </a>
-        <button type="button" class="nut-mo" id="nut-nho" aria-expanded="false" aria-controls="nhos">Xem cả năm</button>
-        <p class="lich-ghi">Lịch sẽ nhắc lúc 9 giờ sáng hôm trước. Những ngày nên có quà được nhắc thêm trước một tuần.</p>
+      <div class="dau-may">
+        <h2 id="nho-tieu-de">Ngày cần nhớ</h2>
+        <button type="button" class="nut-gon" aria-controls="than-nho" aria-expanded="true">Thu gọn</button>
+      </div>
+      <p class="ghi-gon">Đang thu gọn. Bấm Mở ra để xem những ngày cần nhớ.</p>
+      <div class="than" id="than-nho">
+        <p class="lead" id="nho-dan">Những ngày cần chúc nhau trong năm.</p>
+        <p class="chu-giai"><span><i class="rieng"></i>của hai đứa</span><span><i class="le"></i>ngày lễ</span><span><i class="am"></i>âm lịch</span></p>
+        <ul class="nhos" id="nhos"></ul>
+        <div class="mocs-chan">
+          <a class="nut-lich" href="ngay-can-nho.ics">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 13.2v4.6M9.7 15.5h4.6"/></svg>
+            Thêm vào lịch điện thoại
+          </a>
+          <button type="button" class="nut-mo" id="nut-nho" aria-expanded="false" aria-controls="nhos">Xem cả năm</button>
+          <p class="lich-ghi">Lịch sẽ nhắc lúc 9 giờ sáng hôm trước. Những ngày nên có quà được nhắc thêm trước một tuần.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cloud-wrap" aria-labelledby="hien-tieu-de">
+  <section class="cloud-wrap" aria-labelledby="vietbai-tieu-de" data-khoa="viet-bai">
+    <div class="cloud">
+      <div class="dau-may">
+        <h2 id="vietbai-tieu-de">Viết bài 81 năm Sự thật</h2>
+        <button type="button" class="nut-gon" aria-controls="than-viet-bai" aria-expanded="true">Thu gọn</button>
+      </div>
+      <p class="ghi-gon">Đang thu gọn. Bấm Mở ra để xem lại tài liệu gợi ý đề tài.</p>
+      <div class="than" id="than-viet-bai">
+        <p class="lead">Gợi ý 28 đề tài viết bài nhân kỷ niệm 81 năm Ngày truyền thống Nhà xuất bản Chính trị quốc gia Sự thật (5/12/1945 - 5/12/2026). Mỗi đề tài có tít, góc tiếp cận, tư liệu kèm số trang và đoạn mở đầu viết sẵn; tài liệu có thêm lịch đăng bài, khung tin về Lễ kỷ niệm và nhóm đề tài gắn với xu hướng công nghệ năm 2026.</p>
+        <p class="moc-bai" id="moc-bai"></p>
+        <div class="actions">
+          <a class="btn" href="viet-bai-81-nam/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3z"/><path d="M13.5 7.5l3 3"/></svg>
+            Mở tài liệu
+          </a>
+          <span class="url">x102.github.io/1107/viet-bai-81-nam</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cloud-wrap" aria-labelledby="hien-tieu-de" data-khoa="hien">
     <svg class="eave" viewBox="0 0 400 46" aria-hidden="true">
       <path fill="currentColor" d="M0 34c14 0 24-4 32-16h336c8 12 18 16 32 16v6c-18 1-32-4-40-14H40C32 36 18 41 0 40z"/>
       <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" d="M60 14h280"/>
@@ -500,29 +568,41 @@
       <rect x="196" y="34" width="8" height="8" rx="3.5" fill="#ffd27a"/>
     </svg>
     <div class="cloud hien-cloud">
-      <h2 id="hien-tieu-de">Hiên</h2>
-      <p>Hiên là mạng xã hội nhỏ cho những người thích yên tĩnh: viết nhật ký trước, chia sẻ sau, không ai đếm like.</p>
-      <p>Ở đó lúc nào cũng có một chỗ ngồi dành cho hai đứa.</p>
-      <div class="actions">
-        <a class="btn" href="https://huongnoi.vercel.app" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10.5c3-.4 5.2-2.2 6.4-4.5h7.2c1.2 2.3 3.4 4.1 6.4 4.5"/><path d="M5 10v9.5M19 10v9.5M3.5 19.5h17"/></svg>
-          Vào Hiên
-        </a>
-        <span class="url">huongnoi.vercel.app</span>
+      <div class="dau-may">
+        <h2 id="hien-tieu-de">Hiên</h2>
+        <button type="button" class="nut-gon" aria-controls="than-hien" aria-expanded="true">Thu gọn</button>
+      </div>
+      <p class="ghi-gon">Đang thu gọn. Bấm Mở ra để vào Hiên.</p>
+      <div class="than" id="than-hien">
+        <p>Hiên là mạng xã hội nhỏ cho những người thích yên tĩnh: viết nhật ký trước, chia sẻ sau, không ai đếm like.</p>
+        <p>Ở đó lúc nào cũng có một chỗ ngồi dành cho hai đứa.</p>
+        <div class="actions">
+          <a class="btn" href="https://huongnoi.vercel.app" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10.5c3-.4 5.2-2.2 6.4-4.5h7.2c1.2 2.3 3.4 4.1 6.4 4.5"/><path d="M5 10v9.5M19 10v9.5M3.5 19.5h17"/></svg>
+            Vào Hiên
+          </a>
+          <span class="url">huongnoi.vercel.app</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cloud-wrap" aria-labelledby="onthi-tieu-de">
+  <section class="cloud-wrap" aria-labelledby="onthi-tieu-de" data-khoa="on-thi" data-mac-dinh="gon">
     <div class="cloud">
-      <h2 id="onthi-tieu-de">Góc ôn thi</h2>
-      <p class="lead">Sổ tay ôn thi viên chức 2026 cho vị trí Biên tập viên, Nhà xuất bản Chính trị quốc gia Sự thật: tóm tắt văn bản, văn kiện Đại hội Đảng, văn bản kiểm tra – giám sát năm 2026, đề thi thử có tính giờ, hồ sơ hội đồng phỏng vấn và câu hỏi phỏng vấn; phần hiểu văn bản của Đảng và Nhà nước (ra đời, bản chất, ý nghĩa, mối liên hệ) và sách của Nhà xuất bản theo từng năm.</p>
-      <div class="actions">
-        <a class="btn" href="on-thi/">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11a2 2 0 0 1 2 2v14a1.6 1.6 0 0 0-1.6-1.6H4z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16a1.6 1.6 0 0 1 1.6-1.6H20z"/></svg>
-          Mở sổ tay
-        </a>
-        <span class="url">x102.github.io/1107/on-thi</span>
+      <div class="dau-may">
+        <h2 id="onthi-tieu-de">Góc ôn thi</h2>
+        <button type="button" class="nut-gon" aria-controls="than-on-thi" aria-expanded="true">Thu gọn</button>
+      </div>
+      <p class="ghi-gon">Phần này đã qua, sổ tay vẫn được giữ lại để tra cứu khi cần.</p>
+      <div class="than" id="than-on-thi">
+        <p class="lead">Sổ tay ôn thi viên chức 2026 cho vị trí Biên tập viên, Nhà xuất bản Chính trị quốc gia Sự thật: tóm tắt văn bản, văn kiện Đại hội Đảng, văn bản kiểm tra – giám sát năm 2026, đề thi thử có tính giờ, hồ sơ hội đồng phỏng vấn và câu hỏi phỏng vấn; phần hiểu văn bản của Đảng và Nhà nước (ra đời, bản chất, ý nghĩa, mối liên hệ) và sách của Nhà xuất bản theo từng năm.</p>
+        <div class="actions">
+          <a class="btn" href="on-thi/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11a2 2 0 0 1 2 2v14a1.6 1.6 0 0 0-1.6-1.6H4z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16a1.6 1.6 0 0 1 1.6-1.6H20z"/></svg>
+            Mở sổ tay
+          </a>
+          <span class="url">x102.github.io/1107/on-thi</span>
+        </div>
       </div>
     </div>
   </section>
@@ -902,6 +982,57 @@
     document.body.appendChild(s);
     s.addEventListener("animationend", () => s.remove());
   });
+  /* ----- Mốc đăng bài tiếp theo của đợt kỷ niệm 81 năm ----- */
+  (function () {
+    const el = document.getElementById("moc-bai");
+    if (!el) return;
+    const MOC_BAI = [
+      [2026, 11, 24, "Ngày Văn hóa Việt Nam, bài D1"],
+      [2026, 12, 1, "một năm sau Lễ kỷ niệm 80 năm, bài A3"],
+      [2026, 12, 5, "Ngày truyền thống, bài B1 và A1"],
+      [2026, 12, 19, "80 năm Ngày Toàn quốc kháng chiến, bài B3 và B4"],
+      [2026, 12, 27, "50 năm Chi nhánh tại Thành phố Hồ Chí Minh, bài B8"],
+      [2027, 2, 3, "97 năm Ngày thành lập Đảng, bài E2"],
+      [2027, 3, 1, "Luật Xuất bản sửa đổi có hiệu lực, bài A5"]
+    ];
+    const homNay = new Date();
+    for (const [y, m, d, ten] of MOC_BAI) {
+      const con = soNgayTu(new Date(y, m - 1, d), homNay);
+      if (con < 0) continue;
+      el.textContent = "Mốc đăng bài tiếp theo: ";
+      const b = document.createElement("b");
+      b.textContent = d + "/" + m + (y !== homNay.getFullYear() ? "/" + y : "");
+      el.appendChild(b);
+      el.appendChild(document.createTextNode(", " + ten + (con === 0 ? ", hôm nay." : con === 1 ? ", ngày mai." : ", còn " + con + " ngày.")));
+      return;
+    }
+    el.textContent = "Các mốc đăng bài của đợt kỷ niệm 81 năm đã qua.";
+  })();
+
+  /* ----- Thu gọn hoặc mở từng đám mây, nhớ lựa chọn trên máy này ----- */
+  (function () {
+    const luu = {
+      lay(k) { try { return localStorage.getItem("may:" + k); } catch (e) { return null; } },
+      ghi(k, v) { try { localStorage.setItem("may:" + k, v); } catch (e) {} }
+    };
+    document.querySelectorAll(".cloud-wrap[data-khoa]").forEach(sec => {
+      const khoa = sec.dataset.khoa;
+      const nut = sec.querySelector(".nut-gon");
+      if (!nut) return;
+      const daLuu = luu.lay(khoa);
+      const dat = gon => {
+        sec.classList.toggle("gon", gon);
+        nut.textContent = gon ? "Mở ra" : "Thu gọn";
+        nut.setAttribute("aria-expanded", String(!gon));
+      };
+      dat(daLuu ? daLuu === "gon" : sec.dataset.macDinh === "gon");
+      nut.addEventListener("click", () => {
+        const gon = !sec.classList.contains("gon");
+        dat(gon);
+        luu.ghi(khoa, gon ? "gon" : "mo");
+      });
+    });
+  })();
 </script>
 </body>
 </html>
