@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giữ lửa tình yêu</title>
+<meta name="theme-color" content="#7a5b8c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FF5E62' d='M16 28s-11-6.6-11-15a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 8.4-11 15-11 15z'/%3E%3C/svg%3E">
+<meta name="description" content="Tổng hợp nghiên cứu tâm lý học về cách duy trì tình yêu, dỗ người yêu, đáp lại khi người yêu áp lực công việc và những câu thay cho “cố lên”, dành cho người trẻ Việt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Coiny&family=Mali:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dusk:#4a3460;
+  --dusk-2:#6d5a84;
+  --lilac:#8a77a0;
+  --coral:#ff5e62;
+  --coral-deep:#d93a55;
+  --gold:#ffb45a;
+  --cream:#fff2ee;
+  --paper:#fff2ee;
+  --ink:#4a3460;
+  --ink-2:#6d5a84;
+  --muc:#d93a55;
+  --em:#f1e3f0;
+  --mute:#8a77a0;
+  --rule:#f0d3d8;
+  --warn:#b9324a;
+  --display:"Coiny", "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --body:"Mali", "Nunito", ui-rounded, system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:1.0625rem; line-height:1.7;
+  -webkit-tap-highlight-color:transparent;
+}
+a{color:var(--coral-deep); text-underline-offset:3px; text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:6px}
+strong{font-weight:600}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1180px; margin:0 auto; padding:0 16px}
+.page{display:block}
+@media (min-width:1080px){
+  .wrap{padding:0 40px}
+  .page{display:grid; grid-template-columns:230px minmax(0,1fr); gap:64px; align-items:start}
+}
+main{max-width:46rem; min-width:0}
+
+/* ---------- Hero: bầu trời của trang chính ---------- */
+.hero{
+  color:var(--cream);
+  background:
+    linear-gradient(180deg, rgba(62,44,92,.55) 0%, rgba(62,44,92,.15) 40%, rgba(62,44,92,.25) 75%, rgba(33,24,43,.55) 100%),
+    url("../sky.jpg") 72% 100% / cover no-repeat,
+    linear-gradient(180deg, #7a6a9c 0%, #ff6b6b 58%, #ffa14a 100%);
+  padding-bottom:64px;
+}
+.topbar{display:flex; justify-content:space-between; align-items:center; padding-top:max(18px, env(safe-area-inset-top))}
+.date-mark{font-family:var(--display); font-size:1.125rem; letter-spacing:.04em; text-shadow:0 1px 10px rgba(58,40,80,.5)}
+.back-pill{
+  display:inline-flex; align-items:center; gap:6px; padding:7px 16px 7px 10px; border-radius:999px;
+  color:var(--cream); text-decoration:none; font-weight:600; font-size:.95rem;
+  background:rgba(255,242,238,.16); border:1px solid rgba(255,242,238,.55);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+}
+.back-pill svg{width:18px; height:18px}
+.back-pill:hover{background:rgba(255,242,238,.26)}
+.hero-grid{display:grid; gap:36px; padding-top:56px}
+@media (min-width:880px){.hero-grid{grid-template-columns:1.05fr 1fr; align-items:center; gap:56px; padding-top:72px}}
+h1{
+  font-family:var(--display); font-weight:400; letter-spacing:-.005em;
+  font-size:clamp(2.6rem, 7.4vw, 4.6rem); line-height:1.05; margin:0 0 14px;
+  text-shadow:0 3px 0 rgba(74,52,96,.35), 0 0 26px rgba(58,40,80,.45);
+}
+.sub{font-size:1.2rem; line-height:1.45; margin:0 0 16px; max-width:36ch; text-wrap:balance; text-shadow:0 1px 12px rgba(46,30,64,.75)}
+.dated{font-size:.92rem; margin:0; opacity:.9; text-shadow:0 1px 10px rgba(46,30,64,.75)}
+
+.demo{display:flex; flex-direction:column; gap:10px}
+.demo .bubble{max-width:85%; box-shadow:0 8px 20px rgba(46,30,64,.25)}
+.demo .bubble.em{background:var(--cream)}
+.demo .bubble.wrong{position:relative; color:rgba(255,242,238,.85); background:rgba(255,242,238,.08); border:1.5px dashed rgba(255,242,238,.7); box-shadow:none}
+.demo .bubble.wrong::after{content:""; position:absolute; left:14px; right:14px; top:50%; height:2px; background:var(--cream); transform-origin:left; transform:scaleX(1)}
+.demo .why{font-size:.9rem; align-self:flex-end; margin:-2px 4px 0 0; max-width:85%; text-align:right; text-shadow:0 1px 10px rgba(46,30,64,.8)}
+@media (prefers-reduced-motion: no-preference){
+  .demo > *{opacity:0; transform:translateY(6px); animation:pop .45s ease forwards}
+  .demo > *:nth-child(1){animation-delay:.2s}
+  .demo > *:nth-child(2){animation-delay:.9s}
+  .demo > *:nth-child(3){animation-delay:1.9s}
+  .demo > *:nth-child(4){animation-delay:2.5s}
+  .demo .bubble.wrong::after{transform:scaleX(0); animation:strike .5s ease forwards; animation-delay:1.45s}
+}
+@keyframes pop{to{opacity:1; transform:none}}
+@keyframes strike{to{transform:scaleX(1)}}
+
+/* ---------- Bong bóng tin nhắn ---------- */
+.bubble{font-family:var(--body); font-size:1rem; line-height:1.5; padding:10px 16px; border-radius:22px; margin:0; width:fit-content}
+.bubble.em{background:var(--em); color:var(--dusk); border-bottom-left-radius:6px; align-self:flex-start}
+.bubble.anh{background:linear-gradient(180deg, #ff7a72, #e8475a); color:#fff; border-bottom-right-radius:6px; align-self:flex-end; margin-left:auto}
+.ctx{display:block; font-size:.8rem; color:var(--mute); margin-top:2px}
+.bubble.anh .ctx{color:rgba(255,255,255,.82); display:inline; margin:0 4px}
+
+/* ---------- Mục lục ---------- */
+.toc{font-size:.95rem; margin:24px 0 8px}
+.toc details{border:1.5px solid var(--rule); border-radius:18px; padding:10px 16px; background:#fff8f6}
+.toc summary{cursor:pointer; font-weight:600}
+.toc ol{list-style:none; margin:10px 0 0; padding:0}
+.toc li{margin:0}
+.toc a{display:block; padding:5px 0 5px 12px; color:var(--ink-2); text-decoration:none; border-left:2px solid transparent; line-height:1.35}
+.toc a:hover{color:var(--dusk)}
+.toc a.on{color:var(--coral-deep); border-left-color:var(--coral); font-weight:600}
+@media (min-width:1080px){
+  .toc{position:sticky; top:28px; margin-top:48px}
+  .toc details{border:0; padding:0; background:none}
+  .toc summary{list-style:none; color:var(--mute); font-weight:400; margin-bottom:6px; pointer-events:none}
+  .toc summary::-webkit-details-marker{display:none}
+}
+
+/* ---------- Nội dung ---------- */
+section{padding:44px 0 8px; scroll-margin-top:16px}
+h2{font-family:var(--display); font-weight:400; font-size:clamp(1.6rem, 3.6vw, 2.05rem); line-height:1.2; margin:0 0 18px; color:var(--coral-deep)}
+h2 .n{color:var(--lilac); margin-right:.35em}
+h3{font-family:var(--body); font-weight:600; font-size:1.15rem; line-height:1.35; margin:32px 0 10px; color:var(--dusk)}
+p{margin:0 0 16px}
+.lead{font-size:1.15rem; line-height:1.6}
+main ul, main ol{padding-left:1.3em; margin:0 0 18px}
+main li{margin:0 0 8px}
+main li::marker{color:var(--coral)}
+.core li{margin-bottom:10px}
+
+.pairs{display:flex; flex-direction:column; gap:28px; margin:26px 0 20px}
+.pair{display:flex; flex-direction:column; gap:8px; padding-bottom:26px; border-bottom:1.5px dashed var(--rule)}
+.pair:last-child{border-bottom:0; padding-bottom:0}
+.need{font-size:.9rem; color:var(--ink-2); margin:0 0 2px 4px; max-width:80%}
+.need b{font-weight:600; color:var(--dusk)}
+.avoid{font-size:.9rem; color:var(--mute); margin:2px 4px 0 auto; text-align:right; max-width:85%}
+.avoid b{color:var(--warn); font-weight:600; margin-right:4px}
+.avoid s{text-decoration-color:var(--warn); text-decoration-thickness:1.5px}
+
+.purpose{padding:22px 0; border-bottom:1.5px dashed var(--rule); display:flex; flex-direction:column; gap:8px}
+.purpose:last-of-type{border-bottom:0}
+.purpose h3{margin:0}
+.purpose .when{font-size:.92rem; color:var(--ink-2); margin:0 0 6px}
+
+.acr{display:flex; flex-direction:column; gap:10px; margin:22px 0 10px}
+.reply{display:flex; flex-direction:column; align-items:flex-end; gap:4px}
+.reply .tag{font-size:.84rem; color:var(--mute)}
+.reply.good .tag{color:var(--coral-deep); font-weight:600}
+.reply.bad .bubble{background:transparent; border:1.5px solid var(--rule); color:var(--ink-2); border-bottom-right-radius:6px}
+
+.steps{counter-reset:s; list-style:none; padding:0 !important}
+.steps > li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px}
+.steps > li::before{
+  content:counter(s); position:absolute; left:0; top:2px; width:32px; height:32px; border-radius:50%;
+  background:var(--coral-deep); color:#fff; font-family:var(--display); font-size:1rem;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 3px 0 #a92a44;
+}
+.steps ul{margin-top:8px}
+
+.check{list-style:none; padding:0 !important}
+.check li{margin:0 0 10px}
+.check label{display:flex; gap:12px; align-items:flex-start; cursor:pointer}
+.check input{appearance:none; -webkit-appearance:none; flex:0 0 auto; width:22px; height:22px; margin-top:4px; border:2px solid var(--coral); border-radius:8px; background:#fff; cursor:pointer; display:grid; place-content:center}
+.check input::after{content:""; width:10px; height:6px; border-left:2.5px solid #fff; border-bottom:2.5px solid #fff; transform:rotate(-45deg) translate(1px,-1px); opacity:0}
+.check input:checked{background:var(--coral-deep); border-color:var(--coral-deep)}
+.check input:checked::after{opacity:1}
+.check input:checked + span{color:var(--mute)}
+.reset{font:600 .92rem var(--body); background:transparent; border:1.5px solid #f3c3c9; color:var(--coral-deep); border-radius:999px; padding:8px 18px; cursor:pointer}
+.reset:hover{background:#fde6e8}
+
+.tbl{width:100%; border-collapse:collapse; font-size:.95rem; margin:14px 0 18px}
+.tbl th{text-align:left; font-weight:600; color:var(--ink-2); border-bottom:2px solid var(--rule); padding:8px 10px 8px 0}
+.tbl td{border-bottom:1px solid var(--rule); padding:10px 10px 10px 0; vertical-align:top}
+.tbl td:nth-child(2){white-space:nowrap; font-weight:600}
+@media (max-width:560px){
+  .tbl thead{display:none}
+  .tbl tr{display:block; border-bottom:1px solid var(--rule); padding:10px 0}
+  .tbl td{display:block; border:0; padding:2px 0}
+}
+
+.note{font-size:.93rem; color:var(--ink-2); background:#ffe6e3; border-radius:16px; padding:12px 16px; margin:18px 0}
+
+.refs{font-size:.9rem; line-height:1.6; padding-left:0 !important; list-style:none}
+.refs li{padding-left:1.6em; text-indent:-1.6em; margin-bottom:10px}
+footer{border-top:1.5px dashed var(--rule); margin-top:48px; padding:24px 0 max(48px, env(safe-area-inset-bottom)); font-size:.9rem; color:var(--mute)}
+footer p{margin:0 0 6px}
+footer a{font-weight:600}
+
+@media (max-width:560px){
+  body{font-size:1rem}
+  .hero{padding-bottom:44px}
+  .hero-grid{padding-top:40px}
+  .bubble{font-size:.96rem}
+  .demo .bubble, .need, .avoid{max-width:92%}
+}
+@media print{
+  .toc, .reset, .back-pill{display:none}
+  .page{display:block}
+  .hero{background:none; color:var(--dusk)}
+  .hero *{text-shadow:none !important}
+  .demo > *{opacity:1 !important; transform:none !important; animation:none !important}
+  .demo .bubble.wrong{color:var(--mute); border-color:var(--rule)}
+  .demo .bubble.wrong::after{background:var(--warn); transform:scaleX(1) !important; animation:none !important}
+  .pair{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="wrap">
+  <div class="topbar">
+    <a class="back-pill" href="../">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      Trang chính
+    </a>
+    <span class="date-mark" aria-label="Ngày 11 tháng 7">11.07</span>
+  </div>
+  <div class="hero-grid">
+    <div>
+      <h1>Giữ lửa tình yêu</h1>
+      <p class="sub">Khoa học và cách nói cho người trẻ Việt</p>
+      <p class="dated">Tổng hợp ngày 23/11/2026, Phạm Đăng Hiển</p>
+    </div>
+    <div class="demo" aria-label="Ví dụ một đoạn chat: thay câu cố lên bằng một câu công nhận">
+      <p class="bubble em">Hôm nay em mệt quá.</p>
+      <p class="bubble anh wrong"><span>Cố lên.</span></p>
+      <p class="bubble anh">Hôm nay vất vả lắm hả. Em muốn kể không, hay để anh lo bữa tối cho em nghỉ?</p>
+      <p class="why">Công nhận trước, động viên sau</p>
+    </div>
+  </div>
+ </div>
+</header>
+
+<div class="wrap">
+<div class="page">
+  <nav class="toc" aria-label="Mục lục">
+    <details open>
+      <summary>Mục lục</summary>
+      <ol>
+        <li><a href="#tom-tat">Tóm tắt</a></li>
+        <li><a href="#s1">1. Điều gì giữ tình yêu bền lâu</a></li>
+        <li><a href="#s2">2. Bối cảnh người trẻ Việt Nam</a></li>
+        <li><a href="#s3">3. Hiểu và đáp lại những câu nói thường gặp</a></li>
+        <li><a href="#s4">4. Khi người yêu giận dỗi</a></li>
+        <li><a href="#s5">5. Khi người yêu kêu áp lực công việc</a></li>
+        <li><a href="#s6">6. Những câu thay cho “cố lên”</a></li>
+        <li><a href="#s7">7. Bày tỏ tình cảm</a></li>
+        <li><a href="#s8">8. Thói quen giữ lửa</a></li>
+        <li><a href="#s9">9. Giới hạn: khi “dỗ” không phải là giải pháp</a></li>
+        <li><a href="#tlkt">Tài liệu tham khảo</a></li>
+      </ol>
+    </details>
+  </nav>
+
+<main>
+
+<section id="tom-tat">
+  <p class="lead">Tình yêu bền lâu nhờ những lần đáp lại nhau mỗi ngày khiến người kia thấy mình được hiểu, chứ không nhờ ít cãi nhau hay những câu nói “chuẩn”. Tài liệu này tổng hợp nghiên cứu tâm lý học và truyền thông về quan hệ yêu đương, kèm câu nói mẫu cho người trẻ Việt.</p>
+  <h3>Tám điều cốt lõi</h3>
+  <ol class="core">
+    <li>Đáp lại những lời mời kết nối nhỏ: các cặp bền vững đáp 86% số lần, các cặp ly hôn chỉ 33%.</li>
+    <li>Đáp cảm xúc trước, nội dung sau; công nhận cảm xúc không có nghĩa là đồng ý.</li>
+    <li>Không có “mật mã phụ nữ”; khi không chắc người kia cần gì, hỏi nhẹ nhàng thay vì đoán.</li>
+    <li>Khi giận: hạ nhiệt (nghỉ ít nhất 20 phút), nghe hết, công nhận, rồi xin lỗi bằng cách nhận trách nhiệm và đề nghị sửa chữa.</li>
+    <li>Khi người yêu kêu áp lực: hỏi “em muốn anh nghe hay cùng nghĩ cách?”, đứng về phía họ, và giúp bằng việc làm lặng lẽ.</li>
+    <li>Thay “cố lên” bằng một câu công nhận vất vả, rồi mới đến câu đồng hành, tin tưởng hoặc một việc cụ thể.</li>
+    <li>Khen và cảm ơn cụ thể; chia vui hào hứng quan trọng không kém chia buồn.</li>
+    <li>Cùng làm điều mới, bỏ điện thoại xuống, và biết khi nào vấn đề đã vượt quá chuyện “dỗ”.</li>
+  </ol>
+</section>
+
+<section id="s1">
+  <h2><span class="n">1</span>Điều gì giữ tình yêu bền lâu</h2>
+  <p>Hơn bốn mươi năm nghiên cứu cho cùng một kết luận: tình yêu bền không nhờ ít cãi nhau, mà nhờ cả hai thường xuyên <strong>cảm thấy được hiểu, được công nhận và được quan tâm</strong> trong những tương tác nhỏ mỗi ngày.</p>
+  <p><strong>Đáp lại “lời mời kết nối”.</strong> Lời mời (bid) là bất kỳ câu nói hay cử chỉ nào để tìm sự chú ý: “Anh xem cái này”, một tấm ảnh gửi qua Messenger, một tiếng thở dài. Có ba kiểu đáp: quay về phía (đáp, hỏi thêm), quay đi (lờ, mải điện thoại), quay ngược lại (gắt). Trong nghiên cứu theo dõi các cặp mới cưới của Gottman, sau 6 năm những cặp còn bên nhau đã đáp lại lời mời 86% số lần, các cặp ly hôn chỉ 33% (<a href="https://www.gottman.com/blog/turn-toward-instead-of-away/" target="_blank" rel="noopener">Gottman Institute</a>).</p>
+  <p><strong>Cảm nhận được thấu hiểu là “thành phần chung”.</strong> Theo mô hình thân mật của Reis và Shaver, gắn bó hình thành khi một người bộc lộ điều gì đó và người kia đáp lại khiến họ thấy được hiểu, được công nhận, được quan tâm (perceived partner responsiveness). Dỗ giận, động viên, chia vui hay nói lời yêu ở các phần sau đều là những dạng của nguyên tắc này.</p>
+  <p><strong>Bốn “kỵ sĩ” báo hiệu đổ vỡ.</strong> Gottman nhận diện bốn kiểu giao tiếp dự báo ly hôn: chỉ trích (tấn công con người thay vì hành vi), khinh miệt (mỉa mai, đảo mắt; dự báo mạnh nhất), phòng thủ (chống chế, đổ lỗi ngược) và im lặng lánh mặt. Thuốc giải tương ứng là: than phiền nhẹ nhàng về hành vi kèm cảm xúc của mình, nuôi thói quen trân trọng, nhận phần trách nhiệm của mình, và xin tạm dừng để bình tĩnh rồi quay lại.</p>
+  <p><strong>Cách mở lời quyết định cách kết thúc.</strong> Carrère và Gottman (1999) dự đoán được ly hôn ở các cặp mới cưới chỉ từ 3 phút đầu của một cuộc tranh luận. Mở đầu gay gắt gần như luôn kết thúc gay gắt.</p>
+  <p><strong>Tỉ lệ 5:1 khi xung đột.</strong> Ở các cặp ổn định, trong lúc tranh luận, số tương tác tích cực (đùa, gật đầu, công nhận, chạm) nhiều hơn tiêu cực khoảng năm lần (Gottman, 1994). Điều này không có nghĩa phải tránh mọi câu khó nghe, mà là mỗi câu gắt cần nhiều cử chỉ tốt bù lại.</p>
+  <p><strong>Cùng làm điều mới.</strong> Trong thí nghiệm của Aron và cộng sự (2000), các cặp cùng làm một hoạt động mới lạ, hơi thử thách cho biết hài lòng với quan hệ hơn so với các cặp làm việc quen thuộc, dễ chịu. Cảm giác “lớn lên cùng nhau” (self-expansion) là nhiên liệu cho quan hệ lâu năm.</p>
+  <p><strong>Biết ơn những điều nhỏ.</strong> Algoe, Gable và Maisel (2010) gọi lòng biết ơn hằng ngày là “liều tiêm nhắc” cho tình yêu: những ngày một người thấy biết ơn vì việc nhỏ đối phương làm thường kéo theo cảm giác gắn bó hơn vào hôm sau.</p>
+  <p><strong>Tình yêu lãng mạn không nhất thiết phai.</strong> Tổng quan của Acevedo và Aron (2009) cho thấy tình yêu lãng mạn (mãnh liệt, gắn bó nhưng không ám ảnh) vẫn tồn tại ở nhiều cặp yêu lâu năm và đi kèm mức hài lòng cao. Thứ hay phai là sự ám ảnh, hồi hộp kiểu mới yêu, và điều đó là bình thường.</p>
+</section>
+
+<section id="s2">
+  <h2><span class="n">2</span>Bối cảnh người trẻ Việt Nam</h2>
+  <p>Các nguyên tắc ở phần 1 phần lớn được nghiên cứu ở Mỹ và châu Âu, nhưng lõi của chúng (được hiểu, được trân trọng) mang tính phổ quát; cái cần điều chỉnh là <em>cách thể hiện</em>. Nghiên cứu trực tiếp về giao tiếp của các cặp đôi trẻ Việt còn ít, nên phần này kết hợp lý thuyết giao tiếp liên văn hóa với số liệu có sẵn.</p>
+  <ul>
+    <li><strong>Nói ít, hiểu ngầm nhiều.</strong> Văn hóa Việt thuộc nhóm “ngữ cảnh cao” (high-context, theo Edward Hall): ý nghĩa nằm nhiều trong giọng điệu, sự im lặng và hoàn cảnh hơn là trong chữ. Vì vậy “Em không sao” hay “Tùy anh” thường mang nghĩa khác với mặt chữ, nhưng tự đoán nghĩa ngầm rất dễ sai (xem phần 3).</li>
+    <li><strong>Thương bằng việc làm hơn lời nói.</strong> Nhiều gia đình Việt thể hiện yêu thương qua chăm sóc (nấu ăn, đưa đón, “ăn cơm chưa?”) hơn là lời yêu hay ôm hôn. Một nghiên cứu tự thuật tại ĐHQGHN mô tả cách lớn lên trong môi trường như vậy ảnh hưởng tới cách một người cần và thể hiện tình cảm khi yêu (<a href="https://jfs.ulis.vnu.edu.vn/index.php/fs/article/download/5353/4574" target="_blank" rel="noopener">Nguyễn Thị Lan Hương, 2025</a>). Hệ quả hay gặp: một người chờ lời nói, người kia lẳng lặng làm, và cả hai đều thấy mình không được yêu.</li>
+    <li><strong>Thể diện.</strong> Theo thuyết thương lượng thể diện của Ting-Toomey, trong văn hóa tập thể, giữ thể diện cho cả mình và người kia rất quan trọng. Chê trước mặt bạn bè, gia đình, hay đăng trạng thái ám chỉ lên mạng gây tổn thương sâu hơn; xin lỗi và làm lành nên diễn ra riêng tư.</li>
+    <li><strong>Gia đình hai bên.</strong> Quan hệ của người trẻ Việt hiếm khi chỉ của hai người: ý kiến bố mẹ, chuyện so sánh, kỳ vọng về cưới hỏi, nhà cửa, công việc ổn định. Mâu thuẫn liên quan đến gia đình nên được nói theo khung “hai ta cùng giải một bài toán”, không phải “nhà anh và nhà em”.</li>
+    <li><strong>Áp lực công việc và tiền bạc “tràn” vào tình yêu.</strong> Neff và Karney (2009) cho thấy khi stress bên ngoài cao, những va chạm nhỏ hằng ngày tác động mạnh hơn tới cảm nhận về quan hệ. Hiểu điều này giúp không coi cơn cáu của người yêu là nhắm vào mình, và là lý do phần 5 quan trọng.</li>
+    <li><strong>Điện thoại và mạng xã hội.</strong> Một phân tích gộp năm 2025 (30 mẫu, 9.040 người) cho thấy bị người yêu “phubbing” (cắm mặt vào điện thoại khi đang ở cạnh) gắn với mức hài lòng thấp hơn, r ≈ −0,22 (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12106345/" target="_blank" rel="noopener">Ni và cộng sự, 2025</a>). Muise và cộng sự (2009) thấy dùng Facebook nhiều đi kèm ghen tuông nhiều hơn, vì người dùng liên tục thấy những thông tin mơ hồ về người yêu. Ở Việt Nam, khảo sát 383 sinh viên ĐH Đà Lạt thấy dùng mạng xã hội nhiều, nhất là Instagram và TikTok vào đêm khuya, gắn với lo âu và stress cao hơn (<a href="https://js.vnu.edu.vn/PaM/article/view/4514/4089" target="_blank" rel="noopener">Vũ Thị Thùy Dung, Nguyễn Thị Thục Duyên, 2024</a>).</li>
+    <li><strong>Yêu xa.</strong> Rất nhiều cặp trẻ Việt yêu xa vì du học, lao động nước ngoài hay làm việc khác tỉnh. Jiang và Hancock (2013) thấy các cặp yêu xa liên lạc ít lần hơn nhưng cảm thấy thân mật hơn, nhờ bộc lộ bản thân nhiều hơn và có xu hướng lý tưởng hóa nhau (<a href="https://news.cornell.edu/node/282223" target="_blank" rel="noopener">Cornell</a>). Bài học: nhắn sâu (cảm xúc, chuyện trong ngày) quan trọng hơn nhắn nhiều, và cần chuẩn bị cho lúc về gần, khi hình ảnh lý tưởng gặp đời thường.</li>
+  </ul>
+</section>
+
+<section id="s3">
+  <h2><span class="n">3</span>Hiểu và đáp lại những câu nói thường gặp</h2>
+  <p>Cách đáp tốt nhất gần như luôn theo cùng một công thức: <strong>đáp cảm xúc trước, nội dung sau; không chắc thì hỏi, đừng đoán</strong>.</p>
+  <p><strong>Không có “mật mã phụ nữ”.</strong> Hyde (2005) tổng hợp 46 phân tích gộp và thấy 78% khác biệt giới là nhỏ hoặc gần như bằng không. Khác biệt giữa hai con người cụ thể lớn hơn nhiều so với khác biệt nam – nữ. Các câu mẫu dưới đây dùng xưng hô anh – em cho thuận, nhưng áp dụng được cho cả hai phía.</p>
+  <p><strong>Câu nói là lời mời, không phải bài kiểm tra.</strong> Đằng sau hầu hết những câu khó đáp là một trong bốn nhu cầu: được chú ý, được ưu tiên, được hiểu, được an toàn. Tìm ra nhu cầu đó quan trọng hơn tìm đúng “đáp án”.</p>
+  <p><strong>Công nhận không phải là đồng ý.</strong> Công nhận (validation) là nói “cảm xúc của em có lý do”, dù mình nhìn sự việc khác. Thí nghiệm của Shenk và Fruzzetti (2011) cho thấy người được đáp lại theo kiểu công nhận bình tĩnh lại nhanh hơn, còn bị phủ nhận cảm xúc (“có gì đâu mà buồn”) thì cảm xúc tiêu cực và nhịp tim tăng lên.</p>
+  <p><strong>Gọi tên cảm xúc.</strong> Lieberman và cộng sự (2007) chụp não và thấy việc diễn tả cảm xúc thành lời làm giảm hoạt động của hạnh nhân, vùng não gắn với phản ứng cảm xúc. Một câu như “Nghe như em đang thấy bị bỏ rơi” vừa cho thấy mình hiểu, vừa giúp người kia dịu lại.</p>
+
+  <div class="pairs">
+    <div class="pair">
+      <p class="bubble em">Em không sao.<span class="ctx">giọng lạnh</span></p>
+      <p class="need"><b>Có thể đang cần:</b> được nhận ra là mình không ổn, nhưng chưa sẵn sàng kể</p>
+      <p class="bubble anh">Anh thấy em có vẻ không vui. Anh ở đây, lúc nào em muốn kể thì anh nghe.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Ừ, không sao thì thôi.”</s> Hoặc hỏi dồn liên tục</p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Tùy anh.</p>
+      <p class="need"><b>Có thể đang cần:</b> ý kiến của mình được tính đến, hoặc quá mệt để quyết</p>
+      <p class="bubble anh">Anh nghiêng về quán A vì gần, nhưng em đang thèm gì? Hay hôm nay để anh chọn cho em đỡ nghĩ nhé.</p>
+      <p class="avoid"><b>Tránh</b> chọn luôn cái mình thích rồi đi</p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Anh có biết em giận vì sao không?</p>
+      <p class="need"><b>Có thể đang cần:</b> cảm giác được để tâm, được nhớ</p>
+      <p class="bubble anh">Anh đoán là vì tối qua anh trả lời tin nhắn quá trễ. Nếu không phải thì em nói anh nghe, anh muốn hiểu cho đúng.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Không biết.”</s> <s>“Em nói thẳng đi, sao bắt anh đoán?”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Anh chẳng bao giờ quan tâm em.</p>
+      <p class="need"><b>Có thể đang cần:</b> thấy bị xem nhẹ gần đây; “chẳng bao giờ” là cảm xúc, không phải thống kê</p>
+      <p class="bubble anh">Em đang thấy thiếu anh lắm đúng không. Dạo này anh bận và lơ là thật. Em muốn anh làm gì nhiều hơn?</p>
+      <p class="avoid"><b>Tránh</b> <s>“Hôm qua anh vừa đưa em đi ăn mà!”</s> (cãi bằng bằng chứng)</p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Em béo quá / xấu quá.</p>
+      <p class="need"><b>Có thể đang cần:</b> được trấn an, được nghe nỗi tự ti</p>
+      <p class="bubble anh">Anh thấy em xinh, nhất là lúc em cười. Hôm nay có chuyện gì làm em thấy vậy à?</p>
+      <p class="avoid"><b>Tránh</b> <s>“Ừ thì giảm cân đi.”</s> <s>“Lại thế rồi.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Anh đi với bạn đi, em ở nhà cũng được.</p>
+      <p class="need"><b>Có thể đang cần:</b> có thể thật lòng, có thể muốn được ưu tiên</p>
+      <p class="bubble anh">Em thật lòng ổn chứ? Em muốn anh ở nhà thì cứ nói. Còn không thì tối mai mình đi ăn riêng nhé.</p>
+      <p class="avoid"><b>Tránh</b> đi luôn không hỏi lại, hoặc ở nhà nhưng mặt nặng mày nhẹ</p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Anh có còn yêu em không?</p>
+      <p class="need"><b>Có thể đang cần:</b> được khẳng định; có thể đang bất an</p>
+      <p class="bubble anh">Có, và anh yêu em vì cách em lo cho mọi người. Có chuyện gì làm em thấy không chắc à?</p>
+      <p class="avoid"><b>Tránh</b> <s>“Hỏi gì kỳ vậy.”</s> <s>“Không yêu thì ở đây làm gì.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Em mệt quá.</p>
+      <p class="need"><b>Có thể đang cần:</b> được ghi nhận, được nghỉ, đôi khi cần giúp việc cụ thể</p>
+      <p class="bubble anh">Hôm nay vất vả lắm hả. Em muốn kể không, hay để anh lo bữa tối cho em nghỉ?</p>
+      <p class="avoid"><b>Tránh</b> <s>“Ai mà chẳng mệt.”</s> <s>“Cố lên.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Thôi, em không muốn nói nữa.</p>
+      <p class="need"><b>Có thể đang cần:</b> đang quá tải cảm xúc, hoặc thấy nói mà không được nghe</p>
+      <p class="bubble anh">Được, mình nghỉ chút. Anh không bỏ đi đâu, tối nay mình nói tiếp khi em sẵn sàng nhé.</p>
+      <p class="avoid"><b>Tránh</b> nói tiếp dồn dập, hoặc im lặng nhiều ngày</p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Cô đó là ai?<span class="ctx">đang ghen</span></p>
+      <p class="need"><b>Có thể đang cần:</b> cảm giác an toàn, minh bạch</p>
+      <p class="bubble anh">Đồng nghiệp anh, phòng kế toán. Em có điều gì lo không? Anh muốn em yên tâm.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Em lại ghen vớ vẩn.”</s> Hoặc giấu điện thoại</p>
+    </div>
+  </div>
+  <p class="note">Dòng “có thể đang cần” là giả thuyết, không phải đáp án. Người hiểu rõ nhất người yêu mình đang cần gì là chính cô ấy hoặc anh ấy, nên mỗi câu đáp mẫu đều có một câu hỏi mở ở cuối.</p>
+</section>
+
+<section id="s4">
+  <h2><span class="n">4</span>Khi người yêu giận dỗi</h2>
+  <p>Giận dỗi thường là một cách nói “em cần anh để ý tới em”, không phải muốn đẩy anh ra xa. Vì vậy mục tiêu của việc dỗ không phải là làm hết giận ngay, mà là nối lại cảm giác hai người cùng một phía.</p>
+  <p><strong>Vì sao lại dỗi?</strong> Theo lý thuyết gắn bó mà Sue Johnson dùng trong liệu pháp tập trung vào cảm xúc (EFT), khi cảm thấy sự kết nối bị đe dọa, con người “phản kháng”: trách móc, dỗi, im lặng chờ người kia tìm đến. Trong văn hóa Việt, dỗi hay mang ý “xem anh có dỗ không”, tức là một lời mời kết nối gián tiếp.</p>
+  <p><strong>Cái bẫy đuổi – chạy.</strong> Một người đòi nói chuyện, người kia né; người đòi càng đòi, người né càng né. Phân tích gộp 74 nghiên cứu với hơn 14.000 người của Schrodt và cộng sự (2014) cho thấy mô thức đòi – né (demand–withdraw) gắn với mức hài lòng và thân mật thấp hơn, bất kể ai đóng vai nào (<a href="https://www.sciencedaily.com/releases/2014/08/140804122903.htm" target="_blank" rel="noopener">ScienceDaily</a>). Lối ra: người hay né chủ động quay lại, còn người hay đòi nói ra nhu cầu thay vì trách.</p>
+
+  <h3>Quy trình dỗ năm bước</h3>
+  <ol class="steps">
+    <li><strong>Hạ nhiệt trước.</strong> Khi nhịp tim lên khoảng 100 nhịp/phút, cả hai bị “ngập” cảm xúc (flooding) và không còn nghe được nhau. Gottman khuyên nghỉ ít nhất 20 phút và không quá 24 giờ, dùng thời gian đó để đi bộ, nghe nhạc, hít thở sâu, chứ không nghiền lại cuộc cãi (<a href="https://gottman.com/blog/manage-conflict-part-4" target="_blank" rel="noopener">Gottman Institute</a>). Nói rõ mình sẽ quay lại: “Anh cần 30 phút cho bình tĩnh, rồi mình nói tiếp nhé” khác hẳn với bỏ đi trong im lặng.</li>
+    <li><strong>Nghe đến hết.</strong> Không chặn lời để giải thích hay đính chính. Bước này chỉ có một mục tiêu: người kia cảm thấy được hiểu.</li>
+    <li><strong>Công nhận cảm xúc.</strong> “Anh hiểu vì sao em buồn. Nếu anh là em, chờ cả buổi mà không có tin nhắn, anh cũng khó chịu.”</li>
+    <li><strong>Xin lỗi đúng cách.</strong> Lewicki, Polin và Lount (2016) thử nghiệm sáu thành phần của lời xin lỗi: quan trọng nhất là nhận trách nhiệm, thứ hai là đề nghị sửa chữa; bày tỏ hối tiếc, giải thích và cam kết sửa đổi đứng giữa; xin được tha thứ ít tác dụng nhất (<a href="https://news.osu.edu/the-6-elements-of-an-effective-apology-according-to-science/" target="_blank" rel="noopener">Ohio State University</a>).
+      <ul>
+        <li>Ví dụ: “Anh sai vì đã hứa mà quên gọi. Anh tiếc vì để em chờ. Tối nay anh qua đón em đi ăn, và từ giờ anh đặt nhắc lịch.”</li>
+        <li>Tránh “Xin lỗi nếu em thấy buồn” (đẩy lỗi sang cảm xúc của người kia) và “Xin lỗi, nhưng…” (biến lời xin lỗi thành lời chống chế).</li>
+      </ul>
+    </li>
+    <li><strong>Làm lành bằng cử chỉ.</strong> Một cái ôm, món ăn người kia thích, lời rủ đi dạo. Gottman gọi đây là “nỗ lực sửa chữa” (repair attempt); các cặp hạnh phúc không nhất thiết cãi ít hơn, nhưng họ đưa ra và đón nhận những nỗ lực này tốt hơn.</li>
+  </ol>
+
+  <p><strong>Nếu mình không sai thì sao?</strong> Dỗ không có nghĩa là luôn nhận hết lỗi. Vẫn có thể công nhận cảm xúc và xin lỗi về phần mình (giọng điệu, thời điểm), rồi khi cả hai đã nguội thì bàn “lần sau mình làm thế nào”.</p>
+
+  <h3>Câu nên dùng</h3>
+  <div class="pairs">
+    <div class="pair">
+      <p class="need"><b>Mở lời</b></p>
+      <p class="bubble anh">Anh biết em đang giận, và anh muốn hiểu. Em kể anh nghe được không?</p>
+    </div>
+    <div class="pair">
+      <p class="need"><b>Khi người kia im lặng</b></p>
+      <p class="bubble anh">Em chưa muốn nói cũng được. Anh pha cốc trà để đây, lúc nào em sẵn sàng thì gọi anh.</p>
+    </div>
+    <div class="pair">
+      <p class="need"><b>Khi đã hơi nguội, đùa nhẹ</b></p>
+      <p class="bubble anh">Đơn xin tha lỗi số 01, kính mong em phê duyệt.</p>
+    </div>
+    <div class="pair">
+      <p class="need"><b>Khi giận qua tin nhắn</b> (tin nhắn mất giọng điệu nên dễ hiểu lầm hơn)</p>
+      <p class="bubble anh">Chuyện này anh muốn nghe giọng em. Anh gọi em nhé?</p>
+    </div>
+  </div>
+  <p><strong>Câu nên tránh:</strong> “Thôi được chưa”, “Em lúc nào cũng thế”, “Có thế mà cũng giận”, “Tùy em”, và việc im lặng nhiều ngày để “trừng phạt”.</p>
+</section>
+
+<section id="s5">
+  <h2><span class="n">5</span>Khi người yêu kêu áp lực công việc</h2>
+  <p>Phần lớn trường hợp, người đang than áp lực cần được nghe và được đứng cùng trước; lời khuyên đến sau, và chỉ khi họ muốn.</p>
+  <p><strong>Hỏi loại hỗ trợ trước khi đưa.</strong> Theo mô hình “khớp hỗ trợ” (optimal matching) của Cutrona và Russell (1990), hỗ trợ hiệu quả khi đúng loại người kia cần: cảm xúc (an ủi, thấu hiểu), thông tin (lời khuyên) hay thực tế (làm hộ việc). Đưa lời khuyên khi người ta chỉ muốn xả rất dễ bị hiểu thành “anh chẳng hiểu em”. Câu hỏi đơn giản nhất: “Em muốn anh chỉ nghe thôi, hay muốn anh cùng nghĩ cách?”</p>
+  <p><strong>Lời an ủi lấy người nói làm trung tâm.</strong> Burleson xếp lời an ủi theo mức độ “lấy người nói làm trung tâm” (person-centered):</p>
+  <ul>
+    <li><em>Mức thấp</em> phủ nhận cảm xúc: “Chuyện nhỏ mà”, “Đừng nghĩ nữa”.</li>
+    <li><em>Mức trung bình</em> thông cảm chung chung hoặc đánh lạc hướng: “Ai cũng thế”, “Cố lên”.</li>
+    <li><em>Mức cao</em> công nhận và giúp người kia nói rõ cảm xúc: “Bị sếp phê bình trước cả phòng chắc em thấy bẽ mặt lắm.”</li>
+  </ul>
+  <p>Phân tích gộp 23 nghiên cứu của High và Dillard (2012) cho thấy lời an ủi càng lấy người nói làm trung tâm thì càng hiệu quả, và được người nhận đánh giá cao hơn rõ rệt (<a href="https://pure.psu.edu/en/publications/a-review-and-meta-analysis-of-person-centered-messages-and-social/" target="_blank" rel="noopener">Penn State</a>). Đây là lý do khoa học khiến “cố lên” thường chưa đủ (xem phần 6).</p>
+  <p><strong>Hỗ trợ “vô hình”.</strong> Bolger, Zuckerman và Kessler (2000) theo dõi nhật ký hằng ngày của các cặp đôi khi một người đối mặt một sự kiện căng thẳng lớn. Hỗ trợ mà người cho có làm nhưng người nhận không nhận ra lại giúp họ thích nghi tốt nhất, vì ý thức rõ mình “đang được giúp” có cái giá về cảm xúc (<a href="https://hcp.hms.harvard.edu/publication/invisible-support-and-adjustment-stress" target="_blank" rel="noopener">Harvard</a>). Áp dụng: lặng lẽ lo bữa tối, rửa bát, đặt sẵn đồ ăn khi biết người yêu có hạn chót, thay vì tuyên bố “để anh dạy em cách làm”.</p>
+  <p><strong>Cùng đối phó, không chỉ đứng xem.</strong> Phân tích gộp 72 mẫu với 17.856 người của Falconier và cộng sự (2015) cho thấy cách hai người cùng đối phó stress (dyadic coping) tương quan mạnh với mức hài lòng, r = 0,45, bất kể giới, tuổi hay quốc tịch (<a href="https://folia.unifr.ch/global/documents/287390" target="_blank" rel="noopener">Université de Fribourg</a>). Hiệu quả nhất là cùng nhau giải quyết và hỗ trợ tận tâm; giúp với thái độ miễn cưỡng, khó chịu thì gây hại rõ. Đáng chú ý, cảm nhận của người được giúp quan trọng hơn cảm nhận của người giúp.</p>
+
+  <h3>Bốn bước khi người yêu kể chuyện công việc</h3>
+  <ol class="steps">
+    <li>Dừng việc đang làm, đặt điện thoại xuống.</li>
+    <li>Phản chiếu cảm xúc: “Nghe như hôm nay em bị dồn việc tới nghẹt thở.”</li>
+    <li>Hỏi nhu cầu: chỉ nghe, góp ý, hay giúp một việc cụ thể.</li>
+    <li>Đứng về phía người yêu trước. Trong “cuộc trò chuyện giảm stress” Gottman đề xuất, người nghe không bênh sếp, không phân tích đúng sai và không khuyên khi chưa được hỏi.</li>
+  </ol>
+
+  <div class="pairs">
+    <div class="pair">
+      <p class="bubble em">Sếp em hôm nay quá đáng lắm.</p>
+      <p class="bubble anh">Sao vậy em, kể anh nghe đi. <span class="ctx">Nghe xong:</span> Nếu là anh chắc anh cũng tức.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Chắc sếp cũng có lý do.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Em muốn nghỉ việc quá.</p>
+      <p class="bubble anh">Mệt tới mức muốn bỏ luôn hả. Chuyện gì làm em thấy vậy nhất?</p>
+      <p class="avoid"><b>Tránh</b> <s>“Nghỉ thì lấy gì sống?”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Deadline dí quá, chắc em thức trắng.</p>
+      <p class="bubble anh">Tối nay anh đặt đồ ăn cho em, em khỏi lo khoản đó. Xong việc anh dẫn em đi ăn mừng.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Ai bảo để dồn.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Em thấy mình kém quá, ai cũng giỏi hơn em.</p>
+      <p class="bubble anh">Anh không thấy vậy. Tháng trước em xử lý vụ khách khó rất gọn. Hôm nay có chuyện gì làm em nghĩ thế?</p>
+      <p class="avoid"><b>Tránh</b> <s>“Thì cố gắng hơn là được.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Thôi, em không muốn nói chuyện công việc nữa.</p>
+      <p class="bubble anh">Ừ, mình nói chuyện khác. Cuối tuần này em muốn đi đâu không?</p>
+      <p class="avoid"><b>Tránh</b> hỏi tiếp cho bằng được</p>
+    </div>
+  </div>
+  <p>Bốn kiểu đáp nên tránh nhất: so sánh (“anh còn áp lực hơn”), giải pháp vội (“thì em nói thẳng với sếp đi”), xem nhẹ (“có gì đâu”) và chung chung (“cố lên”, “rồi sẽ ổn thôi”).</p>
+</section>
+
+<section id="s6">
+  <h2><span class="n">6</span>Những câu thay cho “cố lên”</h2>
+  <p>“Cố lên” không sai, nhưng khi đứng một mình nó thuộc nhóm lời an ủi chung chung: ngầm bảo người kia “cố thêm nữa”, trả gánh nặng lại cho họ và bỏ qua cảm xúc họ vừa kể. Nó hợp để cổ vũ trước một màn thể hiện (kỳ thi, buổi phỏng vấn), không hợp khi người kia đang kiệt sức. Cách dễ nhất là nói một câu công nhận trước, rồi mới đến câu động viên.</p>
+
+  <div class="purpose">
+    <h3>Công nhận vất vả</h3>
+    <p class="when">Dùng khi người yêu đang mệt, vừa kể một ngày tệ</p>
+    <p class="bubble anh">Hôm nay em vất vả thật đấy.</p>
+    <p class="bubble anh">Làm từng ấy việc mà vẫn trụ được, em giỏi lắm.</p>
+    <p class="bubble anh">Mệt thì cứ nói mệt với anh, không cần tỏ ra ổn.</p>
+  </div>
+  <div class="purpose">
+    <h3>Đồng hành</h3>
+    <p class="when">Dùng trong giai đoạn kéo dài: mùa cao điểm, ôn thi, đổi việc</p>
+    <p class="bubble anh">Có anh đây rồi.</p>
+    <p class="bubble anh">Mình cùng qua đợt này nhé.</p>
+    <p class="bubble anh">Em không phải chịu một mình đâu.</p>
+  </div>
+  <div class="purpose">
+    <h3>Tin tưởng</h3>
+    <p class="when">Dùng trước kỳ thi, buổi thuyết trình, phỏng vấn</p>
+    <p class="bubble anh">Anh tin em làm được, em chuẩn bị kỹ mà.</p>
+    <p class="bubble anh">Kết quả thế nào anh vẫn tự hào về em.</p>
+    <p class="bubble anh">Em cứ làm hết sức, phần còn lại tính sau.</p>
+  </div>
+  <div class="purpose">
+    <h3>Hành động cụ thể</h3>
+    <p class="when">Dùng khi có việc mình làm hộ được</p>
+    <p class="bubble anh">Tối nay anh nấu nhé.</p>
+    <p class="bubble anh">Mai anh đưa em đi làm.</p>
+    <p class="bubble anh">Lúc này em muốn anh làm gì cho em?</p>
+  </div>
+  <div class="purpose">
+    <h3>Cho phép nghỉ</h3>
+    <p class="when">Dùng khi người yêu cầu toàn, tự ép mình</p>
+    <p class="bubble anh">Hôm nay nghỉ sớm đi em, việc để mai.</p>
+    <p class="bubble anh">Em được phép không ổn mà.</p>
+  </div>
+  <div class="purpose">
+    <h3>Nhìn về phía trước</h3>
+    <p class="when">Dùng khi đích đến đã gần</p>
+    <p class="bubble anh">Xong đợt này mình đi ăn lẩu nhé.</p>
+    <p class="bubble anh">Còn hai ngày nữa thôi, anh đếm cùng em.</p>
+  </div>
+  <div class="purpose">
+    <h3>Hài hước nhẹ</h3>
+    <p class="when">Dùng khi người yêu đã bớt căng, muốn cười</p>
+    <p class="bubble anh">Ai làm em mệt, để anh viết đơn khiếu nại.</p>
+    <p class="bubble anh">Nạp năng lượng: một cái ôm, miễn phí, không giới hạn.</p>
+  </div>
+
+  <h3>Chia vui cũng cần học</h3>
+  <p>Gable và cộng sự (2004) phân biệt bốn kiểu đáp khi người yêu báo tin vui. Chỉ kiểu <strong>chủ động – xây dựng</strong> (hào hứng, hỏi chi tiết, sống lại khoảnh khắc cùng họ) gắn với mức gắn bó và hài lòng cao hơn; ba kiểu còn lại đều làm nguội quan hệ.</p>
+  <div class="acr">
+    <p class="bubble em">Em được tăng lương rồi!</p>
+    <div class="reply good">
+      <span class="tag">Chủ động – xây dựng (nên)</span>
+      <p class="bubble anh">Thật á? Giỏi quá! Sếp nói với em thế nào? Em công sức cả năm, xứng đáng lắm. Tối nay đi ăn mừng nhé.</p>
+    </div>
+    <div class="reply bad">
+      <span class="tag">Thụ động – xây dựng</span>
+      <p class="bubble">Tốt đấy. <span class="ctx">rồi tiếp tục lướt điện thoại</span></p>
+    </div>
+    <div class="reply bad">
+      <span class="tag">Chủ động – phá hủy</span>
+      <p class="bubble">Tăng lương thì chắc việc cũng nhiều hơn, lại chẳng có thời gian cho anh.</p>
+    </div>
+    <div class="reply bad">
+      <span class="tag">Thụ động – phá hủy</span>
+      <p class="bubble">À mà tối nay ăn gì? <span class="ctx">bỏ qua tin vui</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="s7">
+  <h2><span class="n">7</span>Bày tỏ tình cảm</h2>
+  <p>Lời yêu có sức nặng nhất khi nó <strong>cụ thể</strong> (gắn với một việc, một khoảnh khắc) và <strong>được đáp lại</strong>; một chữ “ừ” cho câu “em nhớ anh” là một lời mời kết nối bị bỏ lỡ.</p>
+  <p><strong>Được trân trọng giữ người ở lại.</strong> Gordon và cộng sự (2012) thấy người cảm thấy được người yêu trân trọng thì cũng trân trọng lại, quan tâm tới nhu cầu của đối phương hơn và có khả năng vẫn còn bên nhau sau 9 tháng cao hơn. Một công thức dễ nhớ cho lời cảm ơn: <em>việc cụ thể + cảm xúc của mình + ý nghĩa</em>. Ví dụ: “Cảm ơn em hôm qua nấu canh lúc anh ốm. Anh thấy được chăm sóc lắm, như có nhà ở đây.”</p>
+  <p><strong>Chạm và ôm có tác dụng thật.</strong> Cohen và cộng sự (2015) theo dõi 404 người trưởng thành: người được ôm thường xuyên hơn và cảm thấy được hỗ trợ hơn ít bị ảnh hưởng bởi stress do mâu thuẫn, kể cả về nguy cơ nhiễm bệnh khi tiếp xúc virus cảm.</p>
+  <p><strong>“Ngôn ngữ tình yêu” nên dùng như gợi ý, không như quy luật.</strong> Tổng quan của Impett, Park và Muise (2024) về thuyết 5 ngôn ngữ tình yêu của Gary Chapman thấy ba giả định chính đều yếu: phần lớn mọi người coi trọng cả năm cách, số “năm” không nhất quán, và các cặp có cùng ngôn ngữ không hạnh phúc hơn (<a href="https://www.utoronto.ca/news/little-evidence-linking-five-love-languages-healthy-relationships-researchers-say" target="_blank" rel="noopener">ĐH Toronto</a>). Các tác giả đề xuất mô hình “bữa ăn cân bằng”: cho đủ mọi dưỡng chất (lời nói, thời gian, chạm, việc làm, quà, đồng hành, ủng hộ mục tiêu riêng) và hỏi thẳng xem lúc này người kia đang thiếu gì.</p>
+  <p><strong>Bộc lộ dần từng lớp tạo ra gần gũi.</strong> Trong thí nghiệm “36 câu hỏi” của Aron và cộng sự (1997), hai người lạ lần lượt trả lời các câu hỏi ngày càng riêng tư trong 45 phút và cảm thấy gần gũi hơn hẳn nhóm chỉ nói chuyện xã giao. Với cặp đã yêu lâu, những câu như “Điều gì năm nay làm em tự hào nhất?” hay “Em sợ nhất điều gì ở tương lai?” giúp khám phá lại nhau.</p>
+  <p><strong>Với người lớn lên trong gia đình ít nói lời yêu,</strong> nói “anh yêu em” có thể ngượng thật. Bắt đầu từ lời khen và lời cảm ơn cụ thể, những nghi thức nhỏ (tin nhắn chúc ngủ ngon, cái ôm khi gặp), rồi nói chuyện thẳng: “Em thích được anh thể hiện tình cảm theo cách nào nhất?”</p>
+
+  <div class="pairs">
+    <div class="pair">
+      <p class="bubble em">Em nhớ anh.</p>
+      <p class="bubble anh">Anh cũng nhớ em, nhất là lúc đi qua quán bún mình hay ăn. Tối nay gọi video nhé?</p>
+      <p class="avoid"><b>Tránh</b> <s>“Ừ.”</s> <s>“Mới gặp hôm qua mà.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Em yêu anh.</p>
+      <p class="bubble anh">Anh yêu em. Hôm nay đọc tin nhắn của em là anh cười cả buổi.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Biết rồi.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Anh thích em ở điểm gì?</p>
+      <p class="bubble anh">Cách em tận tâm với bạn bè, và cái cách em cười khi kể chuyện nhà.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Thích thì thích thôi.”</s></p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">[Một tấm ảnh tự chụp]</p>
+      <p class="bubble anh">Áo mới hả? Hợp em ghê.</p>
+      <p class="avoid"><b>Tránh</b> thả mỗi một biểu tượng rồi im</p>
+    </div>
+    <div class="pair">
+      <p class="bubble em">Hôm nay anh có nghĩ về em không?</p>
+      <p class="bubble anh">Có, lúc ăn trưa anh nghĩ em chắc lại quên ăn.</p>
+      <p class="avoid"><b>Tránh</b> <s>“Bận quá nên không.”</s></p>
+    </div>
+  </div>
+  <p>Nếu chưa sẵn sàng nói “yêu”, hãy thành thật thay vì nói cho xong: “Anh rất quý những lúc ở bên em, và anh muốn mình tiếp tục hiểu nhau hơn.”</p>
+</section>
+
+<section id="s8">
+  <h2><span class="n">8</span>Thói quen giữ lửa</h2>
+  <p>Những thói quen nhỏ lặp lại đều đặn có tác dụng hơn những cử chỉ lớn thỉnh thoảng mới có. Mỗi dòng dưới đây gắn với một phát hiện ở các phần trước. Bạn có thể tích vào những việc đã làm; trình duyệt sẽ nhớ trên máy này.</p>
+
+  <h3>Hằng ngày</h3>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="d1"><span>Ngẩng lên khỏi điện thoại khi người yêu nói chuyện (đáp lại lời mời kết nối, tránh phubbing).</span></label></li>
+    <li><label><input type="checkbox" data-k="d2"><span>Một lời cảm ơn hoặc lời khen cụ thể.</span></label></li>
+    <li><label><input type="checkbox" data-k="d3"><span>15–20 phút hỏi chuyện trong ngày, chủ yếu là nghe.</span></label></li>
+    <li><label><input type="checkbox" data-k="d4"><span>Một cái ôm hoặc một tin nhắn lúc gặp và lúc tạm biệt.</span></label></li>
+    <li><label><input type="checkbox" data-k="d5"><span>Nếu yêu xa: một cuộc gọi hoặc tin nhắn có nội dung thật (cảm xúc, chuyện trong ngày), không chỉ “ăn chưa, ngủ chưa”.</span></label></li>
+  </ul>
+
+  <h3>Hằng tuần</h3>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="w1"><span>Một buổi hẹn không điện thoại.</span></label></li>
+    <li><label><input type="checkbox" data-k="w2"><span>Thử một việc mới cùng nhau: món ăn lạ, cung đường mới, một lớp học ngắn.</span></label></li>
+    <li><label><input type="checkbox" data-k="w3"><span>30 phút “họp tuần” nhẹ nhàng: tuần này điều gì vui, điều gì khó, tuần sau cần gì ở nhau.</span></label></li>
+  </ul>
+
+  <h3>Hằng tháng</h3>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="m1"><span>Xem chung một bộ phim về tình yêu rồi nói chuyện về nó. Trong nghiên cứu của Rogge và cộng sự với 174 cặp vợ chồng mới cưới, nhóm xem và thảo luận phim mỗi tuần trong một tháng có tỉ lệ ly hôn hoặc ly thân sau 3 năm là 11%, so với 24% ở nhóm không can thiệp (<a href="https://www.rochester.edu/newscenter/divorce-rate-cut-in-half-for-couples-who-discussed-relationship-movies/" target="_blank" rel="noopener">ĐH Rochester</a>).</span></label></li>
+    <li><label><input type="checkbox" data-k="m2"><span>Nhắc lại một kỷ niệm đẹp, xem lại ảnh cũ.</span></label></li>
+    <li><label><input type="checkbox" data-k="m3"><span>Hỏi nhau một câu hỏi sâu (kiểu “36 câu hỏi” ở phần 7).</span></label></li>
+  </ul>
+
+  <h3>Khi có mâu thuẫn</h3>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="c1"><span>Mở lời nhẹ nhàng theo mẫu: “Khi… (sự việc), anh thấy… (cảm xúc), anh mong… (điều cụ thể).”</span></label></li>
+    <li><label><input type="checkbox" data-k="c2"><span>Thấy tim đập nhanh, giọng to lên thì xin nghỉ 20 phút và hẹn giờ quay lại.</span></label></li>
+    <li><label><input type="checkbox" data-k="c3"><span>Không cãi qua tin nhắn, không lôi chuyện cũ, không cãi trước mặt người khác.</span></label></li>
+    <li><label><input type="checkbox" data-k="c4"><span>Kết thúc bằng một cử chỉ làm lành, kể cả khi chưa giải quyết xong vấn đề.</span></label></li>
+  </ul>
+  <p><button type="button" class="reset" id="reset">Bỏ hết dấu tích</button></p>
+</section>
+
+<section id="s9">
+  <h2><span class="n">9</span>Giới hạn: khi “dỗ” không phải là giải pháp</h2>
+  <p>Mọi kỹ năng trong tài liệu này dành cho hai người ngang hàng, tôn trọng nhau và cùng muốn giữ quan hệ. Dỗ là để nối lại kết nối, không phải để chịu đựng mọi thứ.</p>
+  <p><strong>Không phải mâu thuẫn nào cũng giải quyết được.</strong> Theo Gottman, khoảng 69% mâu thuẫn của các cặp là “vấn đề vĩnh viễn”, bắt nguồn từ khác biệt tính cách hay giá trị, và mục tiêu là nói chuyện về chúng một cách ấm áp, có cả tiếng cười, chứ không phải xóa bỏ chúng (<a href="https://www.gottman.com/blog/managing-conflict-solvable-vs-perpetual-problems/" target="_blank" rel="noopener">Gottman Institute</a>). Ví dụ: một người hướng nội, một người thích tụ tập; một người tiết kiệm, một người thích trải nghiệm.</p>
+  <p><strong>Dấu hiệu không còn là giận dỗi thông thường.</strong> Những hành vi sau là kiểm soát hoặc bạo lực, dù do ai làm, kể cả chính mình:</p>
+  <ul>
+    <li>Kiểm tra điện thoại, đòi mật khẩu, theo dõi vị trí liên tục.</li>
+    <li>Cấm gặp bạn bè, gia đình; kiểm soát tiền bạc.</li>
+    <li>Xúc phạm, miệt thị thường xuyên, nhất là trước mặt người khác.</li>
+    <li>Đe dọa, đập phá đồ, đánh, ép buộc quan hệ tình dục.</li>
+    <li>Dọa tự làm hại bản thân để ép người kia làm theo ý mình.</li>
+    <li>Im lặng “trừng phạt” nhiều ngày như một cách điều khiển.</li>
+  </ul>
+  <p><strong>Khi nào nên tìm tư vấn.</strong> Khi hai người cãi đi cãi lại cùng một chuyện, khi khinh miệt hoặc im lặng lánh mặt đã thành thói quen, khi một người lo âu hay buồn bã kéo dài, hoặc sau một lần phản bội. Tư vấn tâm lý cặp đôi (ví dụ theo hướng EFT hay phương pháp Gottman) là một lựa chọn bình thường, không phải dấu hiệu thất bại.</p>
+  <h3>Nơi có thể liên hệ ở Việt Nam</h3>
+  <table class="tbl">
+    <thead><tr><th>Nơi hỗ trợ</th><th>Số điện thoại</th><th>Giờ</th></tr></thead>
+    <tbody>
+      <tr><td>Ngôi nhà Bình yên (bạo lực, nơi lánh nạn tạm thời)</td><td><a href="tel:1900969680">1900 969 680</a></td><td>24/7</td></tr>
+      <tr><td>CSAGA (bạo lực giới, tư vấn pháp lý)</td><td><a href="tel:02433335599">024 3333 5599</a></td><td>8:00–21:00 hằng ngày</td></tr>
+      <tr><td>Nguy hiểm tức thời</td><td><a href="tel:113">113</a> công an, <a href="tel:115">115</a> cấp cứu</td><td>24/7</td></tr>
+    </tbody>
+  </table>
+  <p>Nguồn: <a href="https://findahelpline.com/countries/vn/topics/abuse-domestic-violence" target="_blank" rel="noopener">Find A Helpline</a>. Ở nước ngoài, hãy gọi số khẩn cấp nơi mình đang sống (ví dụ 112 ở Nga và các nước EU) hoặc liên hệ cơ quan đại diện Việt Nam.</p>
+</section>
+
+<section id="tlkt">
+  <h2>Tài liệu tham khảo</h2>
+  <p>Tài liệu có đường liên kết là trang đã mở để đối chiếu số liệu khi soạn; các tài liệu còn lại là công trình gốc, trích theo thư mục học thuật.</p>
+  <ul class="refs">
+    <li>Acevedo, B. P., &amp; Aron, A. (2009). Does a long-term relationship kill romantic love? <em>Review of General Psychology, 13</em>(1), 59–65.</li>
+    <li>Algoe, S. B., Gable, S. L., &amp; Maisel, N. C. (2010). It’s the little things: Everyday gratitude as a booster shot for romantic relationships. <em>Personal Relationships, 17</em>(2), 217–233.</li>
+    <li>Aron, A., Melinat, E., Aron, E. N., Vallone, R. D., &amp; Bator, R. J. (1997). The experimental generation of interpersonal closeness. <em>Personality and Social Psychology Bulletin, 23</em>(4), 363–377.</li>
+    <li>Aron, A., Norman, C. C., Aron, E. N., McKenna, C., &amp; Heyman, R. E. (2000). Couples’ shared participation in novel and arousing activities and experienced relationship quality. <em>Journal of Personality and Social Psychology, 78</em>(2), 273–284.</li>
+    <li>Bolger, N., Zuckerman, A., &amp; Kessler, R. C. (2000). <a href="https://hcp.hms.harvard.edu/publication/invisible-support-and-adjustment-stress" target="_blank" rel="noopener">Invisible support and adjustment to stress</a>. <em>Journal of Personality and Social Psychology, 79</em>(6), 953–961.</li>
+    <li>Burleson, B. R. (2003). The experience and effects of emotional support. In J. O. Greene &amp; B. R. Burleson (Eds.), <em>Handbook of Communication and Social Interaction Skills</em> (pp. 551–594). Erlbaum.</li>
+    <li>Carrère, S., &amp; Gottman, J. M. (1999). Predicting divorce among newlyweds from the first three minutes of a marital conflict discussion. <em>Family Process, 38</em>(3), 293–301.</li>
+    <li>Cohen, S., Janicki-Deverts, D., Turner, R. B., &amp; Doyle, W. J. (2015). Does hugging provide stress-buffering social support? <em>Psychological Science, 26</em>(2), 135–147.</li>
+    <li>Cutrona, C. E., &amp; Russell, D. W. (1990). Type of social support and specific stress: Toward a theory of optimal matching. In B. R. Sarason, I. G. Sarason &amp; G. R. Pierce (Eds.), <em>Social Support: An Interactional View</em> (pp. 319–366). Wiley.</li>
+    <li>Driver, J. L., &amp; Gottman, J. M. (2004). Daily marital interactions and positive affect during marital conflict among newlywed couples. <em>Family Process, 43</em>(3), 301–314.</li>
+    <li>Falconier, M. K., Jackson, J. B., Hilpert, P., &amp; Bodenmann, G. (2015). <a href="https://folia.unifr.ch/global/documents/287390" target="_blank" rel="noopener">Dyadic coping and relationship satisfaction: A meta-analysis</a>. <em>Clinical Psychology Review, 42</em>, 28–46.</li>
+    <li>Gable, S. L., Reis, H. T., Impett, E. A., &amp; Asher, E. R. (2004). What do you do when things go right? The intrapersonal and interpersonal benefits of sharing positive events. <em>Journal of Personality and Social Psychology, 87</em>(2), 228–245.</li>
+    <li>Gordon, A. M., Impett, E. A., Kogan, A., Oveis, C., &amp; Keltner, D. (2012). To have and to hold: Gratitude promotes relationship maintenance in intimate bonds. <em>Journal of Personality and Social Psychology, 103</em>(2), 257–274.</li>
+    <li>Gottman, J. M. (1994). <em>What Predicts Divorce?</em> Erlbaum.</li>
+    <li>Gottman Institute: <a href="https://www.gottman.com/blog/turn-toward-instead-of-away/" target="_blank" rel="noopener">Turn toward instead of away</a>; <a href="https://gottman.com/blog/manage-conflict-part-4" target="_blank" rel="noopener">Manage conflict, part 4</a>; <a href="https://www.gottman.com/blog/managing-conflict-solvable-vs-perpetual-problems/" target="_blank" rel="noopener">Solvable vs. perpetual problems</a>.</li>
+    <li>Hall, E. T. (1976). <em>Beyond Culture</em>. Anchor Press.</li>
+    <li>High, A. C., &amp; Dillard, J. P. (2012). <a href="https://pure.psu.edu/en/publications/a-review-and-meta-analysis-of-person-centered-messages-and-social/" target="_blank" rel="noopener">A review and meta-analysis of person-centered messages and social support outcomes</a>. <em>Communication Studies, 63</em>(1), 99–118.</li>
+    <li>Hyde, J. S. (2005). The gender similarities hypothesis. <em>American Psychologist, 60</em>(6), 581–592.</li>
+    <li>Impett, E. A., Park, H. G., &amp; Muise, A. (2024). Popular psychology through a scientific lens: Evaluating love languages from a relationship science perspective. <em>Current Directions in Psychological Science</em> (<a href="https://www.utoronto.ca/news/little-evidence-linking-five-love-languages-healthy-relationships-researchers-say" target="_blank" rel="noopener">tóm tắt của ĐH Toronto</a>).</li>
+    <li>Jiang, L. C., &amp; Hancock, J. T. (2013). Absence makes the communication grow fonder: Geographic separation, interpersonal media, and intimacy in dating relationships. <em>Journal of Communication, 63</em>(3), 556–577 (<a href="https://news.cornell.edu/node/282223" target="_blank" rel="noopener">tóm tắt của Cornell</a>).</li>
+    <li>Johnson, S. M. (2004). <em>The Practice of Emotionally Focused Couple Therapy</em> (2nd ed.). Brunner-Routledge.</li>
+    <li>Lewicki, R. J., Polin, B., &amp; Lount, R. B. (2016). An exploration of the structure of effective apologies. <em>Negotiation and Conflict Management Research, 9</em>(2), 177–196 (<a href="https://news.osu.edu/the-6-elements-of-an-effective-apology-according-to-science/" target="_blank" rel="noopener">tóm tắt của Ohio State</a>).</li>
+    <li>Lieberman, M. D., Eisenberger, N. I., Crockett, M. J., Tom, S. M., Pfeifer, J. H., &amp; Way, B. M. (2007). Putting feelings into words: Affect labeling disrupts amygdala activity in response to affective stimuli. <em>Psychological Science, 18</em>(5), 421–428.</li>
+    <li>Muise, A., Christofides, E., &amp; Desmarais, S. (2009). More information than you ever wanted: Does Facebook bring out the green-eyed monster of jealousy? <em>CyberPsychology &amp; Behavior, 12</em>(4), 441–444.</li>
+    <li>Neff, L. A., &amp; Karney, B. R. (2009). Stress and reactivity to daily relationship experiences: How stress hinders adaptive processes in marriage. <em>Journal of Personality and Social Psychology, 97</em>(3), 435–450.</li>
+    <li>Nguyễn Thị Lan Hương (2025). <a href="https://jfs.ulis.vnu.edu.vn/index.php/fs/article/download/5353/4574" target="_blank" rel="noopener">Exploring the impact of upbringing on the formation and ways of expressing preferred love language</a>. <em>VNU Journal of Foreign Studies, 41</em>(1), 67–81.</li>
+    <li>Ni, N., Ahrari, S., Zaremohzzabieh, Z., Zarean, M., &amp; Roslan, S. (2025). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12106345/" target="_blank" rel="noopener">A meta-analytic study of partner phubbing and its antecedents and consequences</a>. <em>Frontiers in Psychology, 16</em>, 1561159.</li>
+    <li>Reis, H. T., &amp; Shaver, P. (1988). Intimacy as an interpersonal process. In S. Duck (Ed.), <em>Handbook of Personal Relationships</em> (pp. 367–389). Wiley.</li>
+    <li>Rogge, R. D., Cobb, R. J., Lawrence, E., Johnson, M. D., &amp; Bradbury, T. N. (2013). Is skills training necessary for the primary prevention of marital distress and dissolution? A 3-year experimental study of three interventions. <em>Journal of Consulting and Clinical Psychology, 81</em>(6), 949–961 (<a href="https://www.rochester.edu/newscenter/divorce-rate-cut-in-half-for-couples-who-discussed-relationship-movies/" target="_blank" rel="noopener">tóm tắt của ĐH Rochester</a>).</li>
+    <li>Schrodt, P., Witt, P. L., &amp; Shimkowski, J. R. (2014). A meta-analytical review of the demand/withdraw pattern of interaction and its associations with individual, relational, and communicative outcomes. <em>Communication Monographs, 81</em>(1), 28–58 (<a href="https://www.sciencedaily.com/releases/2014/08/140804122903.htm" target="_blank" rel="noopener">tóm tắt của ScienceDaily</a>).</li>
+    <li>Shenk, C. E., &amp; Fruzzetti, A. E. (2011). The impact of validating and invalidating responses on emotional reactivity. <em>Journal of Social and Clinical Psychology, 30</em>(2), 163–183.</li>
+    <li>Ting-Toomey, S. (1988). Intercultural conflict styles: A face-negotiation theory. In Y. Y. Kim &amp; W. B. Gudykunst (Eds.), <em>Theories in Intercultural Communication</em> (pp. 213–235). Sage.</li>
+    <li>Vũ Thị Thùy Dung, Nguyễn Thị Thục Duyên (2024). <a href="https://js.vnu.edu.vn/PaM/article/view/4514/4089" target="_blank" rel="noopener">Việc sử dụng mạng xã hội và sức khỏe tâm thần của sinh viên</a>. <em>Tạp chí Khoa học ĐHQGHN: Nghiên cứu Chính sách và Quản lý, 40</em>(4), 69–82.</li>
+    <li>Find A Helpline: <a href="https://findahelpline.com/countries/vn/topics/abuse-domestic-violence" target="_blank" rel="noopener">Vietnam – abuse and domestic violence</a>.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>Tài liệu tổng hợp để tham khảo, không thay thế tư vấn tâm lý chuyên môn.</p>
+  <p><a href="../">Về trang chính</a></p>
+  <p>Hiển &amp; Ngọc, từ 11.07.2026</p>
+</footer>
+
+</main>
+</div>
+</div>
+
+<script>
+(function(){
+  // Checklist: nhớ dấu tích trên trình duyệt này (nếu trình duyệt cho phép)
+  var KEY = 'x102-1107-giu-lua-check';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { state = {}; }
+  var boxes = document.querySelectorAll('.check input[type=checkbox]');
+  boxes.forEach(function(b){
+    if (state[b.dataset.k]) b.checked = true;
+    b.addEventListener('change', function(){
+      state[b.dataset.k] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+    });
+  });
+  var reset = document.getElementById('reset');
+  if (reset) reset.addEventListener('click', function(){
+    boxes.forEach(function(b){ b.checked = false; });
+    state = {};
+    try { localStorage.removeItem(KEY); } catch(e) {}
+  });
+
+  // Mục lục: đánh dấu phần đang đọc
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){ a.classList.remove('on'); });
+          var a = map[en.target.id]; if (a) a.classList.add('on');
+        }
+      });
+    }, {rootMargin:'-20% 0px -70% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+  // Trên điện thoại: đóng mục lục sau khi chọn
+  var det = document.querySelector('.toc details');
+  if (det && window.matchMedia('(max-width:1079px)').matches){
+    det.open = false;
+    links.forEach(function(a){ a.addEventListener('click', function(){ det.open = false; }); });
+  }
+})();
+</script>
+</body>
+</html>
