@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Những bài văn hay</title>
+<meta name="description" content="Thư viện những bài văn hay của Đăng Hiển và Bích Ngọc.">
+<meta name="theme-color" content="#5b4479">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FF5E62' d='M16 28s-11-6.6-11-15a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 8.4-11 15-11 15z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Coiny&family=Mali:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dusk: #4a3460;
+    --coral: #ff5e62;
+    --cream: #fff2ee;
+    --gold: #ffb45a;
+    --paper: #fbf9f4;   /* nền của thư viện, để lúc tải không bị loé */
+    --display: "Coiny", "Baloo 2", ui-rounded, system-ui, sans-serif;
+    --body: "Mali", "Nunito", ui-rounded, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--paper);
+    font-family: var(--body);
+    color: var(--dusk);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Thanh trên: một dải trời chiều mỏng, giữ chất của trang 1107 */
+  .thanh {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: max(10px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 10px max(14px, env(safe-area-inset-left));
+    color: var(--cream);
+    background: linear-gradient(100deg, #5b4479 0%, #8e5888 42%, #e8697a 78%, #ff8a6a 100%);
+    box-shadow: 0 2px 12px rgba(58, 36, 78, .25);
+    position: relative;
+    z-index: 2;
+  }
+  .pill {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 14px 0 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 242, 238, .55);
+    background: rgba(255, 242, 238, .14);
+    color: var(--cream);
+    font: 600 .9rem var(--body);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .pill svg { width: 18px; height: 18px; flex: none; }
+  .pill:hover { background: rgba(255, 242, 238, .26); }
+  .pill:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .pill[hidden] { display: none; }
+  .ten {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .ten b {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 1.25rem;
+    letter-spacing: .01em;
+    white-space: nowrap;
+    text-shadow: 0 1px 8px rgba(58, 40, 80, .35);
+  }
+  .ten span {
+    font-size: .82rem;
+    opacity: .92;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ten span:empty { display: none; }
+  .phai { display: flex; gap: 8px; flex: none; }
+
+  /* Khung đọc */
+  .doc { position: relative; flex: 1; min-height: 0; }
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: var(--paper);
+  }
+  .dang-mo {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: var(--paper);
+    color: #8a77a0;
+    font-size: .95rem;
+    transition: opacity .3s ease;
+  }
+  .dang-mo.xong { opacity: 0; pointer-events: none; }
+  .dang-mo svg { display: block; width: 34px; height: 34px; margin: 0 auto 10px; color: var(--coral); animation: dap 1.2s ease-in-out infinite; }
+  @keyframes dap { 50% { transform: scale(1.15); } }
+
+  /* Điện thoại: nút bên phải chỉ còn biểu tượng */
+  @media (max-width: 560px) {
+    .phai .pill { width: 36px; padding: 0; justify-content: center; }
+    .phai .pill .chu { display: none; }
+    .pill.ve .chu { display: none; }
+    .pill.ve { width: 36px; padding: 0; justify-content: center; }
+    .ten b { font-size: 1.1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dang-mo svg { animation: none; }
+    .dang-mo { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <header class="thanh">
+    <a class="pill ve" href="../" aria-label="Về trang chính">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      <span class="chu">Trang chính</span>
+    </a>
+    <div class="ten">
+      <b>Những bài văn hay</b>
+      <span id="bai-dang-doc"></span>
+    </div>
+    <div class="phai">
+      <button type="button" class="pill" id="nut-thu-vien" hidden aria-label="Về thư viện">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>
+        <span class="chu">Thư viện</span>
+      </button>
+      <a class="pill" id="mo-rieng" href="https://x102.github.io/nhungbaivanhay/" target="_blank" rel="noopener" aria-label="Mở trong thẻ mới">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>
+        <span class="chu">Thẻ mới</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="doc">
+    <iframe id="khung" title="Thư viện những bài văn hay"></iframe>
+    <div class="dang-mo" id="dang-mo" aria-hidden="true">
+      <div>
+        <svg viewBox="0 0 32 32"><path fill="currentColor" d="M16 28s-11-6.6-11-15a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 8.4-11 15-11 15z"/></svg>
+        Đang mở thư viện…
+      </div>
+    </div>
+  </main>
+
+<script>
+  /* Thư viện nằm ở x102.github.io/nhungbaivanhay/, cùng tên miền với trang này,
+     nên mở thẳng trong khung mà không phải chép gần 1 GB ảnh sang repo 1107. */
+  const LIB = location.protocol.indexOf("http") === 0 ? "/nhungbaivanhay/" : "https://x102.github.io/nhungbaivanhay/";
+  const LIB_DAY_DU = new URL(LIB, location.href).href;
+  const hopLe = p => /^[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+_(VI|EN|RU)\.html$/.test(p);
+
+  const khung = document.getElementById("khung");
+  const dangMo = document.getElementById("dang-mo");
+  const baiDangDoc = document.getElementById("bai-dang-doc");
+  const nutThuVien = document.getElementById("nut-thu-vien");
+  const moRieng = document.getElementById("mo-rieng");
+
+  // ?p=<slug>/<slug>_VI.html mở thẳng một bài (trang chính dùng cách này cho "bài hôm nay")
+  const p = new URLSearchParams(location.search).get("p");
+  khung.src = LIB + (p && hopLe(p) ? p : "");
+
+  khung.addEventListener("load", () => {
+    dangMo.classList.add("xong");
+    let href = "", tieuDe = "";
+    try {
+      href = khung.contentWindow.location.href;
+      tieuDe = khung.contentDocument.title || "";
+    } catch (e) { /* khác tên miền (xem thử trên máy): bỏ qua phần đồng bộ */ }
+
+    let rel = "";
+    if (href && href.indexOf(LIB_DAY_DU) === 0) rel = href.slice(LIB_DAY_DU.length).split(/[?#]/)[0];
+    const dangDocBai = hopLe(rel);
+
+    baiDangDoc.textContent = dangDocBai ? tieuDe : "";
+    document.title = dangDocBai && tieuDe ? tieuDe + " – Những bài văn hay" : "Những bài văn hay";
+    nutThuVien.hidden = !dangDocBai;
+    moRieng.href = href || LIB_DAY_DU;
+    try { history.replaceState(null, "", dangDocBai ? "?p=" + rel : location.pathname); } catch (e) {}
+  });
+
+  nutThuVien.addEventListener("click", () => { khung.src = LIB; });
+</script>
+</body>
+</html>

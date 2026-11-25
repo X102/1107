@@ -434,6 +434,42 @@
 
   a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 999px; }
 
+  /* Những bài văn hay: bài của hôm nay viết trên trang giấy kẻ dòng */
+  .bai-nay {
+    margin: 0;
+    padding: 15px 18px 15px 30px;
+    border-radius: 6px 18px 18px 6px;
+    background:
+      linear-gradient(90deg, transparent 0 16px, #f6b3bd 16px 18px, transparent 18px),
+      repeating-linear-gradient(180deg, #fffaf6 0 29px, #efdde6 29px 30px) 0 15px;
+    background-color: #fffaf6;
+    box-shadow: 0 2px 0 #f0d3d8, 0 8px 18px rgba(74, 52, 96, .08);
+    line-height: 30px;
+  }
+  .bai-nay p, .bai-nay h3 { margin: 0; }
+  .bai-nhan { font-size: .85rem; font-weight: 600; color: var(--coral-deep); }
+  .bai-vi { font: 600 1.125rem/30px var(--body); color: var(--dusk); text-wrap: pretty; }
+  .bai-vi a { color: inherit; text-decoration: none; border-radius: 6px; }
+  .bai-vi a:hover { color: var(--coral-deep); }
+  .bai-zh { font-size: 1rem; color: #7f6c96; font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif; }
+  .bai-meta { font-size: .9rem; color: #8a77a0; font-variant-numeric: tabular-nums; }
+  .da-doc {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 0 9px;
+    border-radius: 99px;
+    font-size: .78rem;
+    line-height: 1.6;
+    font-weight: 600;
+    vertical-align: 1px;
+    color: #3f7d52;
+    background: #e3f1e5;
+  }
+  .van-tien { margin: 14px 0 0; font-size: .9rem; color: #8a77a0; }
+  .van-tien:empty { display: none; }
+  .btn[hidden] { display: none; }
+  a.nut-mo { display: inline-flex; align-items: center; text-decoration: none; }
+
   /* ---------- Chân trang ---------- */
   footer {
     padding: 8px 20px max(40px, env(safe-area-inset-bottom));
@@ -622,6 +658,35 @@
             Đọc sổ tay
           </a>
           <span class="url">x102.github.io/1107/giu-lua</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cloud-wrap" aria-labelledby="vanhay-tieu-de" data-khoa="van-hay">
+    <div class="cloud">
+      <div class="dau-may">
+        <h2 id="vanhay-tieu-de">Những bài văn hay</h2>
+        <button type="button" class="nut-gon" aria-controls="than-van-hay" aria-expanded="true">Thu gọn</button>
+      </div>
+      <p class="ghi-gon">Đang thu gọn. Bấm Mở ra để xem bài đọc hôm nay.</p>
+      <div class="than" id="than-van-hay">
+        <p class="lead">Thư viện những bài viết hay của trang 洞见 trên WeChat, về gia đình, vợ chồng, con cái và cách sống. Mỗi bài có bản tiếng Việt, tiếng Anh, tiếng Nga và nguyên văn tiếng Trung. Mỗi ngày trang chọn một bài chung để hai đứa cùng đọc.</p>
+        <article class="bai-nay" id="bai-nay" aria-live="polite">
+          <p class="bai-nhan" id="bai-nhan">Hôm nay hai đứa cùng đọc</p>
+          <h3 class="bai-vi"><a id="bai-vi" href="van-hay/">Đang lấy bài hôm nay…</a></h3>
+          <p class="bai-zh" id="bai-zh" lang="zh"></p>
+          <p class="bai-meta" id="bai-meta"></p>
+        </article>
+        <p class="van-tien" id="van-tien"></p>
+        <div class="actions">
+          <a class="btn" id="doc-bai" href="van-hay/" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11a2 2 0 0 1 2 2v14a1.6 1.6 0 0 0-1.6-1.6H4z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16a1.6 1.6 0 0 1 1.6-1.6H20z"/></svg>
+            Đọc bài này
+          </a>
+          <button type="button" class="nut-mo" id="doi-bai" hidden>Đổi bài khác</button>
+          <a class="nut-mo" href="van-hay/">Cả thư viện</a>
+          <span class="url">x102.github.io/1107/van-hay</span>
         </div>
       </div>
     </div>
@@ -1027,6 +1092,92 @@
       return;
     }
     el.textContent = "Các mốc đăng bài của đợt kỷ niệm 81 năm đã qua.";
+  })();
+
+  /* ----- Những bài văn hay: mỗi ngày một bài chung cho hai đứa -----
+     Danh sách bài lấy trực tiếp từ thư viện x102.github.io/nhungbaivanhay/,
+     nên thư viện thêm bài là ở đây tự có, không phải sửa trang này. */
+  (function () {
+    const LIB = location.protocol.indexOf("http") === 0 ? "/nhungbaivanhay/" : "https://x102.github.io/nhungbaivanhay/";
+    const than = document.getElementById("than-van-hay");
+    if (!than) return;
+    const elNhan = document.getElementById("bai-nhan");
+    const elVi = document.getElementById("bai-vi");
+    const elZh = document.getElementById("bai-zh");
+    const elMeta = document.getElementById("bai-meta");
+    const elTien = document.getElementById("van-tien");
+    const nutDoc = document.getElementById("doc-bai");
+    const nutDoi = document.getElementById("doi-bai");
+    let ds = [], dangHien = null, daTai = false;
+
+    // Trạng thái đã đọc do chính thư viện lưu (cùng tên miền nên đọc được)
+    const daDoc = () => {
+      try { return (JSON.parse(localStorage.getItem("wechat-lib-v2")) || {}).read || {}; } catch (e) { return {}; }
+    };
+
+    function hien(a, nhan) {
+      dangHien = a;
+      const link = "van-hay/?p=" + encodeURIComponent(a.files.VI).replace(/%2F/g, "/");
+      elNhan.textContent = nhan;
+      elVi.textContent = a.vi;
+      elVi.href = link;
+      elZh.textContent = a.zh || "";
+      const doc = daDoc();
+      elMeta.textContent = "Bài số " + a.no;
+      if (doc[a.slug]) {
+        const tag = document.createElement("span");
+        tag.className = "da-doc";
+        tag.textContent = "đã đọc trên máy này";
+        elMeta.appendChild(tag);
+      }
+      nutDoc.href = link;
+      nutDoc.hidden = false;
+      nutDoi.hidden = ds.length < 2;
+      const n = ds.filter(x => doc[x.slug]).length;
+      elTien.textContent = "Trên máy này đã đọc " + n + " trong " + ds.length + " bài.";
+    }
+
+    function baiHomNay() {
+      // Ngày thứ k bên nhau ứng với bài thứ k + 1, hết vòng thì quay lại bài đầu
+      const k = ((tongNgay(new Date()) % ds.length) + ds.length) % ds.length;
+      hien(ds[k], "Hôm nay hai đứa cùng đọc");
+    }
+
+    nutDoi.addEventListener("click", () => {
+      const doc = daDoc();
+      let kho = ds.filter(x => !doc[x.slug] && x !== dangHien);
+      if (!kho.length) kho = ds.filter(x => x !== dangHien);
+      hien(kho[Math.floor(Math.random() * kho.length)], "Đọc thêm một bài");
+    });
+
+    function tai() {
+      if (daTai) return;
+      daTai = true;
+      const sc = document.createElement("script");
+      sc.src = LIB + "index-data.js";
+      sc.onload = () => {
+        ds = (window.ARTICLES || []).filter(a => a.files && a.files.VI).sort((a, b) => a.no - b.no);
+        if (ds.length) baiHomNay(); else loi();
+      };
+      sc.onerror = loi;
+      document.head.appendChild(sc);
+    }
+    function loi() {
+      elVi.textContent = "Chưa tải được danh sách bài lúc này.";
+      elMeta.textContent = "Bấm Cả thư viện để mở thư viện.";
+    }
+
+    // Chỉ tải khi mục này sắp hiện trên màn hình và đang mở (danh sách khoảng 0,5 MB)
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(es => {
+        if (es.some(e => e.isIntersecting)) { io.disconnect(); tai(); }
+      }, { rootMargin: "400px 0px" });
+      io.observe(than);
+    } else {
+      tai();
+    }
+    // Quay lại từ thư viện thì cập nhật dấu đã đọc
+    window.addEventListener("pageshow", () => { if (dangHien) hien(dangHien, elNhan.textContent); });
   })();
 
   /* ----- Thu gọn hoặc mở từng đám mây, nhớ lựa chọn trên máy này ----- */
